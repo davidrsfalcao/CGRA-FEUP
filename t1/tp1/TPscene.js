@@ -31,7 +31,7 @@ TPscene.prototype.initLights = function () {
 
     this.shader.bind();
 
- this.lights[0].setPosition(15, 2, 5, 1);
+    this.lights[0].setPosition(15, 2, 5, 1);
     this.lights[0].setDiffuse(1.0,0.5,1.0,1.0);
     this.lights[0].enable();
     this.lights[0].update();
@@ -74,13 +74,6 @@ TPscene.prototype.display = function () {
     this.translate(4,0,3);
     this.floor.display();
     this.table.display();
-
-
-
-
-   
-
-
 
 
 
