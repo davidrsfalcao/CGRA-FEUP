@@ -75,8 +75,7 @@ TPscene.prototype.display = function () {
     this.floor.display();
     this.table.display();
 
-
-
+ 
 
    this.shader.unbind();
 };
