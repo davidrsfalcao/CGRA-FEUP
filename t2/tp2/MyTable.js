@@ -1,55 +1,65 @@
-/**
- * MyTable
- * @constructor
- */
- function MyTable(scene) {
- 	CGFobject.call(this, scene);
+function MyTable(scene) {
+ CGFobject.call(this,scene);
 
- 	this.myUnitCubeQuad = new MyUnitCubeQuad(this.scene);
- 	this.myUnitCubeQuad.initBuffers();
- };
+ this.MyUnitCubeQuad =new MyUnitCubeQuad(this.scene);
+ this.MyUnitCubeQuad.initBuffers();
 
- MyTable.prototype = Object.create(CGFobject.prototype);
- MyTable.prototype.constructor = MyTable;
+  this.materialDefault = new CGFappearance(this.scene);
 
- MyTable.prototype.display_legs = function() {
- 	// legs
-    //Perna1
+    this.metallic = new CGFappearance(this.scene);
+	this.metallic.setAmbient(0.74,0.78,0.8,1);
+	this.metallic.setDiffuse(0.74,0.78,0.8,1);
+	this.metallic.setSpecular(0.74,0.78,0.8,1);	
+	this.metallic.setShininess(120);
+
+	this.wood = new CGFappearance(this.scene);
+	this.wood.setAmbient(0.4,0.2,0,1);
+	this.wood.setDiffuse(0.4,0.2,0,1);
+	this.wood.setSpecular(0.4,0.2,0,0);
+	this.wood.setShininess(50);
+};
+
+MyTable.prototype = Object.create(CGFobject.prototype);
+MyTable.prototype.constructor = MyTable;
+
+MyTable.prototype.display = function () {
+
+
+    //PRIMEIRA PERNA
     this.scene.pushMatrix();
     this.scene.scale(0.3,3.5,0.3);
     this.scene.translate(7.5,0.5,4.25);
-    this.myUnitCubeQuad.display();
+    this.metallic.apply();
+    this.MyUnitCubeQuad.display();
     this.scene.popMatrix();
     
-     //Perna2
+     //SEGUNDA PERNA
     this.scene.pushMatrix();
     this.scene.scale(0.3,3.5,0.3);
     this.scene.translate(7.5,0.5,-4.25);
-    this.myUnitCubeQuad.display();
+    this.MyUnitCubeQuad.display();
     this.scene.popMatrix();
     
-    //Perna3
+    //TERCEIRA PERNA
     this.scene.pushMatrix();
     this.scene.scale(0.3,3.5,0.3);
     this.scene.translate(-7.5,0.5,-4.25);
-    this.myUnitCubeQuad.display();
+    this.MyUnitCubeQuad.display();
     this.scene.popMatrix();
 
-    //Perna4
+    //QUARTA PERNA
     this.scene.pushMatrix();
     this.scene.scale(0.3,3.5,0.3);
     this.scene.translate(-7.5,0.5,4.25);
-    this.myUnitCubeQuad.display();
+    this.MyUnitCubeQuad.display();
     this.scene.popMatrix();
 
-    
- }
-
- MyTable.prototype.display_top = function() {
-    //Tampo da mesa
+    //TAMPO
+    this.wood.apply();
     this.scene.pushMatrix();
     this.scene.translate(0,3.5,0);
     this.scene.scale(5,0.3,3);
-    this.myUnitCubeQuad.display();
+    this.MyUnitCubeQuad.display();
     this.scene.popMatrix();
- }
+
+};
