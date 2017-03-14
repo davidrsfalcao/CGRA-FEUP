@@ -38,8 +38,10 @@ MyPrism.prototype.initBuffers = function() {
   var angulo = 0;
   var indice = 0;
   var x, y, z;
+  var inc_stack = altura / this.stacks;
 
-  for( var stack = 0; stack < this.stacks; stack++){
+
+  for( var stack = 0; stack < altura; stack+=inc_stack){
 
     for(var i = 0; i <= this.slices; i++){
 
@@ -78,7 +80,7 @@ MyPrism.prototype.initBuffers = function() {
       */
       x = Math.cos(angulo + theta) * largura ;
       y = Math.sin(angulo + theta) * largura;
-      z = stack * altura;
+      z = stack;
       this.vertices.push(x , y , z);
 
       /*
@@ -86,7 +88,7 @@ MyPrism.prototype.initBuffers = function() {
       */
       x = Math.cos(angulo) * largura;
       y = Math.sin(angulo) * largura;
-      z = stack * altura;
+      z = stack;
       this.vertices.push(x , y , z);
 
       /*
@@ -94,7 +96,7 @@ MyPrism.prototype.initBuffers = function() {
       */
       x = Math.cos(angulo + theta) * largura;
       y = Math.sin(angulo + theta) * largura;
-      z = (stack + 1) * altura;
+      z = (stack + inc_stack);
       this.vertices.push(x , y , z);
 
       /*
@@ -102,7 +104,7 @@ MyPrism.prototype.initBuffers = function() {
       */
       x = Math.cos(angulo) * largura;
       y = Math.sin(angulo) * largura;
-      z = (stack + 1) * altura;
+      z = (stack + inc_stack);
       this.vertices.push(x , y , z);
 
 
