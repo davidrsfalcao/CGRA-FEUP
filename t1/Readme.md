@@ -1,6 +1,1 @@
-![alt tag] (http://image.prntscr.com/image/43ba383223cb4ce6aff1b407747a0750.png)
-![alt tag] (http://image.prntscr.com/image/afa85974a2c84832b355a1647014066b.png)
-![alt tag] (http://image.prntscr.com/image/5d293d5e6eeb46248dc61ceea0a69017.png)
-![alt tag] (http://image.prntscr.com/image/5971d6f283a44f808212d5ce73fc60a5.png)
-![alt tag] (http://image.prntscr.com/image/6dc886f57cb746a1858bcafc072c3217.png)
-![alt tag] (http://image.prntscr.com/image/91737c4db1bb41f89900f538773653b0.png)
+
