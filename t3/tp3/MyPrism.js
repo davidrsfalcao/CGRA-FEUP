@@ -1,151 +1,148 @@
 /**
- * MyPrism
- * @constructor
- */
- function MyPrism(scene, slices, stacks) {
- 	CGFobject.call(this,scene);
-	
-	this.slices=slices;
-	this.stacks=stacks;
+* MyPrism
+* @constructor
+*/
+function MyPrism(scene, slices, stacks) {
+  CGFobject.call(this,scene);
 
- 	this.initBuffers();
- };
+  this.slices = slices;
+  this.stacks = stacks;
 
- MyPrism.prototype = Object.create(CGFobject.prototype);
- MyPrism.prototype.constructor = MyPrism;
+  this.initBuffers();
+};
 
- MyPrism.prototype.initBuffers = function() {
- 	/*
- 	* TODO:
- 	* Replace the following lines in order to build a prism with a **single mesh**.
- 	*
- 	* How can the vertices, indices and normals arrays be defined to
- 	* build a prism with varying number of slices and stacks?
- 	*/
+MyPrism.prototype = Object.create(CGFobject.prototype);
+MyPrism.prototype.constructor = MyPrism;
 
-    this.vertices = [
- 	];
+MyPrism.prototype.initBuffers = function() {
+  /*
+  * TODO:
+  * Replace the following lines in order to build a prism with a **single mesh**.
+  *
+  * How can the vertices, indices and normals arrays be defined to
+  * build a prism with varying number of slices and stacks?
+  */
 
- 	this.indices = [
- 	];
+  this.vertices = [
+  ];
 
- 	this.normals = [
- 	];
+  this.indices = [
+  ];
 
+  this.normals = [
+  ];
 
- 	
-    //V1 
-    var angulo = Math.PI * 2 / this.slices;
-    var vertice2 = angulo;
-    var vertice = 0;
-    var altura = this.stacks;
-    var indice = 0;
-    for( var s = 0; s < this.stacks; s++){
-      
+  var largura = 1;
+  var altura = 1;
+  var theta = Math.PI * 2 / this.slices;
+  var angulo = 0;
+  var indice = 0;
+  var x, y, z;
+
+  for( var stack = 0; stack < this.stacks; stack++){
+
     for(var i = 0; i <= this.slices; i++){
-        //1 vertice
-        var y = Math.sin(vertice2) * 0.5;
-        var x = y / Math.tan(vertice2);
-        var z = s;
-        this.vertices.push(x);
-        this.vertices.push(y);
-        this.vertices.push(z);
-        //1 Normal
-        this.normals.push(Math.cos(angulo * (i + 0.5)));
-        this.normals.push(Math.sin(angulo * (i + 0.5)));
-        this.normals.push(0);
-        //2 vertice
-        var y = Math.sin(vertice) * 0.5;
-        var x = y / Math.tan(vertice);
-        var z = s;
-        this.vertices.push(x);
-        this.vertices.push(y);
-        this.vertices.push(z);
-        //2 Normal
-        this.normals.push(Math.cos(angulo * (i + 0.5)));
-        this.normals.push(Math.sin(angulo * (i + 0.5)));
-        this.normals.push(0);
-        //3 vertice
-        var y = Math.sin(vertice2) * 0.5;
-        var x = y / Math.tan(vertice2);
-        var z = s + 1;
-        this.vertices.push(x);
-        this.vertices.push(y);
-        this.vertices.push(z);
-        //3 Normal
-        this.normals.push(Math.cos(angulo * (i + 0.5)));
-        this.normals.push(Math.sin(angulo * (i + 0.5)));
-        this.normals.push(0);
-        //4 vertice
-        var y = Math.sin(vertice) * 0.5;
-        var x = y / Math.tan(vertice);
-        var z = s + 1;
-        this.vertices.push(x);
-        this.vertices.push(y);
-        this.vertices.push(z);
-        //4 Normal
-        this.normals.push(Math.cos(angulo * (i + 0.5)));
-        this.normals.push(Math.sin(angulo * (i + 0.5)));
-        this.normals.push(0);
 
-        vertice = vertice + angulo;
-        vertice2 = vertice2 + angulo;
+      /*
+      Método: desenhar face a face do prisma
 
-        //Indices
-        /*this.indices.push(indice);
-        this.indices.push(indice + 1);
-        this.indices.push(indice + 2);
+      Calcular Vértices:
 
-        this.indices.push(indice + 3);
-        this.indices.push(indice + 2);
-        this.indices.push(indice + 1);*/
+      Ex:
+      V1 = ( cos(0) * largura, sin(0) * largura, altura )
+
+            ____________ V2
+           /           /|
+          /_______V3_ / |
+          |          |  |
+          |          |  | V0
+          |          | /
+          |__________|/
+                    V1
+
+                    V1 está sobre os eixos xx e yy
+
+      Calcular Normais:
+      N1:
+      x = cos(theta * i + (theta/2))
+      y = sin(theta * i + (theta/2))
+      z = 0
+
+      */
+
+      var n = theta * (i + 0.5);
 
 
-        this.indices.push(indice + 2);
-        this.indices.push(indice + 1);
-        this.indices.push(indice);
+      /*
+      Vértice 0
+      */
+      x = Math.cos(angulo + theta) * largura ;
+      y = Math.sin(angulo + theta) * largura;
+      z = stack * altura;
+      this.vertices.push(x , y , z);
 
-        this.indices.push(indice + 1);
-        this.indices.push(indice + 2);
-        this.indices.push(indice + 3);
-        indice = indice + 4;
+      /*
+      Vertice 1
+      */
+      x = Math.cos(angulo) * largura;
+      y = Math.sin(angulo) * largura;
+      z = stack * altura;
+      this.vertices.push(x , y , z);
+
+      /*
+      Vertice 2
+      */
+      x = Math.cos(angulo + theta) * largura;
+      y = Math.sin(angulo + theta) * largura;
+      z = (stack + 1) * altura;
+      this.vertices.push(x , y , z);
+
+      /*
+      Vertice 3
+      */
+      x = Math.cos(angulo) * largura;
+      y = Math.sin(angulo) * largura;
+      z = (stack + 1) * altura;
+      this.vertices.push(x , y , z);
+
+
+      /*
+      Normais: são todas iguais para a mesma face
+      */
+
+      for (var cont = 0; cont < 4; cont++)
+      {
+        this.normals.push(Math.cos(n), Math.sin(n),0);
+
+      }
+
+      /*
+
+            i3   __________ i2
+                |       /  |
+                |     /    |
+                |   /      |
+            i1  |/_________| i0
+
+      */
+
+      var i0 = indice;
+      var i1 = indice + 1;
+      var i2 = indice + 2;
+      var i3 = indice + 3;
+
+      this.indices.push(i2 , i1 , i0);
+      this.indices.push(i1 , i2 , i3);
+
+
+      angulo += theta; //rodar theta
+      indice = indice + 4; // incrementar indices
     }
-    vertice2 = angulo;
-    vertice = 0;
-    }
-    
-    /*
- 	this.vertices = [
- 	-0.25, 0.56, 0,
- 	0.25, 0.56, 1,
- 	0.25, 0.56, 0,
- 	-0.25, 0.56, 1,
 
- 	-0.25, -0.56, 0,
- 	0.25, -0.56, 1,
- 	0.25, -0.56, 0,
- 	-0.25, -0.56, 1
- 	];
+    angulo = 0; // iniciar novamente sobre o plano xOy
+  }
 
- 	this.indices = [
- 	1,2,0,
- 	0,3,1,
 
- 	4,6,5,
- 	5,7,4
- 	];
-
- 	this.normals = [
- 	0, 0, 1,
- 	0, 0, 1,
- 	0, 0, 1,
- 	0, 0, 1,
- 	0, 0, 1,
- 	0, 0, 1,
- 	0, 0, 1,
- 	0, 0, 1
- 	];*/
-
- 	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
- };
+  this.primitiveType = this.scene.gl.TRIANGLES;
+  this.initGLBuffers();
+};
