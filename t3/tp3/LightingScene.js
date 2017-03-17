@@ -90,6 +90,7 @@ LightingScene.prototype.display = function() {
 	// Prism
 	this.prism.display();
 
+	//Cylinder
 	this.pushMatrix();
 	this.translate(3,0,0);
 	this.cylinder.display();

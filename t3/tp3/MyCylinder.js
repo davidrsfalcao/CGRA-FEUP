@@ -26,6 +26,7 @@
  	];
 
   var comprimento = 1;
+  var largura = 1;
   var theta = 2*Math.PI / this.slices;
   var inc_stack = comprimento / this.stacks;
 
@@ -34,8 +35,8 @@
   {
     for (var n = 0; n < this.slices; n++) // ciclo para as slices
     {
-      var x = Math.cos(n * theta);
-      var y = Math.sin(n * theta);
+      var x = largura * Math.cos(n * theta);
+      var y = largura * Math.sin(n * theta);
       var z = k * inc_stack;
 
       this.vertices.push(x, y, z);
