@@ -29,9 +29,8 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	// Scene elements
-	this.board_texture = new CGFappearance(this);
-	this.board_texture.loadTexture("../resources/images/board.png");
-
+	this.appearance = new CGFappearance(this);
+	this.appearance.loadTexture("../resources/images/window.png")
 	this.table = new MyTable(this);
 	this.wall = new Plane(this);
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
@@ -199,7 +198,7 @@ LightingScene.prototype.display = function() {
 		this.translate(4, 4.5, 0.2);
 		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
 
-		this.board_texture.apply();
+		this.materialA.apply();
 		this.boardA.display();
 	this.popMatrix();
 
@@ -208,7 +207,7 @@ LightingScene.prototype.display = function() {
 		this.translate(10.5, 4.5, 0.2);
 		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
 
-		this.board_texture.apply();
+		this.materialB.apply();
 		this.boardB.display();
 	this.popMatrix();
 
@@ -222,6 +221,7 @@ LightingScene.prototype.display = function() {
 	this.pushMatrix();
 		this.translate(12,4.5,8);
 		this.rotate( Math.PI/2 , 1 , 0 , 0);
+		this.apply();
 		this.cylinder.display();
 	this.popMatrix();
 
