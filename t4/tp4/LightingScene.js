@@ -33,6 +33,9 @@ LightingScene.prototype.init = function(application) {
 	this.wall = new Plane(this);
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
+	this.lamp = new MyLamp(this, 10, 20);
+	this.cylinder = new MyCylinder(this,8,20);
+	this.prism = new MyPrism(this,8,20);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -103,7 +106,10 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setConstantAttenuation(0);
 	this.lights[3].setQuadraticAttenuation(1.0);
 	this.lights[3].enable();
-
+	this.lights[0].setVisible(true);
+	this.lights[1].setVisible(true);
+	this.lights[2].setVisible(true);
+	this.lights[3].setVisible(true);
 	this.shader.unbind();
 };
 
@@ -204,6 +210,23 @@ LightingScene.prototype.display = function() {
 	this.popMatrix();
 
 	// ---- END Primitive drawing section
+	this.pushMatrix();
+		this.translate(7,8,7);
+		this.rotate( Math.PI/2 , 1 , 0 , 0);
+		this.lamp.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.translate(12,4.5,8);
+		this.rotate( Math.PI/2 , 1 , 0 , 0);
+		this.cylinder.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.translate(5,4.5,8);
+		this.rotate( Math.PI/2 , 1 , 0 , 0);
+		this.prism.display();
+	this.popMatrix();
 
 	this.shader.unbind();
 };
