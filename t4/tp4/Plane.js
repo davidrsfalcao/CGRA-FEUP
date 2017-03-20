@@ -34,10 +34,16 @@ Plane.prototype.initBuffers = function() {
 
 	// Generate vertices
 	this.vertices = [];
+	this.texCoords = [];
 	var xCoord = -0.5;
 	for (var i = 0; i <= this.nrDivs; i++) {
+
 		this.vertices.push(xCoord, 0.5, 0);
+		this.texCoords.push(this.patchLength*i,0);
+
 		this.vertices.push(xCoord, 0.5 - this.patchLength, 0);
+		this.texCoords.push(this.patchLength*i,1-this.patchLength*i);
+
 		xCoord += this.patchLength;
 	}
 	
