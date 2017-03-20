@@ -15,7 +15,7 @@ LightingScene.prototype.constructor = LightingScene;
 
 LightingScene.prototype.init = function(application) {
 	CGFscene.prototype.init.call(this, application);
-
+	this.enableTextures(true);
 	this.initCameras();
 
 	this.initLights();
@@ -29,6 +29,8 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	// Scene elements
+	this.appearance = new CGFappearance(this);
+	this.appearance.loadTexture("../resources/images/window.png")
 	this.table = new MyTable(this);
 	this.wall = new Plane(this);
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
@@ -219,6 +221,7 @@ LightingScene.prototype.display = function() {
 	this.pushMatrix();
 		this.translate(12,4.5,8);
 		this.rotate( Math.PI/2 , 1 , 0 , 0);
+		this.apply();
 		this.cylinder.display();
 	this.popMatrix();
 
