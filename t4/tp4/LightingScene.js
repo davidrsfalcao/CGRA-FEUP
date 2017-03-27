@@ -36,11 +36,16 @@ LightingScene.prototype.init = function(application) {
 	this.board_slides.loadTexture("../resources/images/slides.png");
 
 	this.florApperance = new CGFappearance(this);
-	this.florApperance.loadTexture("../resources/images/floor.png")
+	this.florApperance.loadTexture("../resources/images/floor.png");
+
+	this.window_appearance = new CGFappearance(this);
+	this.window_appearance.loadTexture("../resources/images/window.png")
+	this.window_appearance.setTextureWrap("CLAMP_TO_EDGE" , "CLAMP_TO_EDGE");
 
 
 	this.table = new MyTable(this);
 	this.wall = new Plane(this);
+	this.left_wall = new MyQuad(this,-1,2,-1,2);
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 	this.lamp = new MyLamp(this, 10, 20);
@@ -179,8 +184,8 @@ LightingScene.prototype.display = function() {
 		this.translate(0, 4, 7.5);
 		this.rotate(90 * degToRad, 0, 1, 0);
 		this.scale(15, 8, 0.2);
-		this.wallColor.apply();
-		this.wall.display();
+		this.window_appearance.apply();
+		this.left_wall.display();
 	this.popMatrix();
 
 	// Plane Wall
