@@ -38,10 +38,10 @@ MyQuad.prototype.initBuffers = function () {
         ];
 
     this.texCoords = [
-            minS,maxT,
-            maxS,maxT,
-            minS,minT,
-            maxS,minT
+            this.minS,this.maxT,
+            this.maxS,this.maxT,
+            this.minS,this.minT,
+            this.maxS,this.minT
     ]
     this.primitiveType=this.scene.gl.TRIANGLES;
     this.initGLBuffers();
