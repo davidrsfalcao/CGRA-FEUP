@@ -25,11 +25,13 @@
  	this.normals = [
  	];
 
+  this.texCoords=[];
+
   var comprimento = 1;
   var largura = 1;
   var theta = 2*Math.PI / this.slices;
   var inc_stack = comprimento / this.stacks;
-
+  var inc_text = 1/this.slices;
 
   for (var k = 0; k <= this.stacks; k++) //ciclo para a stacks
   {
@@ -41,8 +43,14 @@
 
       this.vertices.push(x, y, z);
       this.normals.push(x, y, 0);
+      this.texCoords.push(1-inc_text*n , z);
     }
   }
+  var x = largura * Math.cos(0);
+  var y = largura * Math.cos(0);
+  var z = comprimento;
+  this.vertices.push(x, y, z);
+      this.normals.push(x, y, 0);
 
   for (var k = 0; k < this.stacks; k++)  // ciclo para as stacks
   {

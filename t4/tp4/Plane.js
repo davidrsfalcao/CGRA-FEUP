@@ -1,4 +1,3 @@
-
 /** Represents a plane with nrDivs divisions along both axis, with center at (0,0) */
 function Plane(scene, nrDivs) {
 	CGFobject.call(this,scene);
@@ -18,7 +17,6 @@ Plane.prototype.constructor = Plane;
 Plane.prototype.initBuffers = function() {
 	/* example for nrDivs = 3 :
 	(numbers represent index of point in vertices array)
-
 	        y
         	^
 	        |
@@ -29,7 +27,6 @@ Plane.prototype.initBuffers = function() {
 	8    9  |  10  11
 	        |
 	12  13  |  14  15
-
 	*/
 
 	// Generate vertices and normals
@@ -105,12 +102,10 @@ Plane.prototype.initBuffers = function() {
 		{
 			this.indices.push(ind, ind+this.nrDivs+1, ind+1);
 			this.indices.push(ind+1, ind+this.nrDivs+1, ind+this.nrDivs+2 );
-
 			ind++;
 		}
 		ind++;
 	}
-
 	this.primitiveType = this.scene.gl.TRIANGLES;
 */
 

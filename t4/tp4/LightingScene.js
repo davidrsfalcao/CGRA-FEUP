@@ -28,19 +28,20 @@ LightingScene.prototype.init = function(application) {
 
 	this.axis = new CGFaxis(this);
 
+	// Scene elements
 	this.board_texture = new CGFappearance(this);
 	this.board_texture.loadTexture("../resources/images/board.png");
 
 	this.board_slides = new CGFappearance(this);
 	this.board_slides.loadTexture("../resources/images/slides.png");
 
+
 	this.table = new MyTable(this);
 	this.wall = new Plane(this);
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 	this.lamp = new MyLamp(this, 10, 20);
-	this.cylinder = new MyCylinder(this,8,20);
-	this.prism = new MyPrism(this,8,20);
+	this.cylinder = new MyCylinder(this,30,20,10);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -69,6 +70,13 @@ LightingScene.prototype.init = function(application) {
 	this.wallColor.setDiffuse(0.5,0.5,0.5,0.9);
 	this.wallColor.setSpecular(0.5,0.5,0.5,1);
 	this.wallColor.setShininess(0);
+
+	this.cylinderColor = new CGFappearance(this);
+	this.cylinderColor.setAmbient(0.5,0.5,0.5);
+	this.cylinderColor.setDiffuse(0.5,0.5,0.5);
+	this.cylinderColor.setSpecular(0.5,0.5,0.5);
+	this.cylinderColor.loadTexture("../resources/images/granito.jpg")
+	this.cylinderColor.setShininess(3);
 
 };
 
@@ -216,17 +224,20 @@ LightingScene.prototype.display = function() {
 	this.popMatrix();
 
 	this.pushMatrix();
-		this.translate(12,4.5,8);
+		this.translate(1,8,14);
+		this.scale(1,8,1); 
 		this.rotate( Math.PI/2 , 1 , 0 , 0);
-		this.apply();
+		this.cylinderColor.apply();
 		this.cylinder.display();
 	this.popMatrix();
-
 	this.pushMatrix();
-		this.translate(5,4.5,8);
+		this.translate(14,8,14);
+		this.scale(1,8,1);
 		this.rotate( Math.PI/2 , 1 , 0 , 0);
-		this.prism.display();
+		this.cylinderColor.apply();
+		this.cylinder.display();
 	this.popMatrix();
+	
 
 	this.shader.unbind();
 };
