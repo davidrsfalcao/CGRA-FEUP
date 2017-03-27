@@ -33,12 +33,11 @@ MyQuad.prototype.initBuffers = function () {
         ];
 
     this.texCoords = [
-            0,1,
-            1,1,
-            0,0,
-            1,0
+            minS,maxT,
+            masS,maxT,
+            minS,minT,
+            masS,minT
     ]
-
     this.primitiveType=this.scene.gl.TRIANGLES;
     this.initGLBuffers();
 };

@@ -35,6 +35,9 @@ LightingScene.prototype.init = function(application) {
 	this.board_slides = new CGFappearance(this);
 	this.board_slides.loadTexture("../resources/images/slides.png");
 
+	this.florApperance = new CGFappearance(this);
+	this.florApperance.loadTexture("../resources/images/floor.png")
+
 
 	this.table = new MyTable(this);
 	this.wall = new Plane(this);
@@ -225,7 +228,7 @@ LightingScene.prototype.display = function() {
 
 	this.pushMatrix();
 		this.translate(1,8,14);
-		this.scale(1,8,1); 
+		this.scale(1,8,1);
 		this.rotate( Math.PI/2 , 1 , 0 , 0);
 		this.cylinderColor.apply();
 		this.cylinder.display();
@@ -237,7 +240,7 @@ LightingScene.prototype.display = function() {
 		this.cylinderColor.apply();
 		this.cylinder.display();
 	this.popMatrix();
-	
+
 
 	this.shader.unbind();
 };
