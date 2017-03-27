@@ -35,12 +35,12 @@ LightingScene.prototype.init = function(application) {
 	this.board_slides = new CGFappearance(this);
 	this.board_slides.loadTexture("../resources/images/slides.png");
 
-	this.florApperance = new CGFappearance(this);
-	this.florApperance.loadTexture("../resources/images/floor.png");
 
 	this.window_appearance = new CGFappearance(this);
 	this.window_appearance.loadTexture("../resources/images/window.png")
 	this.window_appearance.setTextureWrap("CLAMP_TO_EDGE" , "CLAMP_TO_EDGE");
+	this.floorApperance = new CGFappearance(this);
+	this.floorApperance.loadTexture("../resources/images/floor.png")
 
 
 	this.table = new MyTable(this);
@@ -50,6 +50,7 @@ LightingScene.prototype.init = function(application) {
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 	this.lamp = new MyLamp(this, 10, 20);
 	this.cylinder = new MyCylinder(this,30,20,10);
+	this.floor = new MyQuad(this, 0, 10, 0, 12);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -175,8 +176,8 @@ LightingScene.prototype.display = function() {
 		this.translate(7.5, 0, 7.5);
 		this.rotate(-90 * degToRad, 1, 0, 0);
 		this.scale(15, 15, 0.2);
-		this.floorColor.apply();
-		this.wall.display();
+		this.floorApperance.apply();
+		this.floor.display();
 	this.popMatrix();
 
 	// Left Wall
