@@ -50,11 +50,11 @@ LightingScene.prototype.init = function(application) {
 
 	this.table = new MyTable(this);
 	this.wall = new Plane(this);
-	this.left_wall = new MyQuad(this,-1,2,-1,2);
+	this.left_wall = new MyQuad(this,-1,2,-0.7,1.8);
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 	this.lamp = new MyLamp(this, 10, 20);
-	this.cylinder = new MyCylinder(this,30,20,10);
+	this.cylinder = new MyCylinder(this,200,20,10);
 	this.floor = new MyQuad(this, 0, 10, 0, 12);
 
 	// Materials
@@ -80,16 +80,15 @@ LightingScene.prototype.init = function(application) {
 
 
 	this.wallColor = new CGFappearance(this);
-	this.wallColor.setAmbient(0.5,0.5,0.5,0.9);
-	this.wallColor.setDiffuse(0.5,0.5,0.5,0.9);
-	this.wallColor.setSpecular(0.5,0.5,0.5,1);
-	this.wallColor.setShininess(0);
+	this.wallColor.setDiffuse(0.65,0.65,0.65,1);
+	this.wallColor.setSpecular(0.3,0.3,0.3,1);
+	this.wallColor.setShininess(20);
 
 	this.cylinderColor = new CGFappearance(this);
 	this.cylinderColor.setAmbient(0.5,0.5,0.5);
 	this.cylinderColor.setDiffuse(0.5,0.5,0.5);
 	this.cylinderColor.setSpecular(0.5,0.5,0.5);
-	this.cylinderColor.loadTexture("../resources/images/granito.jpg")
+	this.cylinderColor.loadTexture("../resources/images/marmore-granito.jpg")
 	this.cylinderColor.setShininess(3);
 
 };
@@ -108,14 +107,16 @@ LightingScene.prototype.initLights = function() {
 	this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
 	this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
 	this.lights[3].setPosition(4, 6.0, 5.0, 1.0);
+	this.lights[4].setPosition(0, 4.0, 6.0, 1.0);
 
-	this.lights[0].setAmbient(0, 0, 0, 1);
-	this.lights[0].setSpecular( 1, 1, 0, 1);
+	this.lights[0].setAmbient(0.01, 0.01, 0.01, 1);
+	this.lights[0].setSpecular( 1, 1, 1, 1);
 	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[0].enable();
 
-	this.lights[1].setAmbient(0, 0, 0, 1);
+	this.lights[1].setAmbient(0.01, 0.01, 0.01, 1);
 	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	this.lights[1].setSpecular(1.0, 1.0, 1.0, 1.0);
 	this.lights[1].enable();
 
 	this.lights[2].setAmbient(0, 0, 0, 1);
@@ -127,12 +128,19 @@ LightingScene.prototype.initLights = function() {
 	this.lights[2].enable();
 
 	this.lights[3].setAmbient(0, 0, 0, 1);
-	this.lights[3].setSpecular( 1, 1, 0, 1);
+	this.lights[3].setSpecular( 1, 1, 1, 1);
 	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[3].setLinearAttenuation(0);
 	this.lights[3].setConstantAttenuation(0);
 	this.lights[3].setQuadraticAttenuation(1.0);
 	this.lights[3].enable();
+
+	this.lights[4].setAmbient(0.1, 0.1, 0.1, 1);
+	this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	this.lights[4].setSpecular(1.0, 1.0, 1.0, 1.0);
+	this.lights[4].enable();
+
+
 	this.shader.unbind();
 };
 
