@@ -36,6 +36,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.slidesAppearance = new CGFappearance(this);
 	this.slidesAppearance.loadTexture("../resources/images/slides.png");
+	this.slidesAppearance.setTextureWrap("CLAMP_TO_EDGE" , "CLAMP_TO_EDGE");
 	this.slidesAppearance.setSpecular(0.1,0.1,0.1,1);
 	this.slidesAppearance.setAmbient(0.5,0.5,0.5,1);
 
@@ -44,16 +45,21 @@ LightingScene.prototype.init = function(application) {
 	this.window_appearance = new CGFappearance(this);
 	this.window_appearance.loadTexture("../resources/images/window.png")
 	this.window_appearance.setTextureWrap("CLAMP_TO_EDGE" , "CLAMP_TO_EDGE");
+
+
 	this.floorApperance = new CGFappearance(this);
 	this.floorApperance.loadTexture("../resources/images/floor.png")
+	this.floorApperance.setDiffuse(0.8,0.8,0.8,1);
+	this.floorApperance.setSpecular(0.2,0.2,0.2,0);
+	this.floorApperance.setShininess(10);
 
 
 	this.table = new MyTable(this);
-	this.wall = new Plane(this);
+	this.wall = new Plane(this, 1, 0, 1, 0, 1);
 	this.left_wall = new MyQuad(this,-1,2,-0.7,1.8);
-	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
-	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
-	this.lamp = new MyLamp(this, 10, 20);
+	this.boardA = new Plane(this, BOARD_A_DIVISIONS, -0.3, 1.3, 0, 1);
+	this.boardB = new Plane(this, BOARD_B_DIVISIONS, 0, 1, 0, 1);
+	this.lamp = new MyLamp(this, 100, 20);
 	this.cylinder = new MyCylinder(this,200,20,10);
 	this.floor = new MyQuad(this, 0, 10, 0, 12);
 
@@ -72,12 +78,11 @@ LightingScene.prototype.init = function(application) {
 	this.materialB.setSpecular(0.8,0.8,0.8,1);
 	this.materialB.setShininess(120);
 
-	this.floorColor = new CGFappearance(this);
-	this.floorColor.setAmbient(0.5,0,0,0.9);
-	this.floorColor.setDiffuse(0.5,0,0,0.9);
-	this.floorColor.setSpecular(0.44,0,0,0);
-	this.floorColor.setShininess(50);
-
+	this.materialLamp = new CGFappearance(this);
+	this.materialLamp.setAmbient(0.3,0.3,0.3,1);
+	this.materialLamp.setDiffuse(0.3,0.3,0,1);
+	this.materialLamp.setSpecular(0.1,0.1,0.1,1);
+	this.materialLamp.setShininess(50);
 
 	this.wallColor = new CGFappearance(this);
 	this.wallColor.setDiffuse(0.65,0.65,0.65,1);
@@ -151,6 +156,7 @@ LightingScene.prototype.updateLights = function() {
 
 
 LightingScene.prototype.display = function() {
+
 	this.shader.bind();
 
 	// ---- BEGIN Background, camera and axis setup
@@ -186,78 +192,79 @@ LightingScene.prototype.display = function() {
 
 	// Floor
 	this.pushMatrix();
-		this.translate(7.5, 0, 7.5);
-		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.scale(15, 15, 0.2);
-		this.floorApperance.apply();
-		this.floor.display();
+	this.translate(7.5, 0, 7.5);
+	this.rotate(-90 * degToRad, 1, 0, 0);
+	this.scale(15, 15, 0.2);
+	this.floorApperance.apply();
+	this.floor.display();
 	this.popMatrix();
 
 	// Left Wall
 	this.pushMatrix();
-		this.translate(0, 4, 7.5);
-		this.rotate(90 * degToRad, 0, 1, 0);
-		this.scale(15, 8, 0.2);
-		this.window_appearance.apply();
-		this.left_wall.display();
+	this.translate(0, 4, 7.5);
+	this.rotate(90 * degToRad, 0, 1, 0);
+	this.scale(15, 8, 0.2);
+	this.window_appearance.apply();
+	this.left_wall.display();
 	this.popMatrix();
 
 	// Plane Wall
 	this.pushMatrix();
-		this.translate(7.5, 4, 0);
-		this.scale(15, 8, 0.2);
-		this.wallColor.apply();
-		this.wall.display();
+	this.translate(7.5, 4, 0);
+	this.scale(15, 8, 0.2);
+	this.wallColor.apply();
+	this.wall.display();
 	this.popMatrix();
 
 	// First Table
 	this.pushMatrix();
-		this.translate(5, 0, 8);
-		this.table.display();
+	this.translate(5, 0, 8);
+	this.table.display();
 	this.popMatrix();
 
 	// Second Table
 	this.pushMatrix();
-		this.translate(12, 0, 8);
-		this.table.display();
+	this.translate(12, 0, 8);
+	this.table.display();
 	this.popMatrix();
 
 	// Board A
 	this.pushMatrix();
-		this.translate(4, 4.5, 0.2);
-		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-		this.slidesAppearance.apply();
-		this.boardA.display();
+	this.translate(4, 4.5, 0.2);
+	this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
+	this.slidesAppearance.apply();
+	this.boardA.display();
 	this.popMatrix();
 
 	// Board B
 	this.pushMatrix();
-		this.translate(10.5, 4.5, 0.2);
-		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-		this.boardAppearance.apply();
-		this.boardB.display();
+	this.translate(10.5, 4.5, 0.2);
+	this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
+	this.boardAppearance.apply();
+	this.boardB.display();
 	this.popMatrix();
 
 	// ---- END Primitive drawing section
 	this.pushMatrix();
-		this.translate(7,8,7);
-		this.rotate( Math.PI/2 , 1 , 0 , 0);
-		this.lamp.display();
+	this.translate(7,8,7);
+	this.rotate( Math.PI/2 , 1 , 0 , 0);
+	this.materialLamp.apply();
+	this.lamp.display();
 	this.popMatrix();
 
 	this.pushMatrix();
-		this.translate(1,8,14);
-		this.scale(1,8,1);
-		this.rotate( Math.PI/2 , 1 , 0 , 0);
-		this.cylinderColor.apply();
-		this.cylinder.display();
+	this.translate(1,8,14);
+	this.scale(1,8,1);
+	this.rotate( Math.PI/2 , 1 , 0 , 0);
+	this.cylinderColor.apply();
+	this.cylinder.display();
 	this.popMatrix();
 	this.pushMatrix();
-		this.translate(14,8,14);
-		this.scale(1,8,1);
-		this.rotate( Math.PI/2 , 1 , 0 , 0);
-		this.cylinderColor.apply();
-		this.cylinder.display();
+	this.translate(14,8,14);
+	this.scale(1,8,1);
+	this.rotate( Math.PI/2 , 1 , 0 , 0);
+	this.cylinderColor.apply();
+	this.cylinder.display();
 	this.popMatrix();
 
 
