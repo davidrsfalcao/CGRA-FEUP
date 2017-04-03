@@ -60,8 +60,9 @@ LightingScene.prototype.init = function(application) {
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS, -0.3, 1.3, 0, 1);
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS, 0, 1, 0, 1);
 	this.lamp = new MyLamp(this, 100, 20);
-	this.cylinder = new MyCylinder(this,200,20,10);
+	this.cylinder = new MyCylinder(this,200,20);
 	this.floor = new MyQuad(this, 0, 10, 0, 12);
+	this.clock = new MyClock(this , 10 , 10);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -267,6 +268,8 @@ LightingScene.prototype.display = function() {
 	this.cylinder.display();
 	this.popMatrix();
 
+
+	this.clock.display();
 
 	this.shader.unbind();
 };

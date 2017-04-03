@@ -12,6 +12,7 @@ serialInclude([
 	'MyLamp.js',
 	'MyPrism.js',
 	'MyCylinder.js',
+	'MyClock.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

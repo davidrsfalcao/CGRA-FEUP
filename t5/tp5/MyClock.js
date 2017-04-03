@@ -1,8 +1,8 @@
 /**
- * MyCylinder
+ * MyClock
  * @constructor
  */
- function MyCylinder(scene, slices, stacks) {
+ function MyClock(scene, slices, stacks) {
  	CGFobject.call(this,scene);
 
 	this.slices = slices;
@@ -11,10 +11,10 @@
  	this.initBuffers();
  };
 
- MyCylinder.prototype = Object.create(CGFobject.prototype);
- MyCylinder.prototype.constructor = MyCylinder;
+ MyClock.prototype = Object.create(CGFobject.prototype);
+ MyClock.prototype.constructor = MyClock;
 
- MyCylinder.prototype.initBuffers = function() {
+ MyClock.prototype.initBuffers = function() {
 
  	this.vertices = [
  	];
@@ -45,8 +45,12 @@
       this.normals.push(x, y, 0);
       this.texCoords.push(1-inc_text*n , z);
     }
-
-
+  }
+  this.vertices.push(0,0,0);
+  this.vertices.push(0,0,1);
+  for (var i = 0 ; i < this.slices-1 ; i++){
+    this.indices.push( i ,this.slices*this.stacks+1 , i+1);
+    this.indices.push(this.slices*this.stacks-i-1 , this.slices*this.stacks+1 ,  this.slices*this.stacks-i);
   }
   var x = largura * Math.cos(0);
   var y = largura * Math.cos(0);
