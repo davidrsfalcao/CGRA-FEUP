@@ -35,7 +35,7 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder(this,20,1);
 
 	//Ocean
-	this.oceanFloor = new Plane(this,100,0,1,0,1);
+	this.oceanFloor = new Plane(this,100,0,4,0,4);
 	this.OceanApperance = new CGFappearance(this);
 	this.OceanApperance.loadTexture("../resources/images/OceanFloor.png");
 	this.OceanApperance.setTextureWrap("REPEAT" , "REPEAT");
@@ -115,16 +115,19 @@ LightingScene.prototype.display = function() {
 
 	this.submarine.display();
 
+	//Pole
 	this.pushMatrix();
 	this.translate(8,5,0);
 	this.rotate(Math.PI/2,1,0,0);
+	this.scale(0.1,0.1,5);
 	this.pole.display();
 	this.popMatrix();
 
+	//FLOOR
 	this.pushMatrix();
 	this.translate(7.5, 0, 7.5);
 	this.rotate(-Math.PI/2, 1, 0, 0);
-	this.scale(15, 15, 0.2);
+	this.scale(50, 50, 1);
 	this.OceanApperance.apply();
 	this.oceanFloor.display();
 	this.popMatrix();
