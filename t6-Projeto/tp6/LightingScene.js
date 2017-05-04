@@ -128,7 +128,13 @@ LightingScene.prototype.display = function() {
 	this.axis.display();
 	this.materialDefault.apply();
 
+	//Submarine
+	this.pushMatrix();
+	this.translate(8,0,5);
+	this.rotate(Math.PI,0,1,0);
 	this.submarine.display();
+	this.popMatrix();
+
 
 	//Pole
 	this.pushMatrix();
@@ -140,8 +146,8 @@ LightingScene.prototype.display = function() {
 
 	//Clock
 	this.pushMatrix();
- 		this.translate(8, 5, 0);
-		this.clock.display();
+	this.translate(8, 5, 0);
+	this.clock.display();
 	this.popMatrix();
 
 	//FLOOR
@@ -152,7 +158,6 @@ LightingScene.prototype.display = function() {
 	this.OceanApperance.apply();
 	this.oceanFloor.display();
 	this.popMatrix();
-
 
 
 	// ---- END Primitive drawing section
