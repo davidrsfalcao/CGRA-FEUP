@@ -40,8 +40,6 @@ LightingScene.prototype.init = function(application) {
 	this.slidesAppearance.setSpecular(0.1,0.1,0.1,1);
 	this.slidesAppearance.setAmbient(0.5,0.5,0.5,1);
 
-
-
 	this.window_appearance = new CGFappearance(this);
 	this.window_appearance.loadTexture("../resources/images/window.png")
 	this.window_appearance.setTextureWrap("CLAMP_TO_EDGE" , "CLAMP_TO_EDGE");
@@ -53,6 +51,14 @@ LightingScene.prototype.init = function(application) {
 	this.floorApperance.setSpecular(0.2,0.2,0.2,0);
 	this.floorApperance.setShininess(10);
 
+	this.side_text = new CGFappearance(this);
+  	this.top_text = new CGFappearance(this);
+  	this.top_text.loadTexture("../resources/images/clock.png");
+	
+  	this.hand_text = new CGFappearance(this);
+  	this.hand_text.setSpecular(0.1,0.1,0.1,1);
+  	this.hand_text.setDiffuse(0,0,0,1);
+
 
 	this.table = new MyTable(this);
 	this.wall = new Plane(this, 1, 0, 1, 0, 1);
@@ -62,7 +68,9 @@ LightingScene.prototype.init = function(application) {
 	this.lamp = new MyLamp(this, 100, 20);
 	this.cylinder = new MyCylinder(this,200,20);
 	this.floor = new MyQuad(this, 0, 10, 0, 12);
-	this.clock = new MyClock(this , 10 , 10);
+	this.clock = new MyClock(this);
+
+
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -97,6 +105,8 @@ LightingScene.prototype.init = function(application) {
 	this.cylinderColor.loadTexture("../resources/images/marmore-granito.jpg")
 	this.cylinderColor.setShininess(3);
 
+	this.setUpdatePeriod(100);
+
 };
 
 LightingScene.prototype.initCameras = function() {
@@ -106,7 +116,7 @@ LightingScene.prototype.initCameras = function() {
 LightingScene.prototype.initLights = function() {
 	this.setGlobalAmbientLight(0,0,0,0);
 
-	this.shader.bind();
+	//this.shader.bind();
 
 	// Positions for four lights
 	this.lights[0].setPosition(4, 6, 1, 1);
@@ -147,7 +157,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[4].enable();
 
 
-	this.shader.unbind();
+	//this.shader.unbind();
 };
 
 LightingScene.prototype.updateLights = function() {
@@ -158,7 +168,7 @@ LightingScene.prototype.updateLights = function() {
 
 LightingScene.prototype.display = function() {
 
-	this.shader.bind();
+	//this.shader.bind();
 
 	// ---- BEGIN Background, camera and axis setup
 
@@ -182,12 +192,6 @@ LightingScene.prototype.display = function() {
 	this.materialDefault.apply();
 
 	// ---- END Background, camera and axis setup
-
-
-	// ---- BEGIN Geometric transformation section
-
-	// ---- END Geometric transformation section
-
 
 	// ---- BEGIN Primitive drawing section
 
@@ -253,6 +257,7 @@ LightingScene.prototype.display = function() {
 	this.lamp.display();
 	this.popMatrix();
 
+
 	this.pushMatrix();
 	this.translate(1,8,14);
 	this.scale(1,8,1);
@@ -268,8 +273,15 @@ LightingScene.prototype.display = function() {
 	this.cylinder.display();
 	this.popMatrix();
 
+	this.pushMatrix();
+ 		this.translate(7.25, 7.2, 0);
+ 		this.scale(0.5, 0.5, 1);
+		this.clock.display();
+	this.popMatrix();
 
-	this.clock.display();
+	//this.shader.unbind();
+};
 
-	this.shader.unbind();
+LightingScene.prototype.update = function(time) {
+	this.clock.update(time);
 };

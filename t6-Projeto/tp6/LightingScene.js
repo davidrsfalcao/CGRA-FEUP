@@ -33,12 +33,21 @@ LightingScene.prototype.init = function(application) {
 
 	//Clock
 	this.pole = new MyCylinder(this,20,1);
+	this.clock = new MyClock(this);
+	this.clock_text = new CGFappearance(this);
+	this.clock_text.loadTexture("../resources/images/clock.png");
+	this.side_text = new CGFappearance(this);
+	this.hand_text = new CGFappearance(this);
+	this.hand_text.setSpecular(0.1,0.1,0.1,1);
+	this.hand_text.setDiffuse(0,0,0,1);
 
 	//Ocean
-	this.oceanFloor = new Plane(this,100,0,4,0,4);
+	this.oceanFloor = new MyPlane(this,100,0,4,0,4);
 	this.OceanApperance = new CGFappearance(this);
 	this.OceanApperance.loadTexture("../resources/images/OceanFloor.png");
 	this.OceanApperance.setTextureWrap("REPEAT" , "REPEAT");
+
+	this.setUpdatePeriod(100);
 
 };
 
@@ -123,6 +132,12 @@ LightingScene.prototype.display = function() {
 	this.pole.display();
 	this.popMatrix();
 
+	//Clock
+	this.pushMatrix();
+ 		this.translate(8, 5, 0);
+		this.clock.display();
+	this.popMatrix();
+
 	//FLOOR
 	this.pushMatrix();
 	this.translate(7.5, 0, 7.5);
@@ -132,6 +147,12 @@ LightingScene.prototype.display = function() {
 	this.oceanFloor.display();
 	this.popMatrix();
 
+
+
 	// ---- END Primitive drawing section
 
+};
+
+LightingScene.prototype.update = function(currTime) {
+	this.clock.update(currTime);
 };

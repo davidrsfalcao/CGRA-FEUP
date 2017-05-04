@@ -9,10 +9,12 @@ serialInclude([
 	'MyUnitCubeQuad.js',
 	'MyTable.js',
 	'Plane.js',
-	'MyLamp.js',
 	'MyPrism.js',
 	'MyCylinder.js',
+	'MyLamp.js',
 	'MyClock.js',
+	'MyClockHand.js',
+	'MyPolygon.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

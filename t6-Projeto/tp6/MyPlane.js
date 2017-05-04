@@ -1,5 +1,5 @@
-/** Represents a plane with nrDivs divisions along both axis, with center at (0,0) */
-function Plane(scene, nrDivs, minS, maxS, minT,maxT) {
+/** Represents a MyPlane with nrDivs divisions along both axis, with center at (0,0) */
+function MyPlane(scene, nrDivs, minS, maxS, minT,maxT) {
 	CGFobject.call(this,scene);
 
 	this.nrDivs = nrDivs;
@@ -14,10 +14,10 @@ function Plane(scene, nrDivs, minS, maxS, minT,maxT) {
 	this.initBuffers();
 };
 
-Plane.prototype = Object.create(CGFobject.prototype);
-Plane.prototype.constructor = Plane;
+MyPlane.prototype = Object.create(CGFobject.prototype);
+MyPlane.prototype.constructor = MyPlane;
 
-Plane.prototype.initBuffers = function() {
+MyPlane.prototype.initBuffers = function() {
 	/* example for nrDivs = 3 :
 	(numbers represent index of point in vertices array)
 	        y
@@ -48,7 +48,7 @@ Plane.prototype.initBuffers = function() {
 		{
 			this.vertices.push(xCoord, yCoord, 0);
 
-			// As this plane is being drawn on the xy plane, the normal to the plane will be along the positive z axis.
+			// As this MyPlane is being drawn on the xy MyPlane, the normal to the MyPlane will be along the positive z axis.
 			// So all the vertices will have the same normal, (0, 0, 1).
 
 			this.normals.push(0,0,1);
@@ -72,7 +72,7 @@ Plane.prototype.initBuffers = function() {
 			   11,  8,
 			 8, 12, 9, 13, 10, 14, 11, 15,
 		]
-	Interpreting this index list as a TRIANGLE_STRIP will draw rows of the plane (with degenerate triangles in between. */
+	Interpreting this index list as a TRIANGLE_STRIP will draw rows of the MyPlane (with degenerate triangles in between. */
 
 	this.indices = [];
 	var ind=0;
