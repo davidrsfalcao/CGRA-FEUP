@@ -1,5 +1,5 @@
 /**
-* MyClockTop
+* MyClockHand
 * @constructor
 */
 function MyClockHand(scene,height,type,myAngle) {
@@ -28,12 +28,9 @@ MyClockHand.prototype.initBuffers = function() {
 	this.indices = [
 		0,1,2
 	];
-
-	/*this.normals = [
-];*/
-
-this.primitiveType = this.scene.gl.TRIANGLES;
-this.initGLBuffers();
+	
+	this.primitiveType = this.scene.gl.TRIANGLES;
+	this.initGLBuffers();
 };
 
 MyClockHand.prototype.setAngle = function(thisAngle) {
