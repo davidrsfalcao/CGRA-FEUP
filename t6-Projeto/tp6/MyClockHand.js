@@ -36,11 +36,9 @@ this.primitiveType = this.scene.gl.TRIANGLES;
 this.initGLBuffers();
 };
 
-
 MyClockHand.prototype.setAngle = function(thisAngle) {
 	this.angle = thisAngle;
 }
-
 
 MyClockHand.prototype.update = function(currTime) {
 	this.delta_ms = currTime - this.lastCurrTime;

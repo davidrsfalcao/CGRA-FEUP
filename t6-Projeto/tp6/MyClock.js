@@ -9,9 +9,9 @@ function MyClock(scene) {
     CGFobject.call(this,scene);
 
     this.cylinder = new MyCylinder(this.scene,12,1);
-    this.seconds = new MyClockHand(this.scene,0.5,'seconds',270);
-    this.minutes = new MyClockHand(this.scene,0.4,'minutes',180);
-    this.hours = new MyClockHand(this.scene,0.3,'hours',90);
+    this.seconds = new MyClockHand(this.scene,0.4,'seconds',270);
+    this.minutes = new MyClockHand(this.scene,0.3,'minutes',180);
+    this.hours = new MyClockHand(this.scene,0.2,'hours',90);
     this.top = new MyPolygon(this.scene,12);
     this.back = new MyPolygon(this.scene,12);
 
@@ -27,6 +27,12 @@ function MyClock(scene) {
     this.handAppearance.setDiffuse(0,0,0,0);
     this.handAppearance.setSpecular(0,0,0,0);
     this.handAppearance.setShininess(0);
+
+    this.handSeconds = new CGFappearance(this.scene);
+    this.handSeconds.setAmbient(0,0,0,0);
+    this.handSeconds.setDiffuse(1,0,0,1);
+    this.handSeconds.setSpecular(0,0,0,0);
+    this.handSeconds.setShininess(0);
 };
 
 MyClock.prototype = Object.create(CGFobject.prototype);
@@ -43,7 +49,7 @@ MyClock.prototype.display = function() {
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-    this.handAppearance.apply();
+    this.handSeconds.apply();
     this.scene.translate(0,0,0.301);
     this.scene.rotate(- this.seconds.angle * degToRad,0,0,1);
     this.seconds.display();

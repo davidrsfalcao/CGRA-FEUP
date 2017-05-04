@@ -52,8 +52,9 @@ LightingScene.prototype.init = function(application) {
 
 };
 
-LightingScene.prototype.doSomething = function ()
-{ console.log("Doing something..."); };
+LightingScene.prototype.doSomething = function (){
+	 console.log("Doing something...");
+ };
 
 LightingScene.prototype.initCameras = function() {
 	this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
@@ -104,7 +105,6 @@ LightingScene.prototype.updateLights = function() {
 	for (i = 0; i < this.lights.length; i++)
 	this.lights[i].update();
 }
-
 
 LightingScene.prototype.display = function() {
 
