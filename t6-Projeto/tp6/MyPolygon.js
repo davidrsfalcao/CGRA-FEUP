@@ -39,7 +39,7 @@ MyPolygon.prototype.initBuffers = function() {
         x = 0.5*Math.cos(indice);
         y = 0.5*Math.sin(indice)
         this.vertices.push(x,y,z);
-        this.normals.push(x,y,1);
+        this.normals.push(0,0,1);
         indice = angulo * (i + 1);
     }
 

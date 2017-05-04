@@ -47,6 +47,7 @@ LightingScene.prototype.init = function(application) {
 	this.OceanApperance.loadTexture("../resources/images/OceanFloor.png");
 	this.OceanApperance.setTextureWrap("REPEAT" , "REPEAT");
 
+
 	this.setUpdatePeriod(100);
 
 };
@@ -71,10 +72,13 @@ LightingScene.prototype.initLights = function() {
 	this.lights[0].setSpecular( 1, 1, 0, 1);
 	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[0].enable();
+	this.lights[0].setVisible(true);
+
 
 	this.lights[1].setAmbient(0, 0, 0, 1);
 	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[1].enable();
+	this.lights[1].setVisible(true);
 
 	this.lights[2].setAmbient(0, 0, 0, 1);
 	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -83,6 +87,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[2].setConstantAttenuation(0);
 	this.lights[2].setQuadraticAttenuation(0);
 	this.lights[2].enable();
+	this.lights[2].setVisible(true);
 
 	this.lights[3].setAmbient(0, 0, 0, 1);
 	this.lights[3].setSpecular( 1, 1, 0, 1);
@@ -91,6 +96,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setConstantAttenuation(0);
 	this.lights[3].setQuadraticAttenuation(1.0);
 	this.lights[3].enable();
+	this.lights[3].setVisible(true);
 
 };
 
