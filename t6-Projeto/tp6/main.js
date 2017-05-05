@@ -16,6 +16,7 @@ serialInclude([
 	'MyPolygon.js',
 	'MyClock.js',
 	'MyClockHand.js',
+	'MyTriangle.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

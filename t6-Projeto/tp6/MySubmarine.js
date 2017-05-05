@@ -1,37 +1,71 @@
 /**
- * MySubmarine
- * @constructor
- */
- function MySubmarine(scene) {
- 	CGFobject.call(this,scene);
+* MySubmarine
+* @constructor
+*/
+function MySubmarine(scene) {
+    CGFobject.call(this,scene);
+    this.scene = scene;
+    this.triangle = new MyTriangle(this.scene);
+    
+    this.x = 0;
+    this.y = 0;
+    this.z = 0;
+    this.horizontal = false;
+    this.vertical = true;
 
- 	this.initBuffers();
- };
+};
 
- MySubmarine.prototype = Object.create(CGFobject.prototype);
- MySubmarine.prototype.constructor = MySubmarine;
+MySubmarine.prototype = Object.create(CGFobject.prototype);
+MySubmarine.prototype.constructor = MySubmarine;
 
- MySubmarine.prototype.initBuffers = function() {
+MySubmarine.prototype.display = function() {
+    this.scene.pushMatrix();
+    this.scene.translate(this.x,this.y,this.z);
+    this.triangle.display();
+    this.scene.popMatrix();
 
- 	this.vertices = [
-        0.5, 0.3, 0,
-        -0.5, 0.3, 0,
-        0, 0.3, 2
- 	];
+}
 
- 	this.indices = [
-        0,1,2
- 	];
+MySubmarine.prototype.moveFront = function(){
+    this.z += 1;
+}
 
- 	this.normals = [
-        0,1,0,
-        0,1,0,
-        0,1,0
- 	];
+MySubmarine.prototype.moveBack = function(){
+    this.z -= 1;
+}
 
-    this.texCoords=[];
+MySubmarine.prototype.turnRight = function(){
 
+}
 
- 	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
- };
+MySubmarine.prototype.turnLeft = function(){
+
+}
+
+MySubmarine.prototype.move = function(direction) {
+
+    switch (direction) {
+        case 0:{
+            this.moveFront();
+            break;
+        }
+
+        case 1:{
+            this.moveBack();
+            break;
+        }
+
+        case 2:{
+            this.turnRight();
+            break;
+        }
+
+        case 3:{
+            this.turnLeft();
+            break;
+        }
+        default:
+
+    }
+
+}

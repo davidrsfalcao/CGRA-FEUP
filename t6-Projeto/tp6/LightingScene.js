@@ -159,7 +159,6 @@ LightingScene.prototype.display = function() {
 	this.oceanFloor.display();
 	this.popMatrix();
 
-
 	// ---- END Primitive drawing section
 
 };

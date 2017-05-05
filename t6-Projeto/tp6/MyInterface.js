@@ -66,45 +66,46 @@ MyInterface.prototype.processKeyboard = function(event) {
     // for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
     switch (event.keyCode)
     {
-        //Move Up
+        //Move Front (0) w
         case (87):	{
-            console.log("Key 'W' pressed");
+            this.scene.submarine.move(0);
             break;
         }
         case (119):	{
-            console.log("Key 'w' pressed");
+            this.scene.submarine.move(0);
             break;
         }
 
-        //Move down
+        //Move Back (1) s
         case (83):	{
-            console.log("Key 'A' pressed");
+            this.scene.submarine.move(1);
             break;
         }
         case (115):	{
-            console.log("Key 'A' pressed");
+            this.scene.submarine.move(1);
             break;
         }
 
-        // Move left
-        case (65):	{
-            console.log("Key 'A' pressed");
-            break;
-        }
-        case (97):{
-            console.log("Key 'a' pressed");
-            break;
-        }
-
-        //Move right
+        //Move Right (2) d
         case (68):	{
-            console.log("Key 'A' pressed");
+            this.scene.submarine.move(2);
             break;
         }
         case (100):	{
-            console.log("Key 'A' pressed");
+            this.scene.submarine.move(2);
             break;
         }
+
+        // Move Left (3) a
+        case (65):	{
+            this.scene.submarine.move(3);
+            break;
+        }
+        case (97):{
+            this.scene.submarine.move(3);
+            break;
+        }
+
 
     };
 };
