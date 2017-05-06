@@ -55,8 +55,8 @@ LightingScene.prototype.init = function(application) {
 };
 
 LightingScene.prototype.doSomething = function (){
-	 console.log("Doing something...");
- };
+	console.log("Doing something...");
+};
 
 LightingScene.prototype.initCameras = function() {
 	this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
@@ -79,7 +79,6 @@ LightingScene.prototype.initLights = function() {
 
 	this.lights[1].setAmbient(0, 0, 0, 1);
 	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[1].enable();
 
 	this.lights[2].setAmbient(0, 0, 0, 1);
 	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -87,21 +86,48 @@ LightingScene.prototype.initLights = function() {
 	this.lights[2].setLinearAttenuation(1);
 	this.lights[2].setConstantAttenuation(0);
 	this.lights[2].setQuadraticAttenuation(0);
-	this.lights[2].enable();
 
-	this.lights[3].setAmbient(0, 0, 0, 1);
+	this.lights[3].setAmbient(0.3, 0.3, 0.3, 1);
 	this.lights[3].setSpecular( 1, 1, 0, 1);
 	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
 	this.lights[3].setLinearAttenuation(0);
 	this.lights[3].setConstantAttenuation(0);
-	this.lights[3].setQuadraticAttenuation(1.0);
-	this.lights[3].enable();
+	this.lights[3].setQuadraticAttenuation(0.1);
 
 };
 
 LightingScene.prototype.updateLights = function() {
-	for (i = 0; i < this.lights.length; i++)
-	this.lights[i].update();
+	for (i = 0; i < this.lights.length; i++){
+		this.lights[i].update();
+	}
+
+}
+
+LightingScene.prototype.switchLigths = function() {
+	if (this.Luz0 == true){
+		this.lights[0].enable();
+	} else {
+		this.lights[0].disable();
+	}
+
+	if (this.Luz1 == true){
+		this.lights[1].enable();
+	} else {
+		this.lights[1].disable();
+	}
+
+	if (this.Luz2 == true){
+		this.lights[2].enable();
+	} else {
+		this.lights[2].disable();
+	}
+
+	if (this.Luz3 == true){
+		this.lights[3].enable();
+	} else {
+		this.lights[3].disable();
+	}
+
 }
 
 LightingScene.prototype.display = function() {
@@ -157,6 +183,7 @@ LightingScene.prototype.display = function() {
 	this.oceanFloor.display();
 	this.popMatrix();
 
+	this.switchLigths();
 	// ---- END Primitive drawing section
 
 };
