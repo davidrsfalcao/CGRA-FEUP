@@ -19,7 +19,7 @@ LightingScene.prototype.init = function(application) {
 	this.Luz1=true;
 	this.Luz2=true;
 	this.Luz3=true;
-	this.speed=3;
+	this.speed=1;
 
 	this.gl.clearColor(0.0, 0.0, 0.4, 1.0);
 	this.gl.clearDepth(100.0);
