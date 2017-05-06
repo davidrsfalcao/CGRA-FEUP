@@ -33,15 +33,16 @@ MyInterface.prototype.init = function(application) {
 
     // add a group of controls (and open/expand by defult)
 
-    var group=this.gui.addFolder("Options");
+    var group=this.gui.addFolder("Luzes");
     group.open();
 
     // add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
     // e.g. this.option1=true; this.option2=false;
 
-    group.add(this.scene, 'option1');
-    group.add(this.scene, 'option2');
-
+    group.add(this.scene, 'Luz0');
+    group.add(this.scene, 'Luz1');
+    group.add(this.scene, 'Luz2');
+    group.add(this.scene, 'Luz3');
     // add a slider
     // must be a numeric variable of the scene, initialized in scene.init e.g.
     // this.speed=3;
