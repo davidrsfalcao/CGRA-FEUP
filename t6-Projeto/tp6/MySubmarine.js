@@ -6,13 +6,12 @@ function MySubmarine(scene) {
     CGFobject.call(this,scene);
     this.scene = scene;
     this.triangle = new MyTriangle(this.scene);
-    
+
     this.x = 0;
     this.y = 0;
     this.z = 0;
-    this.horizontal = false;
-    this.vertical = true;
-
+    this.orientation = 'N';
+    this.angle = 0;
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -21,24 +20,121 @@ MySubmarine.prototype.constructor = MySubmarine;
 MySubmarine.prototype.display = function() {
     this.scene.pushMatrix();
     this.scene.translate(this.x,this.y,this.z);
+    this.scene.rotate(this.angle *(Math.PI/2),0,1,0);
     this.triangle.display();
     this.scene.popMatrix();
 
 }
 
 MySubmarine.prototype.moveFront = function(){
-    this.z += 1;
+
+    switch (this.orientation) {
+        case 'N':{
+            this.z += 1;
+            break;
+        }
+
+        case 'S':{
+            this.z -= 1;
+            break;
+        }
+
+        case 'W':{
+            this.x += 1;
+            break;
+        }
+
+        case 'E':{
+            this.x -= 1;
+            break;
+        }
+
+    }
+
 }
 
 MySubmarine.prototype.moveBack = function(){
-    this.z -= 1;
+
+    switch (this.orientation) {
+        case 'N':{
+            this.z -= 1;
+            break;
+        }
+
+        case 'S':{
+            this.z += 1;
+            break;
+        }
+
+        case 'W':{
+            this.x -= 1;
+            break;
+        }
+
+        case 'E':{
+            this.x += 1;
+            break;
+        }
+
+    }
 }
 
 MySubmarine.prototype.turnRight = function(){
 
+    this.angle -= 1;
+
+    switch (this.orientation) {
+        case 'N':{
+            this.orientation = 'E';
+            break;
+        }
+
+        case 'S':{
+            this.orientation = 'W';
+            break;
+        }
+
+        case 'W':{
+            this.orientation = 'N';
+            break;
+        }
+
+        case 'E':{
+            this.orientation = 'S';
+            break;
+        }
+
+    }
+
+
 }
 
 MySubmarine.prototype.turnLeft = function(){
+
+    this.angle += 1;
+
+    switch (this.orientation) {
+        case 'N':{
+            this.orientation = 'W';
+            break;
+        }
+
+        case 'S':{
+            this.orientation = 'E';
+            break;
+        }
+
+        case 'W':{
+            this.orientation = 'S';
+            break;
+        }
+
+        case 'E':{
+            this.orientation = 'N';
+            break;
+        }
+
+    }
 
 }
 
