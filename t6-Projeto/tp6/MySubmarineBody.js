@@ -31,7 +31,7 @@ MySubmarineBody.prototype.display = function() {
 
     //Submarine Tower
     this.scene.pushMatrix();
-    this.scene.translate(0,1.13,3);
+    this.scene.translate(0,1.13,3.3);
 
         //Submarine Tower Cylinder Cover
         this.scene.pushMatrix();
