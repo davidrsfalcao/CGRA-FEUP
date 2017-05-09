@@ -65,7 +65,6 @@ LightingScene.prototype.init = function(application) {
 
 LightingScene.prototype.Pause = function (){
 	this.pause = !this.pause;
-	console.log(this.currTime);
 };
 
 LightingScene.prototype.initCameras = function() {

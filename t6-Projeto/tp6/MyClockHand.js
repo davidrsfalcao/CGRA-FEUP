@@ -19,16 +19,22 @@ MyClockHand.prototype.constructor = MyClockHand;
 MyClockHand.prototype.initBuffers = function() {
 
 
-	this.vertices = [ -0.02,0,0,
-		0.02,0,
-		0,0,
-		this.height,0
+	this.vertices = [
+		-0.02, 0, 0,
+		 0.02, 0, 0,
+		 0.00,this.height,0
 	];
 
 	this.indices = [
 		0,1,2
 	];
-	
+
+	this.normals = [
+		0,0,1,
+		0,0,1,
+		0,0,1
+	]
+
 	this.primitiveType = this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
 };
