@@ -15,11 +15,20 @@ LightingScene.prototype.init = function(application) {
 	this.enableTextures(true);
 
 	this.initLights();
+
+
+	//ligths
 	this.Luz0=true;
 	this.Luz1=true;
 	this.Luz2=true;
 	this.Luz3=true;
-	this.speed=1;
+
+	//frames control
+	this.speed = 1;
+	this.pause=false;
+	this.stoppedTime = 0;
+
+
 
 	this.gl.clearColor(0.0, 0.0, 0.4, 1.0);
 	this.gl.clearDepth(100.0);
@@ -30,7 +39,7 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 	this.materialDefault = new CGFappearance(this);
 
-	//submarino
+	//submarine
 	this.submarine = new MySubmarine(this);
 
 	//Clock
@@ -54,8 +63,9 @@ LightingScene.prototype.init = function(application) {
 
 };
 
-LightingScene.prototype.doSomething = function (){
-	console.log("Doing something...");
+LightingScene.prototype.Pause = function (){
+	this.pause = !this.pause;
+	console.log(this.currTime);
 };
 
 LightingScene.prototype.initCameras = function() {
@@ -189,5 +199,12 @@ LightingScene.prototype.display = function() {
 };
 
 LightingScene.prototype.update = function(currTime) {
-	this.clock.update(currTime);
+
+	if(!this.pause){
+		this.clock.update(currTime-this.stoppedTime);
+	}
+	else {
+		this.stoppedTime += 100; // update period
+	}
+
 };

@@ -29,7 +29,7 @@ MyInterface.prototype.init = function(application) {
     // the identifier 'doSomething' must be a function declared as part of that object (i.e. a member of the scene class)
     // e.g. LightingScene.prototype.doSomething = function () { console.log("Doing something..."); };
 
-    this.gui.add(this.scene, 'doSomething');
+    this.gui.add(this.scene, 'Pause');
 
     // add a group of controls (and open/expand by defult)
 
@@ -43,6 +43,7 @@ MyInterface.prototype.init = function(application) {
     group.add(this.scene, 'Luz1');
     group.add(this.scene, 'Luz2');
     group.add(this.scene, 'Luz3');
+
     // add a slider
     // must be a numeric variable of the scene, initialized in scene.init e.g.
     // this.speed=3;
