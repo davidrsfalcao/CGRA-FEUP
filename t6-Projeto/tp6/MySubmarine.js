@@ -5,23 +5,30 @@
 function MySubmarine(scene) {
     CGFobject.call(this,scene);
     this.scene = scene;
-    this.triangle = new MyTriangle(this.scene);
 
+
+    //Coordinates of submarine
     this.x = 0;
     this.y = 0;
     this.z = 0;
+
+    //Orientation - N , S, W or E
     this.orientation = 'N';
     this.angle = 0;
+
+    this.body = new MySubmarineBody(this.scene);
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor = MySubmarine;
 
 MySubmarine.prototype.display = function() {
-    this.scene.pushMatrix();
+
     this.scene.translate(this.x,this.y,this.z);
     this.scene.rotate(this.angle *(Math.PI/2),0,1,0);
-    this.triangle.display();
+
+    this.scene.pushMatrix();
+    this.body.display();
     this.scene.popMatrix();
 
 }

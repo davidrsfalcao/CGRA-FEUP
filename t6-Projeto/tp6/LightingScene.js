@@ -23,7 +23,7 @@ LightingScene.prototype.init = function(application) {
 	this.Luz2=true;
 	this.Luz3=true;
 
-	//frames control
+	//Run/Pause control
 	this.speed = 1;
 	this.pause=false;
 	this.stoppedTime = 0;
@@ -109,6 +109,7 @@ LightingScene.prototype.updateLights = function() {
 	for (i = 0; i < this.lights.length; i++){
 		this.lights[i].update();
 	}
+	this.switchLigths();
 
 }
 
@@ -163,8 +164,7 @@ LightingScene.prototype.display = function() {
 
 	//Submarine
 	this.pushMatrix();
-	this.translate(8,0,5);
-	this.rotate(Math.PI,0,1,0);
+	//this.translate(0,0.6,0);
 	this.submarine.display();
 	this.popMatrix();
 
@@ -192,7 +192,6 @@ LightingScene.prototype.display = function() {
 	this.oceanFloor.display();
 	this.popMatrix();
 
-	this.switchLigths();
 	// ---- END Primitive drawing section
 
 };

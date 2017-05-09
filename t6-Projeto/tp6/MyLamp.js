@@ -1,5 +1,5 @@
 /**
- * MyLamp
+ * MyCilinder
  * @constructor
  */
  function MyLamp(scene, slices, stacks) {
@@ -15,58 +15,37 @@
  MyLamp.prototype.constructor = MyLamp;
 
  MyLamp.prototype.initBuffers = function() {
- 	this.vertices = [
- 	];
+ 	this.vertices = [];
+ 	this.normals = [];
+ 	this.indices = [];
+ 	this.texCoords = [];
 
- 	this.indices = [
- 	];
+	var ang=(2*Math.PI)/this.slices;
+	var angHor=(Math.PI/2)/this.stacks;
+	var radiusTexture = 0;
+	var incRadiusTexture = 0.5/this.stacks;
 
- 	this.normals = [
- 	];
+	for(i = 0; i <= this.stacks; i++) {
+		for(j = 0; j < this.slices; j++) {
+			var x = Math.cos(ang*j) * Math.cos(angHor*i);
+			var y = Math.sin(ang*j) * Math.cos(angHor*i);
+			this.vertices.push(x ,y, Math.sin(angHor*i));
+			this.normals.push(Math.cos(ang*j) * Math.cos(angHor*i),Math.sin(ang*j) * Math.cos(angHor*i),0);
+			this.texCoords.push(x * 0.5 + 0.5, y * 0.5 + 0.5);
+		}
+		radiusTexture += incRadiusTexture;
 
-  var comprimento = 1;
-  var largura = 1;
-  var theta = 2*Math.PI / this.slices; //used to generate vertices around origin
-  var theta_slices = (Math.PI/2)/this.stacks; //used to give sphere like effect
-  var inc_slices= largura / this.stacks;
+	}
 
-  for (var k = 0; k <= this.stacks; k++) //ciclo para a stacks
-  {
-    for (var n = 0; n < this.slices; n++) // ciclo para as slices
-    {
-      var x = (largura*Math.cos(k*theta_slices)) * Math.cos(n * theta);
-      var y = (largura*Math.cos(k*theta_slices)) * Math.sin(n * theta);
-      var z = Math.sin(k*theta_slices);//k * inc_slices; 
+	for(i = 0; i < this.stacks; i++) {
+		for(j = 0; j < this.slices - 1; j++) {
+			this.indices.push(i*this.slices + j, i*this.slices + j+1, (i+1)*this.slices + j);
+			this.indices.push(i*this.slices + j+1, (i+1)*this.slices + j+1, (i+1)*this.slices + j);
+		}
 
-      this.vertices.push(x, y, z);
-      this.normals.push(x, y, 0);
-    }
-
-  }
-
-  for (var k = 0; k < this.stacks; k++)  // ciclo para as stacks
-  {
-    for (var n = 0; n < this.slices; n++) // ciclo para as slices
-    {
-      /*
-        Por exemplo:
-        (0,1,this.slices)
-      */
-      var sk =  this.slices * k;
-      var sk1 = this.slices*(k+1);
-
-      this.indices.push(sk+n, sk+n+1, sk1 +n);
-
-      if (n == (this.slices - 1)) {
-        this.indices.push(sk, sk+n+1, sk+n);
-
-      }
-      else {
-        this.indices.push(sk1+n+1, sk1+n, sk+n+1);
-      }
-    }
-  }
-
+		this.indices.push(i*this.slices + this.slices - 1, i*this.slices, (i+1)*this.slices + this.slices - 1);
+		this.indices.push(i*this.slices, i*this.slices + this.slices, (i+1)*this.slices + this.slices - 1);
+	}
 
 
  	this.primitiveType = this.scene.gl.TRIANGLES;
