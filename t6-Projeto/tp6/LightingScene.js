@@ -48,7 +48,7 @@ LightingScene.prototype.init = function(application) {
 	this.temp.setShininess(100);
 
 	//Clock
-	this.pole = new MyCylinder(this,20,1);
+	this.pole = new MyCylinder(this,500,1);
 	this.rustAppearance = new CGFappearance(this);
 	this.rustAppearance.loadTexture("../resources/images/rust.jpg");
 	this.clock = new MyClock(this);

@@ -6,9 +6,9 @@ function MySubmarineBody(scene) {
     CGFobject.call(this,scene);
     this.scene = scene;
 
-    this.cylinder = new MyCylinder(this.scene, 20, 1);
-    this.front = new MyLamp(this.scene, 20, 20);
-    this.cover = new MyPolygon(this.scene, 20);
+    this.cylinder = new MyCylinder(this.scene, 500, 1);
+    this.front = new MyLamp(this.scene, 500, 10);
+    this.cover = new MyPolygon(this.scene, 500);
 };
 
 MySubmarineBody.prototype = Object.create(CGFobject.prototype);
