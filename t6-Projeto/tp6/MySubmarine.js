@@ -13,9 +13,8 @@ function MySubmarine(scene) {
     this.z = 0;
 
     //Orientation - N , S, W or E
-    this.orientation = 'N';
     this.angle_mult = 0;
-    this.turn_angle = Math.PI/36; // 5 graus
+    this.turn_angle = Math.PI/18; // angulo de viragem - 10 graus
 
     this.body = new MySubmarineBody(this.scene);
 };
@@ -49,60 +48,11 @@ MySubmarine.prototype.moveBack = function(){
 MySubmarine.prototype.turnRight = function(){
 
     this.angle_mult -= 1;
-
-    // switch (this.orientation) {
-    //     case 'N':{
-    //         this.orientation = 'E';
-    //         break;
-    //     }
-    //
-    //     case 'S':{
-    //         this.orientation = 'W';
-    //         break;
-    //     }
-    //
-    //     case 'W':{
-    //         this.orientation = 'N';
-    //         break;
-    //     }
-    //
-    //     case 'E':{
-    //         this.orientation = 'S';
-    //         break;
-    //     }
-    //
-    // }
-
-
 }
 
 MySubmarine.prototype.turnLeft = function(){
 
     this.angle_mult += 1;
-
-    // switch (this.orientation) {
-    //     case 'N':{
-    //         this.orientation = 'W';
-    //         break;
-    //     }
-    //
-    //     case 'S':{
-    //         this.orientation = 'E';
-    //         break;
-    //     }
-    //
-    //     case 'W':{
-    //         this.orientation = 'S';
-    //         break;
-    //     }
-    //
-    //     case 'E':{
-    //         this.orientation = 'N';
-    //         break;
-    //     }
-    //
-    // }
-
 }
 
 MySubmarine.prototype.move = function(direction) {
