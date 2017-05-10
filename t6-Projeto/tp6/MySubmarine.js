@@ -14,7 +14,8 @@ function MySubmarine(scene) {
 
     //Orientation - N , S, W or E
     this.orientation = 'N';
-    this.angle = 0;
+    this.angle_mult = 0;
+    this.turn_angle = Math.PI/36; // 5 graus
 
     this.body = new MySubmarineBody(this.scene);
 };
@@ -25,7 +26,7 @@ MySubmarine.prototype.constructor = MySubmarine;
 MySubmarine.prototype.display = function() {
 
     this.scene.translate(this.x,this.y,this.z);
-    this.scene.rotate(this.angle *(Math.PI/2),0,1,0);
+    this.scene.rotate(this.angle_mult *this.turn_angle,0,1,0);
 
     this.scene.pushMatrix();
     this.body.display();
@@ -35,113 +36,72 @@ MySubmarine.prototype.display = function() {
 
 MySubmarine.prototype.moveFront = function(){
 
-    switch (this.orientation) {
-        case 'N':{
-            this.z += 1;
-            break;
-        }
-
-        case 'S':{
-            this.z -= 1;
-            break;
-        }
-
-        case 'W':{
-            this.x += 1;
-            break;
-        }
-
-        case 'E':{
-            this.x -= 1;
-            break;
-        }
-
-    }
-
+    this.z += Math.cos(this.angle_mult*this.turn_angle);
+    this.x += Math.sin(this.angle_mult*this.turn_angle);
 }
 
 MySubmarine.prototype.moveBack = function(){
 
-    switch (this.orientation) {
-        case 'N':{
-            this.z -= 1;
-            break;
-        }
-
-        case 'S':{
-            this.z += 1;
-            break;
-        }
-
-        case 'W':{
-            this.x -= 1;
-            break;
-        }
-
-        case 'E':{
-            this.x += 1;
-            break;
-        }
-
-    }
+    this.z -= Math.cos(this.angle_mult*this.turn_angle);
+    this.x -= Math.sin(this.angle_mult*this.turn_angle);
 }
 
 MySubmarine.prototype.turnRight = function(){
 
-    this.angle -= 1;
+    this.angle_mult -= 1;
 
-    switch (this.orientation) {
-        case 'N':{
-            this.orientation = 'E';
-            break;
-        }
-
-        case 'S':{
-            this.orientation = 'W';
-            break;
-        }
-
-        case 'W':{
-            this.orientation = 'N';
-            break;
-        }
-
-        case 'E':{
-            this.orientation = 'S';
-            break;
-        }
-
-    }
+    // switch (this.orientation) {
+    //     case 'N':{
+    //         this.orientation = 'E';
+    //         break;
+    //     }
+    //
+    //     case 'S':{
+    //         this.orientation = 'W';
+    //         break;
+    //     }
+    //
+    //     case 'W':{
+    //         this.orientation = 'N';
+    //         break;
+    //     }
+    //
+    //     case 'E':{
+    //         this.orientation = 'S';
+    //         break;
+    //     }
+    //
+    // }
 
 
 }
 
 MySubmarine.prototype.turnLeft = function(){
 
-    this.angle += 1;
+    this.angle_mult += 1;
 
-    switch (this.orientation) {
-        case 'N':{
-            this.orientation = 'W';
-            break;
-        }
-
-        case 'S':{
-            this.orientation = 'E';
-            break;
-        }
-
-        case 'W':{
-            this.orientation = 'S';
-            break;
-        }
-
-        case 'E':{
-            this.orientation = 'N';
-            break;
-        }
-
-    }
+    // switch (this.orientation) {
+    //     case 'N':{
+    //         this.orientation = 'W';
+    //         break;
+    //     }
+    //
+    //     case 'S':{
+    //         this.orientation = 'E';
+    //         break;
+    //     }
+    //
+    //     case 'W':{
+    //         this.orientation = 'S';
+    //         break;
+    //     }
+    //
+    //     case 'E':{
+    //         this.orientation = 'N';
+    //         break;
+    //     }
+    //
+    // }
 
 }
 
