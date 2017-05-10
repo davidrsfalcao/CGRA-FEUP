@@ -44,19 +44,16 @@ LightingScene.prototype.init = function(application) {
 
 	//Clock
 	this.pole = new MyCylinder(this,20,1);
+	this.rustAppearance = new CGFappearance(this);
+	this.rustAppearance.loadTexture("../resources/images/rust.jpg");
 	this.clock = new MyClock(this);
-	this.clock_text = new CGFappearance(this);
-	this.clock_text.loadTexture("../resources/images/clock.png");
-	this.side_text = new CGFappearance(this);
-	this.hand_text = new CGFappearance(this);
-	this.hand_text.setSpecular(0.1,0.1,0.1,1);
-	this.hand_text.setDiffuse(0,0,0,1);
+
 
 	//Ocean
 	this.oceanFloor = new MyPlane(this,100,0,4,0,4);
-	this.OceanApperance = new CGFappearance(this);
-	this.OceanApperance.loadTexture("../resources/images/OceanFloor.png");
-	this.OceanApperance.setTextureWrap("REPEAT" , "REPEAT");
+	this.OceanAppearance = new CGFappearance(this);
+	this.OceanAppearance.loadTexture("../resources/images/OceanFloor.png");
+	this.OceanAppearance.setTextureWrap("REPEAT" , "REPEAT");
 
 
 	this.setUpdatePeriod(100);
@@ -174,6 +171,7 @@ LightingScene.prototype.display = function() {
 	this.translate(8,5,0);
 	this.rotate(Math.PI/2,1,0,0);
 	this.scale(0.1,0.1,5);
+	this.rustAppearance.apply();
 	this.pole.display();
 	this.popMatrix();
 
@@ -188,7 +186,7 @@ LightingScene.prototype.display = function() {
 	this.translate(7.5, 0, 7.5);
 	this.rotate(-Math.PI/2, 1, 0, 0);
 	this.scale(50, 50, 1);
-	this.OceanApperance.apply();
+	this.OceanAppearance.apply();
 	this.oceanFloor.display();
 	this.popMatrix();
 
