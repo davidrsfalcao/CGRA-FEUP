@@ -1,12 +1,12 @@
 /**
- * MyLamp
+ * MyCilinder
  * @constructor
  */
  function MyLamp(scene, slices, stacks) {
  	CGFobject.call(this,scene);
 
-	this.slices=slices;
-	this.stacks=stacks;
+	this.slices = slices;
+	this.stacks = stacks;
 
  	this.initBuffers();
  };
@@ -15,61 +15,34 @@
  MyLamp.prototype.constructor = MyLamp;
 
  MyLamp.prototype.initBuffers = function() {
-
  	this.vertices = [];
+ 	this.normals = [];
  	this.indices = [];
-	this.normals = [];
-	this.texCoords = [];
+ 	this.texCoords = [];
 
-	var stack = 1/this.stacks;
-	//---------------stacks------------------
-	for (var q = 0; q <= 1;) {
-		//---------------slices------------------
-		for (var i = 0; i < this.slices; i++) {
-			this.vertices.push(Math.sqrt(1-(q*q))*Math.cos(i*(2*Math.PI)/this.slices));
-			this.vertices.push(Math.sqrt(1-(q*q))*Math.sin(i*(2*Math.PI)/this.slices));
-			this.vertices.push(q);
+	var ang=(2*Math.PI)/this.slices;
+	var angHor=(Math.PI/2)/this.stacks;
 
-			this.normals.push(Math.sqrt(1-(q*q))*Math.cos(i*(2*Math.PI)/this.slices));
-			this.normals.push(Math.sqrt(1-(q*q))*Math.sin(i*(2*Math.PI)/this.slices));
-			this.normals.push(q);
-		}
-
-		q = q + stack;
-	}
-
-	for (var q = 0; q < this.stacks; q++) {
-		//---------------slices------------------
-		for (var i = 0; i < this.slices; i++) {
-
-			this.indices.push(this.slices*q+i);
-			this.indices.push(this.slices*q+i+1);
-			this.indices.push(this.slices*(q+1)+i);
-			if (i != (this.slices - 1)) {
-				this.indices.push(this.slices*(q+1)+i+1);
-				this.indices.push(this.slices*(q+1)+i);
-				this.indices.push(this.slices*q+i+1);
-				}
-			else {
-				this.indices.push(this.slices*q);
-				this.indices.push(this.slices*q+i+1)
-				this.indices.push(this.slices*q+i);
-				}
+	for(i = 0; i <= this.stacks; i++) {
+		for(j = 0; j < this.slices; j++) {
+			var x = Math.cos(ang*j) * Math.cos(angHor*i);
+			var y = Math.sin(ang*j) * Math.cos(angHor*i);
+			this.vertices.push(x ,y, Math.sin(angHor*i));
+			this.normals.push(Math.cos(ang*j) * Math.cos(angHor*i),Math.sin(ang*j) * Math.cos(angHor*i),0);
+			this.texCoords.push(x * 0.5 + 0.5, y * 0.5 + 0.5);
 		}
 	}
 
-	var s = 0;
-	var t = 0;
-	var sinc = 1/this.slices;
-	var tinc = 1/this.stacks;
-	for (var a = 0; a <= this.stacks; a++) {
-		for (var b = 0; b < this.slices; b++) {
-			this.texCoords.push(s, t);
-			s += sinc;
+	for(i = 0; i < this.stacks; i++) {
+		for(j = 0; j < this.slices - 1; j++) {
+			this.indices.push(i*this.slices + j, i*this.slices + j+1, (i+1)*this.slices + j);
+			this.indices.push(i*this.slices + j+1, (i+1)*this.slices + j+1, (i+1)*this.slices + j);
 		}
-		s = 0;
-		t += tinc;
+
+		this.indices.push(i*this.slices + this.slices - 1, i*this.slices, (i+1)*this.slices + this.slices - 1);
+		this.indices.push(i*this.slices, i*this.slices + this.slices, (i+1)*this.slices + this.slices - 1);
 	}
+
 
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
