@@ -60,7 +60,6 @@ LightingScene.prototype.init = function(application) {
 	this.OceanAppearance.loadTexture("../resources/images/OceanFloor.png");
 	this.OceanAppearance.setTextureWrap("REPEAT" , "REPEAT");
 
-
 	this.setUpdatePeriod(100);
 
 };
@@ -195,6 +194,7 @@ LightingScene.prototype.display = function() {
 	this.OceanAppearance.apply();
 	this.oceanFloor.display();
 	this.popMatrix();
+
 
 	// ---- END Primitive drawing section
 
