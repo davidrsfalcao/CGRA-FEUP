@@ -6,9 +6,12 @@ function MySubmarineBody(scene) {
     CGFobject.call(this,scene);
     this.scene = scene;
 
+    this.periscope_heigth = 0.30;
+
     this.cylinder = new MyCylinder(this.scene, 500, 1);
     this.front = new MyLamp(this.scene, 500, 10);
     this.cover = new MyPolygon(this.scene, 500);
+    this.periscope = new MyPeriscope(this.scene);
 };
 
 MySubmarineBody.prototype = Object.create(CGFobject.prototype);
@@ -46,6 +49,14 @@ MySubmarineBody.prototype.display = function() {
         this.scene.rotate(Math.PI/2,1,0,0);
         this.cylinder.display();
         this.scene.popMatrix();
+
+        //Periscope
+        this.scene.pushMatrix();
+        this.scene.translate(0,this.periscope_heigth,-0.05);
+        this.periscope.display();
+        this.scene.popMatrix();
+
+
     this.scene.popMatrix();
 
     // Submarine Back
@@ -54,6 +65,10 @@ MySubmarineBody.prototype.display = function() {
     this.scene.scale(0.73/2,1.2/2,0.46); // 0.73 x 1.20 x 0.46
     this.front.display();
     this.scene.popMatrix();
+
+
+
+
 
 
 
