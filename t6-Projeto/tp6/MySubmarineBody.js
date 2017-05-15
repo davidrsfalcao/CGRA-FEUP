@@ -18,20 +18,20 @@ MySubmarineBody.prototype.display = function() {
 
     // Main Cylinder
     this.scene.pushMatrix();
-    this.scene.scale(0.73/2,1.2/2,4.8); // 0.73 x 1.20 x 4.8
+    this.scene.scale(0.73/2,1.2/2,4.08); // 0.73 x 1.20 x 4.8
     this.cylinder.display();
     this.scene.popMatrix();
 
     // Submarine Front
     this.scene.pushMatrix();
-    this.scene.translate(0,0,4.8);
+    this.scene.translate(0,0,4.08);
     this.scene.scale(0.73/2,1.2/2,0.46); // 0.73 x 1.20 x 0.46
     this.front.display();
     this.scene.popMatrix();
 
     //Submarine Tower
     this.scene.pushMatrix();
-    this.scene.translate(0,1.13,3);
+    this.scene.translate(0,1.13,2.5);
 
         //Submarine Tower Cylinder Cover
         this.scene.pushMatrix();

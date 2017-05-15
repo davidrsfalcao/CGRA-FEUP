@@ -39,7 +39,7 @@ MySubmarine.prototype.display = function() {
 
     //Periscope
     this.scene.pushMatrix();
-    this.scene.translate(0,1.13,3);
+    this.scene.translate(0,1.13,2.5);
         this.scene.pushMatrix();
         this.scene.translate(0,this.periscope_heigth,-0.05);
         this.periscope.display();

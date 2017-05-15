@@ -25,7 +25,7 @@ LightingScene.prototype.init = function(application) {
 
 	//Run/Pause control
 	this.speed = 1;
-	this.pause=false;
+	this.pause = false;
 	this.stoppedTime = 0;
 
 
