@@ -21,7 +21,8 @@ function MySubmarine(scene) {
 
     this.body = new MySubmarineBody(this.scene);
     this.periscope = new MyPeriscope(this.scene);
-    this.propeller_left = new MyPropeller(this.scene);
+    this.propeller_left = new MyPropeller(this.scene,1);
+    this.propeller_right = new MyPropeller(this.scene,-1);
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -44,19 +45,24 @@ MySubmarine.prototype.display = function() {
         this.periscope.display();
         this.scene.popMatrix();
     this.scene.popMatrix();
-    
+
+    this.scene.pushMatrix();
+    this.scene.translate(0.565,0,0);
+    this.propeller_left.display();
+    this.scene.popMatrix();
+
 }
 
 MySubmarine.prototype.moveFront = function(){
 
-    this.z += Math.cos(this.angle_mult*this.turn_angle);
-    this.x += Math.sin(this.angle_mult*this.turn_angle);
+    this.z += Math.cos(this.angle_mult*this.turn_angle)*0.1*Math.abs(this.scene.speed);
+    this.x += Math.sin(this.angle_mult*this.turn_angle)*0.1*Math.abs(this.scene.speed);
 }
 
 MySubmarine.prototype.moveBack = function(){
 
-    this.z -= Math.cos(this.angle_mult*this.turn_angle);
-    this.x -= Math.sin(this.angle_mult*this.turn_angle);
+    this.z -= Math.cos(this.angle_mult*this.turn_angle)*0.1*Math.abs(this.scene.speed);
+    this.x -= Math.sin(this.angle_mult*this.turn_angle)*0.1*Math.abs(this.scene.speed);
 }
 
 MySubmarine.prototype.turnRight = function(){

@@ -195,7 +195,6 @@ LightingScene.prototype.display = function() {
 	this.oceanFloor.display();
 	this.popMatrix();
 
-
 	// ---- END Primitive drawing section
 
 };
@@ -208,5 +207,7 @@ LightingScene.prototype.update = function(currTime) {
 	else {
 		this.stoppedTime += 100; // update period
 	}
+
+	this.submarine.propeller_left.update();
 
 };
