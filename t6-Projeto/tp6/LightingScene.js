@@ -55,10 +55,16 @@ LightingScene.prototype.init = function(application) {
 
 
 	//Ocean
-	this.oceanFloor = new MyPlane(this,100,0,4,0,4);
+	this.oceanFloor = new MyPlane(this,100,0,3,0,3);
 	this.OceanAppearance = new CGFappearance(this);
-	this.OceanAppearance.loadTexture("../resources/images/OceanFloor.png");
+	this.OceanAppearance.loadTexture("../resources/images/sand.png");
 	this.OceanAppearance.setTextureWrap("REPEAT" , "REPEAT");
+
+
+	this.water_wall = new MyPlane(this,100,0,1,0,1);
+	this.waterAppearance = new CGFappearance(this);
+	this.waterAppearance.loadTexture("../resources/images/water.png");
+	this.waterAppearance.setTextureWrap("REPEAT" , "REPEAT");
 
 	this.setUpdatePeriod(100);
 
@@ -193,6 +199,23 @@ LightingScene.prototype.display = function() {
 	this.scale(50, 50, 1);
 	this.OceanAppearance.apply();
 	this.oceanFloor.display();
+	this.popMatrix();
+
+	//Wall Right
+	this.pushMatrix();
+	this.translate(7.5, 7.5, -17.5);
+	this.scale(50, 15, 1);
+	this.waterAppearance.apply();
+	this.water_wall.display();
+	this.popMatrix();
+
+	//Wall Left
+	this.pushMatrix();
+	this.translate(-17.5, 7.5, 7.5);
+	this.rotate(Math.PI/2,0,1,0);
+	this.scale(50, 15, 1);
+	this.waterAppearance.apply();
+	this.water_wall.display();
 	this.popMatrix();
 
 	// ---- END Primitive drawing section

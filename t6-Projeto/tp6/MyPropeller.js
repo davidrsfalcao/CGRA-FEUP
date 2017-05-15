@@ -73,6 +73,4 @@ MyPropeller.prototype.display = function() {
 MyPropeller.prototype.update = function(){
     this.position++;
     this.angle = ((36*Math.PI)/180) * this.scene.speed * this.orientation * this.position;
-    console.log(this.angle);
-
 }
