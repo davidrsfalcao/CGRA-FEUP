@@ -209,5 +209,6 @@ LightingScene.prototype.update = function(currTime) {
 	}
 
 	this.submarine.propeller_left.update();
+	this.submarine.propeller_right.update();
 
 };

@@ -14,7 +14,7 @@ function MySubmarine(scene) {
 
     //Orientation
     this.angle_mult = 0;
-    this.turn_angle = Math.PI/18; // angulo de viragem - 10 graus
+    this.turn_angle = Math.PI/72; // angulo de viragem - 2.5 graus
 
     //Periscope movemente
     this.periscope_heigth = 0.30;
@@ -46,10 +46,19 @@ MySubmarine.prototype.display = function() {
         this.scene.popMatrix();
     this.scene.popMatrix();
 
+    //Helice esquerda (do ponto de vista do submarino)
     this.scene.pushMatrix();
-    this.scene.translate(0.565,0,0);
+    this.scene.translate(0.526,-0.3,0);
     this.propeller_left.display();
     this.scene.popMatrix();
+
+    //Helice direita (do ponto de vista do submarino)
+    this.scene.pushMatrix();
+    this.scene.translate(-0.526,-0.3,0);
+    this.propeller_right.display();
+    this.scene.popMatrix();
+
+
 
 }
 
