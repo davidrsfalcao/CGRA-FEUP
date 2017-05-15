@@ -30,6 +30,7 @@ MySubmarine.prototype.constructor = MySubmarine;
 
 MySubmarine.prototype.display = function() {
 
+
     this.scene.translate(this.x,this.y,this.z);
     this.scene.rotate(this.angle_mult *this.turn_angle,0,1,0);
 
@@ -61,17 +62,27 @@ MySubmarine.prototype.display = function() {
 
 
 }
+MySubmarine.prototype.updateLights = function(){
+    var xl, yl, zl;
+    xl = this.x + 5*Math.sin(this.angle_mult * this.turn_angle);
+    yl = this.y + 0.6;
+    zl = this.z + 5*Math.cos(this.angle_mult * this.turn_angle);
+
+    this.scene.lights[4].setPosition(xl, yl, zl, 1);
+}
+
 
 MySubmarine.prototype.moveFront = function(){
 
-    this.z += Math.cos(this.angle_mult*this.turn_angle)*0.1*Math.abs(this.scene.speed);
-    this.x += Math.sin(this.angle_mult*this.turn_angle)*0.1*Math.abs(this.scene.speed);
+    this.z += Math.cos(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
+    this.x += Math.sin(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
+    this.updateLights();
 }
 
 MySubmarine.prototype.moveBack = function(){
 
-    this.z -= Math.cos(this.angle_mult*this.turn_angle)*0.1*Math.abs(this.scene.speed);
-    this.x -= Math.sin(this.angle_mult*this.turn_angle)*0.1*Math.abs(this.scene.speed);
+    this.z -= Math.cos(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
+    this.x -= Math.sin(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
 }
 
 MySubmarine.prototype.turnRight = function(){
@@ -109,5 +120,6 @@ MySubmarine.prototype.move = function(direction) {
         default:
 
     }
+    this.updateLights();
 
 }
