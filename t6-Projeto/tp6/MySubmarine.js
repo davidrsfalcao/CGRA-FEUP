@@ -12,11 +12,16 @@ function MySubmarine(scene) {
     this.y = 0;
     this.z = 0;
 
-    //Orientation - N , S, W or E
+    //Orientation
     this.angle_mult = 0;
     this.turn_angle = Math.PI/18; // angulo de viragem - 10 graus
 
+    //Periscope movemente
+    this.periscope_heigth = 0.30;
+
     this.body = new MySubmarineBody(this.scene);
+    this.periscope = new MyPeriscope(this.scene);
+    this.propeller_left = new MyPropeller(this.scene);
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -31,6 +36,15 @@ MySubmarine.prototype.display = function() {
     this.body.display();
     this.scene.popMatrix();
 
+    //Periscope
+    this.scene.pushMatrix();
+    this.scene.translate(0,1.13,3);
+        this.scene.pushMatrix();
+        this.scene.translate(0,this.periscope_heigth,-0.05);
+        this.periscope.display();
+        this.scene.popMatrix();
+    this.scene.popMatrix();
+    
 }
 
 MySubmarine.prototype.moveFront = function(){
