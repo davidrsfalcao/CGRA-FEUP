@@ -14,7 +14,7 @@ function MySubmarine(scene) {
 
     //Orientation
     this.angle_mult = 0;
-    this.turn_angle = Math.PI/72; // angulo de viragem - 2.5 graus
+    this.turn_angle = Math.PI/90; // angulo de viragem - 2 graus
 
     //Periscope movemente
     this.periscope_heigth = 0.30;
