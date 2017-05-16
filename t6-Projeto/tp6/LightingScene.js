@@ -18,10 +18,10 @@ LightingScene.prototype.init = function(application) {
 
 
 	//ligths
-	this.Luz0=true;
-	this.Luz1=true;
-	this.Luz2=true;
-	this.Luz3=true;
+	this.Light0=true;
+	this.Light1=true;
+	this.Light2=true;
+	this.Light3=true;
 
 	//Run/Pause control
 	this.speed = 1;
@@ -50,12 +50,12 @@ LightingScene.prototype.init = function(application) {
 	//Clock
 	this.pole = new MyCylinder(this,500,1);
 	this.rustAppearance = new CGFappearance(this);
-	this.rustAppearance.loadTexture("../resources/images/rust.jpg");
+	this.rustAppearance.loadTexture("../resources/images/metal.png");
 	this.clock = new MyClock(this);
 
 
 	//Ocean
-	this.oceanFloor = new MyPlane(this,100,0,3,0,3);
+	this.oceanFloor = new MyPlane(this,100,0,10,0,10);
 	this.OceanAppearance = new CGFappearance(this);
 	this.OceanAppearance.loadTexture("../resources/images/sand.png");
 	this.OceanAppearance.setTextureWrap("REPEAT" , "REPEAT");
@@ -113,8 +113,8 @@ LightingScene.prototype.initLights = function() {
 	this.lights[4].setAmbient(0, 0, 0, 1);
 	this.lights[4].setSpecular( 1, 1, 0, 1);
 	this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	//this.lights[4].enable();
-	this.lights[4].setVisible(false);
+	// this.lights[4].enable();
+	// this.lights[4].setVisible(true);
 
 };
 
@@ -127,25 +127,25 @@ LightingScene.prototype.updateLights = function() {
 }
 
 LightingScene.prototype.switchLigths = function() {
-	if (this.Luz0 == true){
+	if (this.Light0 == true){
 		this.lights[0].enable();
 	} else {
 		this.lights[0].disable();
 	}
 
-	if (this.Luz1 == true){
+	if (this.Light1 == true){
 		this.lights[1].enable();
 	} else {
 		this.lights[1].disable();
 	}
 
-	if (this.Luz2 == true){
+	if (this.Light2 == true){
 		this.lights[2].enable();
 	} else {
 		this.lights[2].disable();
 	}
 
-	if (this.Luz3 == true){
+	if (this.Light3 == true){
 		this.lights[3].enable();
 	} else {
 		this.lights[3].disable();

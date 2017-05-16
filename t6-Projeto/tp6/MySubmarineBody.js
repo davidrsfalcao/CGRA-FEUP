@@ -26,6 +26,7 @@ MySubmarineBody.prototype.display = function() {
     this.scene.pushMatrix();
     this.scene.translate(0,0,4.08);
     this.scene.scale(0.73/2,1.2/2,0.46); // 0.73 x 1.20 x 0.46
+    this.scene.rotate(Math.PI/2,1,0,0);
     this.front.display();
     this.scene.popMatrix();
 
@@ -51,16 +52,10 @@ MySubmarineBody.prototype.display = function() {
 
     // Submarine Back
     this.scene.pushMatrix();
-    this.scene.rotate(Math.PI,0,1,0);
     this.scene.scale(0.73/2,1.2/2,0.46); // 0.73 x 1.20 x 0.46
+    this.scene.rotate(-Math.PI/2,1,0,0);
     this.front.display();
     this.scene.popMatrix();
-
-
-
-
-
-
 
 
 }

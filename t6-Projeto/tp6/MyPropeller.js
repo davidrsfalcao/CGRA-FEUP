@@ -38,7 +38,7 @@ MyPropeller.prototype.display = function() {
     /* */this.scene.popMatrix();
 
     /* */this.scene.pushMatrix();
-    /* */this.scene.rotate(Math.PI,0,1,0);
+    /* */this.scene.rotate(Math.PI,1,0,0);
     /* */this.scene.scale(0.1/2,0.1/2,0.05);
     /* */this.center.display();
     /* */this.scene.popMatrix();

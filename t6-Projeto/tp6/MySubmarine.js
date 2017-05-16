@@ -49,13 +49,13 @@ MySubmarine.prototype.display = function() {
 
     //Helice esquerda (do ponto de vista do submarino)
     this.scene.pushMatrix();
-    this.scene.translate(0.526,-0.3,0);
+    this.scene.translate(0.5255,-0.3,0);
     this.propeller_left.display();
     this.scene.popMatrix();
 
     //Helice direita (do ponto de vista do submarino)
     this.scene.pushMatrix();
-    this.scene.translate(-0.526,-0.3,0);
+    this.scene.translate(-0.5255,-0.3,0);
     this.propeller_right.display();
     this.scene.popMatrix();
 
