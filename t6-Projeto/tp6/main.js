@@ -21,6 +21,7 @@ serialInclude([
 	'MyClock.js',
 	'MyClockHand.js',
 	'MyTriangle.js',
+	'MyWing.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

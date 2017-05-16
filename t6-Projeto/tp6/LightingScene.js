@@ -39,6 +39,8 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 	this.materialDefault = new CGFappearance(this);
 
+	this.wing = new MyWing(this);
+
 	//submarine
 	this.submarine = new MySubmarine(this);
 	this.temp = new CGFappearance(this);
@@ -194,8 +196,6 @@ LightingScene.prototype.display = function() {
 	this.OceanAppearance.apply();
 	this.oceanFloor.display();
 	this.popMatrix();
-
-
 	// ---- END Primitive drawing section
 
 };

@@ -55,12 +55,4 @@ MySubmarineBody.prototype.display = function() {
     this.scene.scale(0.73/2,1.2/2,0.46); // 0.73 x 1.20 x 0.46
     this.front.display();
     this.scene.popMatrix();
-
-
-
-
-
-
-
-
 }

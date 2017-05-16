@@ -14,9 +14,9 @@ MyTriangle.prototype.constructor = MyTriangle;
 MyTriangle.prototype.initBuffers = function() {
 
     this.vertices = [
-        0.5, 0.3, 0,
-        -0.5, 0.3, 0,
-        0, 0.3, 2
+        0,0,0,
+        0,0,1,
+        1,0,0
     ];
 
     this.indices = [
@@ -29,7 +29,10 @@ MyTriangle.prototype.initBuffers = function() {
         0,1,0
     ];
 
-    this.texCoords=[];
+    this.texCoords=[
+        0,0,
+        1,1,
+        0,1];
 
 
     this.primitiveType = this.scene.gl.TRIANGLES;

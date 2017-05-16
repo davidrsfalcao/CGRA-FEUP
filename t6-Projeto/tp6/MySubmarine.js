@@ -22,6 +22,7 @@ function MySubmarine(scene) {
     this.body = new MySubmarineBody(this.scene);
     this.periscope = new MyPeriscope(this.scene);
     this.propeller_left = new MyPropeller(this.scene);
+    this.wing = new MyWing(this.scene);
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -43,6 +44,20 @@ MySubmarine.prototype.display = function() {
         this.scene.translate(0,this.periscope_heigth,-0.05);
         this.periscope.display();
         this.scene.popMatrix();
+    this.scene.popMatrix();
+
+
+    this.scene.pushMatrix();
+        this.scene.translate(0,0.5,0);
+        this.scene.scale(0.7,0.1,0.3);
+        this.wing.display();
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+        this.scene.translate(0,0.6,0);
+        this.scene.rotate(Math.PI/2,0,0,1);
+        this.scene.scale(0.7,0.1,0.3);
+        this.wing.display();
     this.scene.popMatrix();
     
 }
