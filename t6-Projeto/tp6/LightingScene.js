@@ -50,7 +50,7 @@ LightingScene.prototype.init = function(application) {
 	//Clock
 	this.pole = new MyCylinder(this,500,1);
 	this.rustAppearance = new CGFappearance(this);
-	this.rustAppearance.loadTexture("../resources/images/metal.png");
+	this.rustAppearance.loadTexture("../resources/images/rust.png");
 	this.clock = new MyClock(this);
 
 
