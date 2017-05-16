@@ -1,49 +1,77 @@
 /**
- * MyCilinder
- * @constructor
- */
- function MyLamp(scene, slices, stacks) {
- 	CGFobject.call(this,scene);
+* MyLamp
+* @constructor
+*/
+function MyLamp(scene, slices, stacks)
+{
+	CGFobject.call(this, scene);
 
 	this.slices = slices;
 	this.stacks = stacks;
+	this.minS = 0.0
+	this.maxS = 1.0
+	this.minT = 0.0
+	this.maxT = 1.0
+	this.texelLengthS = (this.maxS - this.minS) / this.slices;
+	this.texelLengthT = (this.maxT - this.minT) / this.stacks;
+	this.initBuffers();
+};
 
- 	this.initBuffers();
- };
+MyLamp.prototype = Object.create(CGFobject.prototype);
+MyLamp.prototype.constructor = MyLamp;
 
- MyLamp.prototype = Object.create(CGFobject.prototype);
- MyLamp.prototype.constructor = MyLamp;
+MyLamp.prototype.initBuffers = function()
+{
+	this.indices = [];
+	this.normals = [];
+	this.texCoords = [];
+	this.vertices = [];
 
- MyLamp.prototype.initBuffers = function() {
- 	this.vertices = [];
- 	this.normals = [];
- 	this.indices = [];
- 	this.texCoords = [];
+	var phi = 0;
+	var sCoord = this.maxS;
+	var phiIncrement = (2 * Math.PI) / this.slices;
+	var thetaIncrement = Math.PI / (2 * this.stacks);
 
-	var ang=(2*Math.PI)/this.slices;
-	var angHor=(Math.PI/2)/this.stacks;
+	for (var i = 0; i <= this.slices; i++)
+	{
+		var theta = 0;
+		var tCoord = this.minT;
 
-	for(i = 0; i <= this.stacks; i++) {
-		for(j = 0; j < this.slices; j++) {
-			var x = Math.cos(ang*j) * Math.cos(angHor*i);
-			var y = Math.sin(ang*j) * Math.cos(angHor*i);
-			this.vertices.push(x ,y, Math.sin(angHor*i));
-			this.normals.push(Math.cos(ang*j) * Math.cos(angHor*i),Math.sin(ang*j) * Math.cos(angHor*i),0);
-			this.texCoords.push(x * 0.5 + 0.5, y * 0.5 + 0.5);
+		for (var j = 0; j <= this.stacks; j++)
+		{
+			var x = Math.cos(phi) * Math.sin(theta);
+			var z = Math.sin(phi) * Math.sin(theta);
+			var y = Math.cos(theta);
+
+			this.vertices.push(x, y, z);
+			this.normals.push(x, y, z);
+			this.texCoords.push(sCoord, tCoord);
+
+			theta += thetaIncrement;
+			tCoord += this.texelLengthT;
 		}
+
+		phi += phiIncrement;
+		sCoord -= this.texelLengthS;
 	}
 
-	for(i = 0; i < this.stacks; i++) {
-		for(j = 0; j < this.slices - 1; j++) {
-			this.indices.push(i*this.slices + j, i*this.slices + j+1, (i+1)*this.slices + j);
-			this.indices.push(i*this.slices + j+1, (i+1)*this.slices + j+1, (i+1)*this.slices + j);
+	var vertexNumber = 1;
+
+	for (var i = 0; i < this.slices; i++)
+	{
+		for (var j = 0; j < this.stacks; j++)
+		{
+			this.indices.push(vertexNumber, vertexNumber + this.stacks, vertexNumber + this.stacks + 1);
+			this.indices.push(vertexNumber + this.stacks, vertexNumber, vertexNumber - 1);
+			this.indices.push(vertexNumber + this.stacks + 1, vertexNumber + this.stacks, vertexNumber);
+			this.indices.push(vertexNumber, vertexNumber + this.stacks, vertexNumber - 1);
+
+			vertexNumber++;
 		}
 
-		this.indices.push(i*this.slices + this.slices - 1, i*this.slices, (i+1)*this.slices + this.slices - 1);
-		this.indices.push(i*this.slices, i*this.slices + this.slices, (i+1)*this.slices + this.slices - 1);
+		vertexNumber++;
 	}
 
-
- 	this.primitiveType = this.scene.gl.TRIANGLES;
- 	this.initGLBuffers();
- };
+	this.primitiveType = this.scene.gl.TRIANGLES;
+	this.initGLBuffers();
+};

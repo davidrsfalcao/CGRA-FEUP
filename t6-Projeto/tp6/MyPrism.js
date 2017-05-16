@@ -32,6 +32,9 @@ MyPrism.prototype.initBuffers = function() {
   this.normals = [
   ];
 
+  this.texCoords = [
+  ];
+
   var largura = 1;
   var altura = 1;
   var theta = Math.PI * 2 / this.slices;
@@ -82,6 +85,7 @@ MyPrism.prototype.initBuffers = function() {
       y = Math.sin(angulo + theta) * largura;
       z = stack;
       this.vertices.push(x , y , z);
+      this.texCoords.push(Math.cos(angulo+theta),1-z);
 
       /*
       Vertice 1
@@ -90,6 +94,7 @@ MyPrism.prototype.initBuffers = function() {
       y = Math.sin(angulo) * largura;
       z = stack;
       this.vertices.push(x , y , z);
+      this.texCoords.push(Math.cos(angulo),1-z);
 
       /*
       Vertice 2
@@ -98,6 +103,7 @@ MyPrism.prototype.initBuffers = function() {
       y = Math.sin(angulo + theta) * largura;
       z = (stack + inc_stack);
       this.vertices.push(x , y , z);
+      this.texCoords.push(Math.cos(angulo+theta),1-z);
 
       /*
       Vertice 3
@@ -106,6 +112,7 @@ MyPrism.prototype.initBuffers = function() {
       y = Math.sin(angulo) * largura;
       z = (stack + inc_stack);
       this.vertices.push(x , y , z);
+      this.texCoords.push(Math.cos(angulo),1-z);
 
 
       /*

@@ -14,21 +14,22 @@ function MySubmarine(scene) {
 
     //Orientation
     this.angle_mult = 0;
-    this.turn_angle = Math.PI/18; // angulo de viragem - 10 graus
+    this.turn_angle = Math.PI/90; // angulo de viragem - 2 graus
 
     //Periscope movemente
     this.periscope_heigth = 0.30;
 
     this.body = new MySubmarineBody(this.scene);
     this.periscope = new MyPeriscope(this.scene);
-    this.propeller_left = new MyPropeller(this.scene);
-    this.wing = new MyWing(this.scene);
+    this.propeller_left = new MyPropeller(this.scene,1);
+    this.propeller_right = new MyPropeller(this.scene,-1);
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor = MySubmarine;
 
 MySubmarine.prototype.display = function() {
+
 
     this.scene.translate(this.x,this.y,this.z);
     this.scene.rotate(this.angle_mult *this.turn_angle,0,1,0);
@@ -39,7 +40,7 @@ MySubmarine.prototype.display = function() {
 
     //Periscope
     this.scene.pushMatrix();
-    this.scene.translate(0,1.13,3);
+    this.scene.translate(0,1.13,2.5);
         this.scene.pushMatrix();
         this.scene.translate(0,this.periscope_heigth,-0.05);
         this.periscope.display();
@@ -47,31 +48,42 @@ MySubmarine.prototype.display = function() {
     this.scene.popMatrix();
 
 
+    //Helice esquerda (do ponto de vista do submarino)
     this.scene.pushMatrix();
-        this.scene.translate(0,0.5,0);
-        this.scene.scale(0.7,0.1,0.3);
-        this.wing.display();
+    this.scene.translate(0.5255,-0.3,0);
+    this.propeller_left.display();
     this.scene.popMatrix();
 
+    //Helice direita (do ponto de vista do submarino)
     this.scene.pushMatrix();
-        this.scene.translate(0,0.6,0);
-        this.scene.rotate(Math.PI/2,0,0,1);
-        this.scene.scale(0.7,0.1,0.3);
-        this.wing.display();
+    this.scene.translate(-0.5255,-0.3,0);
+    this.propeller_right.display();
     this.scene.popMatrix();
-    
+
 }
+
+
+MySubmarine.prototype.updateLights = function(){
+    var xl, yl, zl;
+    xl = this.x + 5*Math.sin(this.angle_mult * this.turn_angle);
+    yl = this.y + 0.6;
+    zl = this.z + 5*Math.cos(this.angle_mult * this.turn_angle);
+
+    this.scene.lights[4].setPosition(xl, yl, zl, 1);
+}
+
 
 MySubmarine.prototype.moveFront = function(){
 
-    this.z += Math.cos(this.angle_mult*this.turn_angle);
-    this.x += Math.sin(this.angle_mult*this.turn_angle);
+    this.z += Math.cos(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
+    this.x += Math.sin(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
+    this.updateLights();
 }
 
 MySubmarine.prototype.moveBack = function(){
 
-    this.z -= Math.cos(this.angle_mult*this.turn_angle);
-    this.x -= Math.sin(this.angle_mult*this.turn_angle);
+    this.z -= Math.cos(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
+    this.x -= Math.sin(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
 }
 
 MySubmarine.prototype.turnRight = function(){
@@ -109,5 +121,6 @@ MySubmarine.prototype.move = function(direction) {
         default:
 
     }
+    this.updateLights();
 
 }

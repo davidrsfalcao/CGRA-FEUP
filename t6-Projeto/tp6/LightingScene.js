@@ -18,14 +18,14 @@ LightingScene.prototype.init = function(application) {
 
 
 	//ligths
-	this.Luz0=true;
-	this.Luz1=true;
-	this.Luz2=true;
-	this.Luz3=true;
+	this.Light0=true;
+	this.Light1=true;
+	this.Light2=true;
+	this.Light3=true;
 
 	//Run/Pause control
 	this.speed = 1;
-	this.pause=false;
+	this.pause = false;
 	this.stoppedTime = 0;
 
 
@@ -52,15 +52,21 @@ LightingScene.prototype.init = function(application) {
 	//Clock
 	this.pole = new MyCylinder(this,500,1);
 	this.rustAppearance = new CGFappearance(this);
-	this.rustAppearance.loadTexture("../resources/images/rust.jpg");
+	this.rustAppearance.loadTexture("../resources/images/rust.png");
 	this.clock = new MyClock(this);
 
 
 	//Ocean
-	this.oceanFloor = new MyPlane(this,100,0,4,0,4);
+	this.oceanFloor = new MyPlane(this,100,0,10,0,10);
 	this.OceanAppearance = new CGFappearance(this);
-	this.OceanAppearance.loadTexture("../resources/images/OceanFloor.png");
+	this.OceanAppearance.loadTexture("../resources/images/sand.png");
 	this.OceanAppearance.setTextureWrap("REPEAT" , "REPEAT");
+
+
+	this.water_wall = new MyPlane(this,100,0,1,0,1);
+	this.waterAppearance = new CGFappearance(this);
+	this.waterAppearance.loadTexture("../resources/images/water.png");
+	this.waterAppearance.setTextureWrap("REPEAT" , "REPEAT");
 
 	this.setUpdatePeriod(100);
 
@@ -82,11 +88,11 @@ LightingScene.prototype.initLights = function() {
 	this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
 	this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
 	this.lights[3].setPosition(4, 6.0, 5.0, 1.0);
+	this.lights[4].setPosition(0, 0.6, 5, 1.0);
 
 	this.lights[0].setAmbient(0, 0, 0, 1);
 	this.lights[0].setSpecular( 1, 1, 0, 1);
 	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[0].enable();
 
 
 	this.lights[1].setAmbient(0, 0, 0, 1);
@@ -106,6 +112,12 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setConstantAttenuation(0);
 	this.lights[3].setQuadraticAttenuation(0.1);
 
+	this.lights[4].setAmbient(0, 0, 0, 1);
+	this.lights[4].setSpecular( 1, 1, 0, 1);
+	this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	// this.lights[4].enable();
+	// this.lights[4].setVisible(true);
+
 };
 
 LightingScene.prototype.updateLights = function() {
@@ -117,25 +129,25 @@ LightingScene.prototype.updateLights = function() {
 }
 
 LightingScene.prototype.switchLigths = function() {
-	if (this.Luz0 == true){
+	if (this.Light0 == true){
 		this.lights[0].enable();
 	} else {
 		this.lights[0].disable();
 	}
 
-	if (this.Luz1 == true){
+	if (this.Light1 == true){
 		this.lights[1].enable();
 	} else {
 		this.lights[1].disable();
 	}
 
-	if (this.Luz2 == true){
+	if (this.Light2 == true){
 		this.lights[2].enable();
 	} else {
 		this.lights[2].disable();
 	}
 
-	if (this.Luz3 == true){
+	if (this.Light3 == true){
 		this.lights[3].enable();
 	} else {
 		this.lights[3].disable();
@@ -196,6 +208,24 @@ LightingScene.prototype.display = function() {
 	this.OceanAppearance.apply();
 	this.oceanFloor.display();
 	this.popMatrix();
+
+	//Wall Right
+	this.pushMatrix();
+	this.translate(7.5, 7.5, -17.5);
+	this.scale(50, 15, 1);
+	this.waterAppearance.apply();
+	this.water_wall.display();
+	this.popMatrix();
+
+	//Wall Left
+	this.pushMatrix();
+	this.translate(-17.5, 7.5, 7.5);
+	this.rotate(Math.PI/2,0,1,0);
+	this.scale(50, 15, 1);
+	this.waterAppearance.apply();
+	this.water_wall.display();
+	this.popMatrix();
+
 	// ---- END Primitive drawing section
 
 };
@@ -208,5 +238,8 @@ LightingScene.prototype.update = function(currTime) {
 	else {
 		this.stoppedTime += 100; // update period
 	}
+
+	this.submarine.propeller_left.update();
+	this.submarine.propeller_right.update();
 
 };
