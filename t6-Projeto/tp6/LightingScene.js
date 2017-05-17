@@ -181,7 +181,7 @@ LightingScene.prototype.display = function() {
 	//Submarine
 	this.pushMatrix();
 	this.translate(0,1.2,0);
-	this.rustAppearance.apply();
+//	this.rustAppearance.apply();
 	this.submarine.display();
 	this.popMatrix();
 
