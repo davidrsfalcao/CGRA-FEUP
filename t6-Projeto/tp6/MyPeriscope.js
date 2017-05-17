@@ -8,6 +8,7 @@ function MyPeriscope(scene) {
 
     this.cylinder = new MyCylinder(this.scene, 500, 1);
     this.cover = new MyPolygon(this.scene, 500);
+
 };
 
 MyPeriscope.prototype = Object.create(CGFobject.prototype);
@@ -17,6 +18,7 @@ MyPeriscope.prototype.display = function() {
 
     this.scene.pushMatrix();
     this.scene.scale(0.05,0.05,0.2);
+    this.scene.myAppearance.apply();
     this.cylinder.display();
     this.scene.popMatrix();
 

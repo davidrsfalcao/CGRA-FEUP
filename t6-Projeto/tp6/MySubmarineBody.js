@@ -18,7 +18,10 @@ MySubmarineBody.prototype.display = function() {
 
     // Main Cylinder
     this.scene.pushMatrix();
-    this.scene.scale(0.73/2,1.2/2,4.08); // 0.73 x 1.20 x 4.8
+    this.scene.translate(0,0,4.08);
+    this.scene.scale(0.73/2,1.2/2,4.08); // 0.73 x 1.20 x 4.08
+    this.scene.rotate(Math.PI,0,1,0);
+    this.scene.monsterAppearance.apply();
     this.cylinder.display();
     this.scene.popMatrix();
 

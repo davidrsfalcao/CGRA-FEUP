@@ -6,6 +6,8 @@ function MySubmarine(scene) {
     CGFobject.call(this,scene);
     this.scene = scene;
 
+    //Texture
+    this.texture = 1;
 
     //Coordinates of submarine
     this.x = 0;
@@ -147,4 +149,8 @@ MySubmarine.prototype.move = function(direction) {
     }
     this.updateLights();
 
+}
+
+MySubmarine.prototype.setTexture = function(texture){
+    this.texture = texture;
 }

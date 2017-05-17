@@ -24,9 +24,6 @@ MyInterface.prototype.init = function(application) {
 
     this.gui = new dat.GUI();
 
-
-    // add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
-    // e.g. this.option1=true; this.option2=false;
     var lights=this.gui.addFolder("Lights");
     lights.add(this.scene, 'Light0');
     lights.add(this.scene, 'Light1');
@@ -38,7 +35,7 @@ MyInterface.prototype.init = function(application) {
 
     var submarine=this.gui.addFolder("Submarine");
     submarine.add(this.scene, 'speed', -1, 2, 0.1);
-    submarine.add(this.scene, 'textures', { texture1: 0, texture2: 1, texture3: 2} );
+    submarine.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList );
 
     return true;
 };

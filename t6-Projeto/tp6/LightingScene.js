@@ -30,7 +30,7 @@ LightingScene.prototype.init = function(application) {
 	this.stoppedTime = 0;
 
 	//Textures
-	this.textures = 0;
+	this.currSubmarineAppearance = 'Metal';
 
 
 
@@ -53,11 +53,21 @@ LightingScene.prototype.init = function(application) {
 	this.temp.setSpecular(0.1,0.1,0.1,0.1);
 	this.temp.setShininess(100);
 
+	//Textures
+	this.submarineAppearanceList = [ 'Metal', 'Miliar', 'Monster'];
+	this.myAppearance = new CGFappearance(this);
+	this.myAppearance.loadTexture("../resources/images/periscope.png");
+	this.monsterAppearance = new CGFappearance(this);
+	this.monsterAppearance.loadTexture("../resources/images/monster.png");
+
 	//Clock
 	this.pole = new MyCylinder(this,500,1);
 	this.rustAppearance = new CGFappearance(this);
 	this.rustAppearance.loadTexture("../resources/images/rust.jpg");
 	this.clock = new MyClock(this);
+
+	this.metalAppearance = new CGFappearance(this);
+	this.metalAppearance.loadTexture("../resources/images/metal.png");
 
 
 	//Ocean
@@ -65,8 +75,6 @@ LightingScene.prototype.init = function(application) {
 	this.OceanAppearance = new CGFappearance(this);
 	this.OceanAppearance.loadTexture("../resources/images/sand.png");
 	this.OceanAppearance.setTextureWrap("REPEAT" , "REPEAT");
-
-
 	this.water_wall = new MyPlane(this,100,0,1,0,1);
 	this.waterAppearance = new CGFappearance(this);
 	this.waterAppearance.loadTexture("../resources/images/water.png");
@@ -184,7 +192,7 @@ LightingScene.prototype.display = function() {
 	//Submarine
 	this.pushMatrix();
 	this.translate(0,1.2,0);
-//	this.rustAppearance.apply();
+	this.metalAppearance.apply();
 	this.submarine.display();
 	this.popMatrix();
 
@@ -201,6 +209,7 @@ LightingScene.prototype.display = function() {
 	//Clock
 	this.pushMatrix();
 	this.translate(8, 5, 0);
+	this.rustAppearance.apply();
 	this.clock.display();
 	this.popMatrix();
 
