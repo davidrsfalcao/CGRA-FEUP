@@ -1,6 +1,7 @@
-var degToRad = Math.PI / 180.0;
-
-
+/**
+* LightingScene
+* @constructor
+*/
 function LightingScene() {
 	CGFscene.call(this);
 }
@@ -52,7 +53,7 @@ LightingScene.prototype.init = function(application) {
 	//Clock
 	this.pole = new MyCylinder(this,500,1);
 	this.rustAppearance = new CGFappearance(this);
-	this.rustAppearance.loadTexture("../resources/images/rust.png");
+	this.rustAppearance.loadTexture("../resources/images/rust.jpg");
 	this.clock = new MyClock(this);
 
 
@@ -179,7 +180,7 @@ LightingScene.prototype.display = function() {
 
 	//Submarine
 	this.pushMatrix();
-	this.translate(0,0.6,0);
+	this.translate(0,1.2,0);
 	this.rustAppearance.apply();
 	this.submarine.display();
 	this.popMatrix();

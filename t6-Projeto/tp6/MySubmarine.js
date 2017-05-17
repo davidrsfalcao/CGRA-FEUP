@@ -23,6 +23,8 @@ function MySubmarine(scene) {
     this.periscope = new MyPeriscope(this.scene);
     this.propeller_left = new MyPropeller(this.scene,1);
     this.propeller_right = new MyPropeller(this.scene,-1);
+    this.middle_fin = new MyWing(this.scene, 1.42, 0.25);
+    this.back_fin = new MyWing(this.scene, 2.34, 0.35);
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -41,10 +43,10 @@ MySubmarine.prototype.display = function() {
     //Periscope
     this.scene.pushMatrix();
     this.scene.translate(0,1.13,2.5);
-        this.scene.pushMatrix();
-        this.scene.translate(0,this.periscope_heigth,-0.05);
-        this.periscope.display();
-        this.scene.popMatrix();
+    this.scene.pushMatrix();
+    this.scene.translate(0,this.periscope_heigth,-0.05);
+    this.periscope.display();
+    this.scene.popMatrix();
     this.scene.popMatrix();
 
 
@@ -59,6 +61,28 @@ MySubmarine.prototype.display = function() {
     this.scene.translate(-0.5255,-0.3,0);
     this.propeller_right.display();
     this.scene.popMatrix();
+
+    //Barbatana da torre
+    this.scene.pushMatrix();
+    this.scene.translate(0,0.8,2.5);
+    //this.scene.rotate(-Math.PI/4,1,0,0);
+    this.middle_fin.display();
+    this.scene.popMatrix();
+
+    //Barbatana traseira horizontal
+    this.scene.pushMatrix();
+    this.scene.translate(0,0.1,-0.15);
+    //this.scene.rotate(-Math.PI/4,1,0,0);
+    this.back_fin.display();
+    this.scene.popMatrix();
+
+    //Barbatana traseira vertical
+    this.scene.pushMatrix();
+    this.scene.translate(0,0,-0.15);
+    this.scene.rotate(Math.PI/2,0,0,1);
+    this.back_fin.display();
+    this.scene.popMatrix();
+
 
 }
 

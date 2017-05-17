@@ -3,12 +3,17 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function MyWing(scene) {
+function MyWing(scene, length, length_triangle) {
     CGFobject.call(this,scene);
     this.scene = scene;
+    this.length = length - (length_triangle*2);
+    this.width = 0.3;
+    this.thickness = 0.05;
+    this.length_triangle = length_triangle;
 
     this.rectangle = new MyQuad(scene,0,1,0,1);
     this.triangle = new MyTriangle(scene);
+    this.cube = new MyUnitCubeQuad(scene);
 
 };
 
@@ -16,81 +21,91 @@ MyWing.prototype = Object.create(CGFobject.prototype);
 MyWing.prototype.constructor=MyWing;
 
 MyWing.prototype.display = function () {
-    //down face
+
+    //centro
     this.scene.pushMatrix();
-        this.scene.translate(0,-0.5,0);
-        this.scene.rotate(+Math.PI/2,1,0,0);
-        this.rectangle.display();
+    this.scene.scale(this.length, this.thickness, this.width);
+    this.cube.display();
     this.scene.popMatrix();
-    //upper face
+
+    //Asa direita
     this.scene.pushMatrix();
-        this.scene.translate(0,0.5,0);
-        this.scene.rotate(-Math.PI/2,1,0,0);
-        this.rectangle.display();
+    /* Triangulo de cima*/
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(this.length/2,this.thickness/2,-this.width/2);
+    /* */this.scene.scale(this.length_triangle,this.thickness, this.width);
+    /* */this.triangle.display();
+    /* */this.scene.popMatrix();
+
+    /* Triangulo de baixo */
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(this.length/2,-this.thickness/2,-this.width/2);
+    /* */this.scene.rotate(Math.PI,1,0,1);
+    /* */this.scene.scale(this.width,this.thickness, this.length_triangle);
+    /* */this.triangle.display();
+    /* */this.scene.popMatrix();
+
+    /* Retangulo cateto */
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(this.length/2+this.length_triangle/2,0,-this.width/2);
+    /* */this.scene.rotate(Math.PI,1,0,0);
+    /* */this.scene.scale(this.length_triangle,this.thickness, this.width);
+    /* */this.rectangle.display();
+    /* */this.scene.popMatrix();
+
+    var comprimento = Math.sqrt(Math.pow(this.length_triangle,2)+ Math.pow(this.width,2));
+    var angulo = Math.acos(this.length_triangle/comprimento);
+
+    /* Retangulo hipotenusa */
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(this.length/2+this.length_triangle/2,0,0);
+    /* */this.scene.rotate(angulo,0,1,0);
+    /* */this.scene.scale(comprimento,this.thickness, this.width);
+    /* */this.rectangle.display();
+    /* */this.scene.popMatrix();
+
     this.scene.popMatrix();
-    //behind submarine face
+
+
+    //Asa esquerda
     this.scene.pushMatrix();
-        this.scene.translate(0,0,-0.5);
-        this.scene.rotate(Math.PI,1,0,0);
-        this.rectangle.display();
+    this.scene.rotate(Math.PI,0,0,1);
+
+    /* Triangulo de cima*/
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(this.length/2,this.thickness/2,-this.width/2);
+    /* */this.scene.scale(this.length_triangle,this.thickness, this.width);
+    /* */this.triangle.display();
+    /* */this.scene.popMatrix();
+
+    /* Triangulo de baixo */
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(this.length/2,-this.thickness/2,-this.width/2);
+    /* */this.scene.rotate(Math.PI,1,0,1);
+    /* */this.scene.scale(this.width,this.thickness, this.length_triangle);
+    /* */this.triangle.display();
+    /* */this.scene.popMatrix();
+
+    /* Retangulo cateto */
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(this.length/2+this.length_triangle/2,0,-this.width/2);
+    /* */this.scene.rotate(Math.PI,1,0,0);
+    /* */this.scene.scale(this.length_triangle,this.thickness, this.width);
+    /* */this.rectangle.display();
+    /* */this.scene.popMatrix();
+
+    var comprimento = Math.sqrt(Math.pow(this.length_triangle,2)+ Math.pow(this.width,2));
+    var angulo = Math.acos(this.length_triangle/comprimento);
+
+    /* Retangulo hipotenusa */
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(this.length/2+this.length_triangle/2,0,0);
+    /* */this.scene.rotate(angulo,0,1,0);
+    /* */this.scene.scale(comprimento,this.thickness, comprimento);
+    /* */this.rectangle.display();
+    /* */this.scene.popMatrix();
+
     this.scene.popMatrix();
-    //middle submarine face
-    this.scene.pushMatrix();
-        this.scene.translate(0,0,0.5);
-        this.rectangle.display();
-    this.scene.popMatrix();
-    //behind left face
-    this.scene.pushMatrix();
-        this.scene.translate(1,0,-0.5);
-        this.scene.rotate(Math.PI,1,0,0);
-        this.rectangle.display();
-    this.scene.popMatrix();
-    //behind right face
-    this.scene.pushMatrix();
-        this.scene.translate(-1,0,-0.5);
-        this.scene.rotate(Math.PI,1,0,0);
-        this.rectangle.display();
-    this.scene.popMatrix();
-    //left diagonal face
-    this.scene.pushMatrix();
-        this.scene.translate(1,0,0);
-        this.scene.rotate(Math.PI/4,0,1,0);
-        this.scene.scale(Math.sqrt(2),1,1);
-        this.rectangle.display();
-    this.scene.popMatrix();
-    //right diagonal face
-    this.scene.pushMatrix();
-        this.scene.translate(-1,0,0);
-        this.scene.rotate(-Math.PI/4,0,1,0);
-        this.scene.scale(Math.sqrt(2),1,1);
-        this.rectangle.display();
-    this.scene.popMatrix();
-    //upper right triangle
-    this.scene.pushMatrix();
-        this.scene.translate(-0.5 , 0.5 ,-0.5);
-        this.scene.rotate(3*Math.PI/2,0,1,0);
-        this.triangle.display();
-    this.scene.popMatrix();
-    //upper left triangle
-    this.scene.pushMatrix();
-        this.scene.translate(0.5 , 0.5 ,-0.5);
-        this.triangle.display();
-    this.scene.popMatrix();
-    //bottom right triangle
-    this.scene.pushMatrix();
-        this.scene.translate(0.5 , -0.5 ,-0.5);
-        this.scene.rotate(3*Math.PI/2,0,1,0);
-        this.scene.rotate(Math.PI,1,0,0);
-        this.triangle.display();
-    this.scene.popMatrix();
-    //bottom left triangle
-    this.scene.pushMatrix();
-        this.scene.translate(-0.5 , -0.5 ,-0.5);
-        this.scene.rotate(3*Math.PI/2,0,1,0);
-        this.scene.rotate(Math.PI,1,0,0);
-        this.scene.rotate(Math.PI/2,0,1,0);
-        this.triangle.display();
-    this.scene.popMatrix();   
 
     this.primitiveType=this.scene.gl.TRIANGLES;
 };
