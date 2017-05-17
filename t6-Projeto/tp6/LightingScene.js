@@ -29,6 +29,9 @@ LightingScene.prototype.init = function(application) {
 	this.pause = false;
 	this.stoppedTime = 0;
 
+	//Textures
+	this.textures = 0;
+
 
 
 	this.gl.clearColor(0.0, 0.0, 0.4, 1.0);
