@@ -41,7 +41,4 @@ MyPeriscope.prototype.display = function() {
     this.cover.display();
     this.scene.popMatrix();
 
-
-
-
 }

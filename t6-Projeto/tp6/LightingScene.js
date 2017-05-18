@@ -151,8 +151,8 @@ LightingScene.prototype.initLights = function() {
 	this.lights[4].setAmbient(0, 0, 0, 1);
 	this.lights[4].setSpecular( 1, 1, 0, 1);
 	this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	// this.lights[4].enable();
-	// this.lights[4].setVisible(true);
+	//this.lights[4].enable();
+	//this.lights[4].setVisible(true);
 
 };
 
