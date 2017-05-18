@@ -29,8 +29,7 @@ LightingScene.prototype.init = function(application) {
 	this.pause = false;
 	this.stoppedTime = 0;
 
-	//Textures
-	this.currSubmarineAppearance = 'Metal';
+
 
 
 
@@ -53,22 +52,47 @@ LightingScene.prototype.init = function(application) {
 	this.temp.setSpecular(0.1,0.1,0.1,0.1);
 	this.temp.setShininess(100);
 
-	//Textures
-	this.submarineAppearanceList = [ 'Metal', 'Miliar', 'Monster'];
-	this.myAppearance = new CGFappearance(this);
-	this.myAppearance.loadTexture("../resources/images/periscope.png");
-	this.monsterAppearance = new CGFappearance(this);
-	this.monsterAppearance.loadTexture("../resources/images/monster.png");
+	//Textures submarine
+	this.submarineAppearanceList = [ 'Metal', 'Military', 'Monster'];
+	this.currSubmarineAppearance = 'Metal';
+	this.submarineAppearances = [];
+
+	//METAL TEXTURE
+	/* 0 */this.metalAppearance = new CGFappearance(this);
+	/* 0 */this.metalAppearance.loadTexture("../resources/images/metal.png");
+	/* 0 */this.submarineAppearances.push(this.metalAppearance);
+
+	/* 1 */this.myAppearance = new CGFappearance(this);
+	/* 1 */this.myAppearance.loadTexture("../resources/images/black.png");
+	/* 1 */this.submarineAppearances.push(this.myAppearance);
+
+	// MILITARY TEXTURE
+	/* 2 */this.militaryAppearance = new CGFappearance(this);
+	/* 2 */this.militaryAppearance.loadTexture("../resources/images/military.png");
+	/* 2 */this.submarineAppearances.push(this.militaryAppearance);
+
+	/* 3 */this.militaryAppearance1 = new CGFappearance(this);
+	/* 3 */this.militaryAppearance1.loadTexture("../resources/images/military1.png");
+	/* 3 */this.submarineAppearances.push(this.militaryAppearance1);
+
+	// MONSTER TEXTURE
+	/* 4 */this.monsterAppearance = new CGFappearance(this);
+	/* 4 */this.monsterAppearance.loadTexture("../resources/images/monster.png");
+	/* 4 */this.submarineAppearances.push(this.monsterAppearance);
+
+	/* 5 */this.monsterAppearance1 = new CGFappearance(this);
+	/* 5 */this.monsterAppearance1.loadTexture("../resources/images/monster1.png");
+	/* 5 */this.submarineAppearances.push(this.monsterAppearance1);
+
+	/* 6 */this.monsterAppearance2 = new CGFappearance(this);
+	/* 6 */this.monsterAppearance2.loadTexture("../resources/images/black1.png");
+	/* 6 */this.submarineAppearances.push(this.monsterAppearance2);
 
 	//Clock
 	this.pole = new MyCylinder(this,500,1);
 	this.rustAppearance = new CGFappearance(this);
 	this.rustAppearance.loadTexture("../resources/images/rust.jpg");
 	this.clock = new MyClock(this);
-
-	this.metalAppearance = new CGFappearance(this);
-	this.metalAppearance.loadTexture("../resources/images/metal.png");
-
 
 	//Ocean
 	this.oceanFloor = new MyPlane(this,100,0,10,0,10);

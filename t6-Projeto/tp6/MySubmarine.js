@@ -39,6 +39,19 @@ MySubmarine.prototype.display = function() {
     this.body.display();
     this.scene.popMatrix();
 
+    switch (this.scene.currSubmarineAppearance) {
+        case 'Metal':
+            this.scene.submarineAppearances[1].apply();
+            break;
+
+        case 'Military':
+            this.scene.submarineAppearances[3].apply();
+            break;
+        case 'Monster':
+            this.scene.submarineAppearances[5].apply();
+            break;
+    }
+
     //Periscope
     this.scene.pushMatrix();
     this.scene.translate(0,1.13,2.5);

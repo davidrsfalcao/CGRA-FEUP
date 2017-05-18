@@ -7,6 +7,7 @@ var degToRad = Math.PI / 180.0;
 
 function MyClock(scene) {
     CGFobject.call(this,scene);
+    this.scene = scene;
 
     this.cylinder = new MyCylinder(this.scene,12,1);
     this.seconds = new MyClockHand(this.scene,0.4,'seconds',270);
@@ -20,7 +21,7 @@ function MyClock(scene) {
     this.clockAppearance.setDiffuse(0.9,0.9,0.9,1);
     this.clockAppearance.setSpecular(0.1,0.1,0.1,1);
     this.clockAppearance.setShininess(2);
-    this.clockAppearance.loadTexture("/resources/images/clock.png");
+    this.clockAppearance.loadTexture("../resources/images/clock1.png");
 
     this.handAppearance = new CGFappearance(this.scene);
     this.handAppearance.setAmbient(0,0,0,0);
