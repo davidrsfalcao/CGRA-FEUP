@@ -47,24 +47,24 @@ MySubmarine.prototype.display = function() {
 
     switch (this.scene.currSubmarineAppearance) {
         case 'Metal':
-            this.scene.submarineAppearances[1].apply();
-            break;
+        this.scene.submarineAppearances[1].apply();
+        break;
 
         case 'Military':
-            this.scene.submarineAppearances[3].apply();
-            break;
+        this.scene.submarineAppearances[3].apply();
+        break;
         case 'Monster':
-            this.scene.submarineAppearances[5].apply();
-            break;
+        this.scene.submarineAppearances[5].apply();
+        break;
     }
 
     //Periscope
     this.scene.pushMatrix();
     this.scene.translate(0,1.13,2.5);
-    this.scene.pushMatrix();
-    this.scene.translate(0,this.periscope_heigth,-0.05);
-    this.periscope.display();
-    this.scene.popMatrix();
+    /* */this.scene.pushMatrix();
+    /* */this.scene.translate(0,this.periscope_heigth,-0.05);
+    /* */this.periscope.display();
+    /* */this.scene.popMatrix();
     this.scene.popMatrix();
 
 
@@ -83,14 +83,12 @@ MySubmarine.prototype.display = function() {
     //Barbatana da torre
     this.scene.pushMatrix();
     this.scene.translate(0,0.8,2.5);
-    //this.scene.rotate(-Math.PI/4,1,0,0);
     this.middle_fin.display();
     this.scene.popMatrix();
 
     //Barbatana traseira horizontal
     this.scene.pushMatrix();
     this.scene.translate(0,0.1,-0.15);
-    //this.scene.rotate(-Math.PI/4,1,0,0);
     this.back_fin.display();
     this.scene.popMatrix();
 
@@ -132,13 +130,19 @@ MySubmarine.prototype.moveBack = function(){
 MySubmarine.prototype.turnRight = function(){
 
     this.angle_mult -= 1;
-    this.propellerV_angle = Math.PI/8;
+    if(this.scene.speed > 0){
+        this.propellerV_angle = Math.PI/8;
+    }
+    else this.propellerV_angle = -Math.PI/8;
 }
 
 MySubmarine.prototype.turnLeft = function(){
 
     this.angle_mult += 1;
-    this.propellerV_angle = -Math.PI/8;
+    if(this.scene.speed > 0){
+        this.propellerV_angle = -Math.PI/8;
+    }
+    else this.propellerV_angle = Math.PI/8;
 }
 
 MySubmarine.prototype.stopTurning = function(){
