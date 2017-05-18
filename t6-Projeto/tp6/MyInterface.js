@@ -96,21 +96,79 @@ MyInterface.prototype.processKeyboard = function(event) {
             break;
         }
         case (68):	/* D */ {
-            this.scene.submarine.turnRight();
+            if(this.scene.speed != 0){
+                this.scene.submarine.turnRight();
+            }
             break;
         }
         case (100):	/* d */ {
-            this.scene.submarine.turnRight();
+            if(this.scene.speed != 0){
+                this.scene.submarine.turnRight();
+            }
             break;
         }
         case (65):	/* A */ {
-            this.scene.submarine.turnLeft();
+            if(this.scene.speed != 0){
+                this.scene.submarine.turnLeft();
+            }
             break;
         }
         case (97):  /* a */ {
-            this.scene.submarine.turnLeft();
+            if(this.scene.speed != 0){
+                this.scene.submarine.turnLeft();
+            }
             break;
         }
+
+    };
+};
+
+MyInterface.prototype.processKeyUp = function(event) {
+    // call CGFinterface default code (omit if you want to override)
+    CGFinterface.prototype.processKeyUp.call(this,event);
+
+    // Check key codes e.g. here: http://www.asciitable.com/
+    // or use String.fromCharCode(event.keyCode) to compare chars
+
+    // for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
+
+    switch (event.keyCode) {
+        /*
+        SUBMARINE MOVEMENT
+        */
+        // case (87):	/* W */ {
+        //     this.scene.submarine.moveFront();
+        //     break;
+        // }
+        // case (119):	/* w */ {
+        //     this.scene.submarine.moveFront();
+        //     break;
+        // }
+        // case (83):	/* S */ {
+        //     this.scene.submarine.moveBack();
+        //     break;
+        // }
+        // case (115):	/* s */ {
+        //     this.scene.submarine.moveBack();
+        //     break;
+        // }
+        case (68):	/* D */ {
+            this.scene.submarine.stopTurning();
+            break;
+        }
+        case (100):	/* d */ {
+            this.scene.submarine.stopTurning();
+            break;
+        }
+        case (65):	/* A */ {
+            this.scene.submarine.stopTurning();
+            break;
+        }
+        case (97):  /* a */ {
+            this.scene.submarine.stopTurning();
+            break;
+        }
+
 
     };
 };
