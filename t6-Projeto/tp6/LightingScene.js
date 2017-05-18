@@ -24,8 +24,12 @@ LightingScene.prototype.init = function(application) {
 	this.Light2=true;
 	this.Light3=true;
 
+	//Submarine control
+	this.speed = 0;
+	this.v_max = 5;
+	this.v_min = -2;
+
 	//Run/Pause control
-	this.speed = 1;
 	this.pause = false;
 	this.stoppedTime = 0;
 
@@ -42,7 +46,6 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 	this.materialDefault = new CGFappearance(this);
 
-	this.wing = new MyWing(this);
 
 	//submarine
 	this.submarine = new MySubmarine(this);
@@ -108,9 +111,6 @@ LightingScene.prototype.init = function(application) {
 
 };
 
-LightingScene.prototype.Pause = function (){
-	this.pause = !this.pause;
-};
 
 LightingScene.prototype.initCameras = function() {
 	this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
@@ -276,7 +276,5 @@ LightingScene.prototype.update = function(currTime) {
 		this.stoppedTime += 100; // update period
 	}
 
-	this.submarine.propeller_left.update();
-	this.submarine.propeller_right.update();
-
+	this.submarine.update();
 };

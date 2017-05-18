@@ -34,7 +34,7 @@ MyInterface.prototype.init = function(application) {
     clock.add(this.scene, 'pause');
 
     var submarine=this.gui.addFolder("Submarine");
-    submarine.add(this.scene, 'speed', -1, 2, 0.1);
+    submarine.add(this.scene, 'speed', this.scene.v_min, this.scene.v_max);
     submarine.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList );
 
     return true;
@@ -54,43 +54,61 @@ MyInterface.prototype.processKeyboard = function(event) {
     // for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
     switch (event.keyCode)
     {
-        //Move Front (0) w
-        case (87):	{
-            this.scene.submarine.move(0);
+
+        /*
+        PERISCOPE MOVEMENT
+        */
+        case (80): /* P */	{
+            this.scene.submarine.upPeriscope();
             break;
         }
-        case (119):	{
-            this.scene.submarine.move(0);
+        case (112):	/* p */ {
+            this.scene.submarine.upPeriscope();
             break;
         }
 
-        //Move Back (1) s
-        case (83):	{
-            this.scene.submarine.move(1);
+        case (76): /* L */	{
+            this.scene.submarine.downPeriscope();
             break;
         }
-        case (115):	{
-            this.scene.submarine.move(1);
-            break;
-        }
-
-        //Move Right (2) d
-        case (68):	{
-            this.scene.submarine.move(2);
-            break;
-        }
-        case (100):	{
-            this.scene.submarine.move(2);
+        case (108): /* l */	{
+            this.scene.submarine.downPeriscope();
             break;
         }
 
-        // Move Left (3) a
-        case (65):	{
-            this.scene.submarine.move(3);
+        /*
+        SUBMARINE MOVEMENT
+        */
+        case (87):	/* W */ {
+            this.scene.submarine.moveFront();
             break;
         }
-        case (97):{
-            this.scene.submarine.move(3);
+        case (119):	/* w */ {
+            this.scene.submarine.moveFront();
+            break;
+        }
+        case (83):	/* S */ {
+            this.scene.submarine.moveBack();
+            break;
+        }
+        case (115):	/* s */ {
+            this.scene.submarine.moveBack();
+            break;
+        }
+        case (68):	/* D */ {
+            this.scene.submarine.turnRight();
+            break;
+        }
+        case (100):	/* d */ {
+            this.scene.submarine.turnRight();
+            break;
+        }
+        case (65):	/* A */ {
+            this.scene.submarine.turnLeft();
+            break;
+        }
+        case (97):  /* a */ {
+            this.scene.submarine.turnLeft();
             break;
         }
 

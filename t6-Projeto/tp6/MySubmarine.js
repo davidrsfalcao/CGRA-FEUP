@@ -16,7 +16,10 @@ function MySubmarine(scene) {
     this.turn_angle = Math.PI/90; // angulo de viragem - 2 graus
 
     //Periscope movemente
+    this.periscope_max = 0.60;
     this.periscope_heigth = 0.30;
+    this.periscope_min = 0.15;
+
 
     this.body = new MySubmarineBody(this.scene);
     this.periscope = new MyPeriscope(this.scene);
@@ -98,7 +101,6 @@ MySubmarine.prototype.display = function() {
 
 }
 
-
 MySubmarine.prototype.updateLights = function(){
     var xl, yl, zl;
     xl = this.x + 5*Math.sin(this.angle_mult * this.turn_angle);
@@ -108,18 +110,19 @@ MySubmarine.prototype.updateLights = function(){
     this.scene.lights[4].setPosition(xl, yl, zl, 1);
 }
 
-
 MySubmarine.prototype.moveFront = function(){
 
-    this.z += Math.cos(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
-    this.x += Math.sin(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
-    this.updateLights();
+    if (this.scene.speed < this.scene.v_max){
+        this.scene.speed++;
+    }
+
 }
 
 MySubmarine.prototype.moveBack = function(){
 
-    this.z -= Math.cos(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
-    this.x -= Math.sin(this.angle_mult*this.turn_angle)*Math.abs(this.scene.speed);
+    if (this.scene.speed > this.scene.v_min){
+        this.scene.speed--;
+    }
 }
 
 MySubmarine.prototype.turnRight = function(){
@@ -132,31 +135,29 @@ MySubmarine.prototype.turnLeft = function(){
     this.angle_mult += 1;
 }
 
-MySubmarine.prototype.move = function(direction) {
+MySubmarine.prototype.move = function() {
 
-    switch (direction) {
-        case 0:{
-            this.moveFront();
-            break;
-        }
+    this.z += Math.cos(this.angle_mult*this.turn_angle)*0.1*(this.scene.speed);
+    this.x += Math.sin(this.angle_mult*this.turn_angle)*0.1*(this.scene.speed);
 
-        case 1:{
-            this.moveBack();
-            break;
-        }
+}
 
-        case 2:{
-            this.turnRight();
-            break;
-        }
-
-        case 3:{
-            this.turnLeft();
-            break;
-        }
-        default:
-
+MySubmarine.prototype.upPeriscope = function(){
+    if(this.periscope_heigth < this.periscope_max){
+        this.periscope_heigth += 0.01;
     }
-    this.updateLights();
+}
 
+MySubmarine.prototype.downPeriscope = function(){
+    if(this.periscope_heigth > this.periscope_min){
+        this.periscope_heigth -= 0.01;
+    }
+}
+
+MySubmarine.prototype.update = function(){
+
+    this.move();
+    this.propeller_left.update();
+    this.propeller_right.update();
+    this.updateLights();
 }
