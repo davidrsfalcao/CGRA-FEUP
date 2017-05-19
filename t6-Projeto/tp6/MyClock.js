@@ -16,13 +16,6 @@ function MyClock(scene) {
     this.top = new MyPolygon(this.scene,12);
     this.back = new MyPolygon(this.scene,12);
 
-    this.clockAppearance = new CGFappearance(this.scene);
-    this.clockAppearance.setAmbient(0.3,0.3,0.3,1);
-    this.clockAppearance.setDiffuse(0.9,0.9,0.9,1);
-    this.clockAppearance.setSpecular(0.1,0.1,0.1,1);
-    this.clockAppearance.setShininess(2);
-    this.clockAppearance.loadTexture("../resources/images/clock1.png");
-
     this.handAppearance = new CGFappearance(this.scene);
     this.handAppearance.setAmbient(0,0,0,0);
     this.handAppearance.setDiffuse(0,0,0,0);
@@ -77,7 +70,7 @@ MyClock.prototype.display = function() {
 
 
     this.scene.pushMatrix();
-    this.clockAppearance.apply();
+    this.scene.clockAppearances[this.scene.currClockAppearance].apply();
     this.scene.translate(0,0,0.3);
     this.top.display();
     this.scene.popMatrix();

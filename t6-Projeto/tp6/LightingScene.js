@@ -17,6 +17,14 @@ LightingScene.prototype.init = function(application) {
 
 	this.initLights();
 
+	this.gl.clearColor(0.0, 0.0, 0.4, 1.0);
+	this.gl.clearDepth(100.0);
+	this.gl.enable(this.gl.DEPTH_TEST);
+	this.gl.enable(this.gl.CULL_FACE);
+	this.gl.depthFunc(this.gl.LEQUAL);
+
+	this.axis = new CGFaxis(this);
+	this.materialDefault = new CGFappearance(this);
 
 	//ligths
 	this.Light0=true;
@@ -32,19 +40,6 @@ LightingScene.prototype.init = function(application) {
 	//Run/Pause control
 	this.pause = false;
 	this.stoppedTime = 0;
-
-
-
-
-
-	this.gl.clearColor(0.0, 0.0, 0.4, 1.0);
-	this.gl.clearDepth(100.0);
-	this.gl.enable(this.gl.DEPTH_TEST);
-	this.gl.enable(this.gl.CULL_FACE);
-	this.gl.depthFunc(this.gl.LEQUAL);
-
-	this.axis = new CGFaxis(this);
-	this.materialDefault = new CGFappearance(this);
 
 
 	//submarine
@@ -92,10 +87,38 @@ LightingScene.prototype.init = function(application) {
 	/* 6 */this.submarineAppearances.push(this.monsterAppearance2);
 
 	//Clock
+	this.clock = new MyClock(this);
+	this.currClockAppearance = 0;
+	this.clockAppearances = [];
+
+	/* 0 */this.clock1 = new CGFappearance(this);
+	/* 0 */this.clock1.setAmbient(0.3,0.3,0.3,1);
+	/* 0 */this.clock1.setDiffuse(0.9,0.9,0.9,1);
+	/* 0 */this.clock1.setSpecular(0.1,0.1,0.1,1);
+	/* 0 */this.clock1.setShininess(2);
+	/* 0 */this.clock1.loadTexture("../resources/images/clock1.png");
+	/* 0 */this.clockAppearances.push(this.clock1);
+
+	/* 1 */this.clock2 = new CGFappearance(this);
+	/* 1 */this.clock2.setAmbient(0.3,0.3,0.3,1);
+	/* 1 */this.clock2.setDiffuse(0.9,0.9,0.9,1);
+	/* 1 */this.clock2.setSpecular(0.1,0.1,0.1,1);
+	/* 1 */this.clock2.setShininess(2);
+	/* 1 */this.clock2.loadTexture("../resources/images/clock2.png");
+	/* 1 */this.clockAppearances.push(this.clock2);
+
+	/* 2 */this.clock3 = new CGFappearance(this);
+	/* 2 */this.clock3.setAmbient(0.3,0.3,0.3,1);
+	/* 2 */this.clock3.setDiffuse(0.9,0.9,0.9,1);
+	/* 2 */this.clock3.setSpecular(0.1,0.1,0.1,1);
+	/* 2 */this.clock3.setShininess(2);
+	/* 2 */this.clock3.loadTexture("../resources/images/clock3.png");
+	/* 2 */this.clockAppearances.push(this.clock3);
+
 	this.pole = new MyCylinder(this,500,1);
 	this.rustAppearance = new CGFappearance(this);
 	this.rustAppearance.loadTexture("../resources/images/rust.jpg");
-	this.clock = new MyClock(this);
+
 
 	//Ocean
 	this.oceanFloor = new MyPlane(this,100,0,10,0,10);
@@ -107,6 +130,9 @@ LightingScene.prototype.init = function(application) {
 	this.waterAppearance.loadTexture("../resources/images/water.png");
 	this.waterAppearance.setTextureWrap("REPEAT" , "REPEAT");
 
+
+	//this.audio=new Audio("../resources/Can't Help Falling In Love.mp3");
+	//this.audio.play();
 	this.setUpdatePeriod(100);
 
 };
