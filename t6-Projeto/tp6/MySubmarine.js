@@ -140,14 +140,14 @@ MySubmarine.prototype.smoothStop = function(){
 
     if (this.scene.speed > 0)
     {
-        this.scene.speed -= (1/this.scene.frames)/5;
+        this.scene.speed -= (1/this.scene.frames)/3;
         if (this.scene.speed < 0){
             this.scene.speed = 0;
         }
 
     } else  if (this.scene.speed < 0)
     {
-        this.scene.speed += (1/this.scene.frames)/5;
+        this.scene.speed += (1/this.scene.frames)/3;
         if (this.scene.speed > 0){
             this.scene.speed = 0;
         }
