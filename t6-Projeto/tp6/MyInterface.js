@@ -25,6 +25,7 @@ MyInterface.prototype.init = function(application) {
     this.gui = new dat.GUI();
 
     this.gui.add(this.scene, 'frames', 1, 200);
+    this.gui.add(this.scene, 'cameraChosen', {Free: 0, ThirdPerson: 1});
 
     var lights=this.gui.addFolder("Lights");
     lights.add(this.scene, 'Light0');

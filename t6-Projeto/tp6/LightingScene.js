@@ -43,6 +43,9 @@ LightingScene.prototype.init = function(application) {
 	this.lastUpdate = 0;
 	this.frames = 100;
 
+	//Camera
+	this.cameraChosen = 0;
+
 
 	//submarine
 	this.Light = false;
@@ -130,7 +133,7 @@ LightingScene.prototype.init = function(application) {
 	this.waterAppearance.loadTexture("../resources/images/water.png");
 
 
-	//this.audio=new Audio("../resources/Can't Help Falling In Love.mp3");
+	//this.audio=new Audio("../resources/lalala.mp3");
 	//this.audio.play();
 	this.setUpdatePeriod(1000/this.frames);
 
@@ -224,6 +227,22 @@ LightingScene.prototype.updateFrames = function(){
 	this.setUpdatePeriod(1000/this.frames);
 }
 
+LightingScene.prototype.updateCamera = function(){
+
+	var x = this.submarine.x - 10*Math.sin(this.submarine.angle_mult * this.submarine.turn_angle);
+	var y = this.submarine.y + 4;
+	var z = this.submarine.z - 10*Math.cos(this.submarine.angle_mult * this.submarine.turn_angle);
+	this.camera.setPosition(vec3.fromValues(x, y, z));
+
+	var xl, yl, zl;
+	xl = this.submarine.x + 5*Math.sin(this.submarine.angle_mult * this.submarine.turn_angle);
+	yl = this.submarine.y + 0.6;
+	zl = this.submarine.z + 5*Math.cos(this.submarine.angle_mult * this.submarine.turn_angle);
+
+	this.camera.setTarget(vec3.fromValues(xl, yl, zl));
+
+}
+
 LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Background, camera and axis setup
@@ -309,6 +328,11 @@ LightingScene.prototype.update = function(currTime) {
 		this.time += currTime-this.lastUpdate;
 	}
 
-
 	this.submarine.update(currTime-this.lastUpdate);
+
+	if (this.cameraChosen == 1){
+		this.updateCamera(); //camera 3ª pessoa
+	}
+	//else camera livre
+
 };
