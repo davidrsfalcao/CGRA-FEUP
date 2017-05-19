@@ -45,12 +45,10 @@ LightingScene.prototype.init = function(application) {
 
 
 	//submarine
+	this.Light = false;
 	this.submarine = new MySubmarine(this);
 	this.temp = new CGFappearance(this);
-	this.temp.setAmbient(0.01,0.01,0.01,1);
-	this.temp.setDiffuse(0.1,0.1,0.1,1);
-	this.temp.setSpecular(0.1,0.1,0.1,0.1);
-	this.temp.setShininess(100);
+
 
 	//Textures submarine
 	this.submarineAppearanceList = [ 'Metal', 'Military', 'Monster'];
@@ -130,7 +128,6 @@ LightingScene.prototype.init = function(application) {
 	this.water_wall = new MyPlane(this,100,0,1,0,1);
 	this.waterAppearance = new CGFappearance(this);
 	this.waterAppearance.loadTexture("../resources/images/water.png");
-	this.waterAppearance.setTextureWrap("REPEAT" , "REPEAT");
 
 
 	//this.audio=new Audio("../resources/Can't Help Falling In Love.mp3");
@@ -176,10 +173,9 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setQuadraticAttenuation(0.1);
 
 	this.lights[4].setAmbient(0, 0, 0, 1);
-	this.lights[4].setSpecular( 1, 1, 0, 1);
+	this.lights[4].setSpecular( 1, 1, 1, 1);
 	this.lights[4].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	//this.lights[4].enable();
-	//this.lights[4].setVisible(true);
+	this.lights[4].enable();
 
 };
 
@@ -214,6 +210,12 @@ LightingScene.prototype.switchLigths = function() {
 		this.lights[3].enable();
 	} else {
 		this.lights[3].disable();
+	}
+
+	if (this.Light == true){
+		this.lights[4].enable();
+	} else {
+		this.lights[4].disable();
 	}
 
 }

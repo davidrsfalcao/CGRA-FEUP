@@ -216,6 +216,9 @@ MySubmarine.prototype.move = function(delta) {
 
     this.z += Math.cos(this.angle_mult*this.turn_angle)*(delta/1000)*(this.scene.speed);
     this.x += Math.sin(this.angle_mult*this.turn_angle)*(delta/1000)*(this.scene.speed);
+    if (this.y + Math.sin(this.vertical_angle)*(delta/1000)*(this.scene.speed) < 0){
+        this.y = 0;
+    }else
     this.y += Math.sin(this.vertical_angle)*(delta/1000)*(this.scene.speed);
 
 }

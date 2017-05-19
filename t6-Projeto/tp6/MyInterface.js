@@ -37,6 +37,7 @@ MyInterface.prototype.init = function(application) {
     clock.add(this.scene, 'currClockAppearance', { Simple: 0, Old: 1, J_Walker: 2} );
 
     var submarine=this.gui.addFolder("Submarine");
+    submarine.add(this.scene, 'Light');
     submarine.add(this.scene, 'speed', this.scene.v_min, this.scene.v_max);
     submarine.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList );
 
