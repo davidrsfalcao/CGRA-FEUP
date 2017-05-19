@@ -149,6 +149,16 @@ MyInterface.prototype.processKeyboard = function(event) {
             }
             break;
         }
+        case (78):	/* N */ {
+            this.scene.Light = (!this.scene.Light);
+            break;
+        }
+        case (110):  /* n */ {
+            this.scene.Light = (!this.scene.Light);
+            break;
+        }
+
+
 
     };
 };

@@ -182,67 +182,6 @@ LightingScene.prototype.initLights = function() {
 
 };
 
-LightingScene.prototype.updateLights = function() {
-	for (i = 0; i < this.lights.length; i++){
-		this.lights[i].update();
-	}
-	this.switchLigths();
-
-}
-
-LightingScene.prototype.switchLigths = function() {
-	if (this.Light0 == true){
-		this.lights[0].enable();
-	} else {
-		this.lights[0].disable();
-	}
-
-	if (this.Light1 == true){
-		this.lights[1].enable();
-	} else {
-		this.lights[1].disable();
-	}
-
-	if (this.Light2 == true){
-		this.lights[2].enable();
-	} else {
-		this.lights[2].disable();
-	}
-
-	if (this.Light3 == true){
-		this.lights[3].enable();
-	} else {
-		this.lights[3].disable();
-	}
-
-	if (this.Light == true){
-		this.lights[4].enable();
-	} else {
-		this.lights[4].disable();
-	}
-
-}
-
-LightingScene.prototype.updateFrames = function(){
-	this.setUpdatePeriod(1000/this.frames);
-}
-
-LightingScene.prototype.updateCamera = function(){
-
-	var x = this.submarine.x - 10*Math.sin(this.submarine.angle_mult * this.submarine.turn_angle);
-	var y = this.submarine.y + 4;
-	var z = this.submarine.z - 10*Math.cos(this.submarine.angle_mult * this.submarine.turn_angle);
-	this.camera.setPosition(vec3.fromValues(x, y, z));
-
-	var xl, yl, zl;
-	xl = this.submarine.x + 5*Math.sin(this.submarine.angle_mult * this.submarine.turn_angle);
-	yl = this.submarine.y + 0.6;
-	zl = this.submarine.z + 5*Math.cos(this.submarine.angle_mult * this.submarine.turn_angle);
-
-	this.camera.setTarget(vec3.fromValues(xl, yl, zl));
-
-}
-
 LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Background, camera and axis setup
@@ -318,6 +257,67 @@ LightingScene.prototype.display = function() {
 	// ---- END Primitive drawing section
 
 };
+
+LightingScene.prototype.switchLigths = function() {
+	if (this.Light0 == true){
+		this.lights[0].enable();
+	} else {
+		this.lights[0].disable();
+	}
+
+	if (this.Light1 == true){
+		this.lights[1].enable();
+	} else {
+		this.lights[1].disable();
+	}
+
+	if (this.Light2 == true){
+		this.lights[2].enable();
+	} else {
+		this.lights[2].disable();
+	}
+
+	if (this.Light3 == true){
+		this.lights[3].enable();
+	} else {
+		this.lights[3].disable();
+	}
+
+	if (this.Light == true){
+		this.lights[4].enable();
+	} else {
+		this.lights[4].disable();
+	}
+
+}
+
+LightingScene.prototype.updateLights = function() {
+	for (i = 0; i < this.lights.length; i++){
+		this.lights[i].update();
+	}
+	this.switchLigths();
+
+}
+
+LightingScene.prototype.updateFrames = function(){
+	this.setUpdatePeriod(1000/this.frames);
+}
+
+LightingScene.prototype.updateCamera = function(){
+
+	var x = this.submarine.x - 10*Math.sin(this.submarine.angle_mult * this.submarine.turn_angle);
+	var y = this.submarine.y + 4;
+	var z = this.submarine.z - 10*Math.cos(this.submarine.angle_mult * this.submarine.turn_angle);
+	this.camera.setPosition(vec3.fromValues(x, y, z));
+
+	var xl, yl, zl;
+	xl = this.submarine.x + 5*Math.sin(this.submarine.angle_mult * this.submarine.turn_angle);
+	yl = this.submarine.y + 0.6;
+	zl = this.submarine.z + 5*Math.cos(this.submarine.angle_mult * this.submarine.turn_angle);
+
+	this.camera.setTarget(vec3.fromValues(xl, yl, zl));
+
+}
 
 LightingScene.prototype.update = function(currTime) {
 
