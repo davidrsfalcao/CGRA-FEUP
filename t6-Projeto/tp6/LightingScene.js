@@ -40,6 +40,7 @@ LightingScene.prototype.init = function(application) {
 	//Run/Pause control
 	this.pause = false;
 	this.stoppedTime = 0;
+	this.frames = 100;
 
 
 	//submarine
@@ -133,10 +134,9 @@ LightingScene.prototype.init = function(application) {
 
 	//this.audio=new Audio("../resources/Can't Help Falling In Love.mp3");
 	//this.audio.play();
-	this.setUpdatePeriod(100);
+	this.setUpdatePeriod(1000/this.frames);
 
 };
-
 
 LightingScene.prototype.initCameras = function() {
 	this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
@@ -217,6 +217,10 @@ LightingScene.prototype.switchLigths = function() {
 
 }
 
+LightingScene.prototype.updateFrames = function(){
+	this.setUpdatePeriod(1000/this.frames);
+}
+
 LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Background, camera and axis setup
@@ -295,11 +299,13 @@ LightingScene.prototype.display = function() {
 
 LightingScene.prototype.update = function(currTime) {
 
+	this.updateFrames();
+
 	if(!this.pause){
 		this.clock.update(currTime-this.stoppedTime);
 	}
 	else {
-		this.stoppedTime += 100; // update period
+		this.stoppedTime += 1000/this.frames; // update period
 	}
 
 	this.submarine.update();

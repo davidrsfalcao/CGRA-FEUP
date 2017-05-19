@@ -24,6 +24,8 @@ MyInterface.prototype.init = function(application) {
 
     this.gui = new dat.GUI();
 
+    this.gui.add(this.scene, 'frames', 1, 200);
+
     var lights=this.gui.addFolder("Lights");
     lights.add(this.scene, 'Light0');
     lights.add(this.scene, 'Light1');
@@ -37,6 +39,7 @@ MyInterface.prototype.init = function(application) {
     var submarine=this.gui.addFolder("Submarine");
     submarine.add(this.scene, 'speed', this.scene.v_min, this.scene.v_max);
     submarine.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList );
+
 
     return true;
 };
