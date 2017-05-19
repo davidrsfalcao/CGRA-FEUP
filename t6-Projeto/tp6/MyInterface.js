@@ -32,7 +32,7 @@ MyInterface.prototype.init = function(application) {
 
     var clock=this.gui.addFolder("Clock");
     clock.add(this.scene, 'pause');
-    clock.add(this.scene, 'currClockAppearance', { Simple: 0, Old: 1, Roosters: 2} );
+    clock.add(this.scene, 'currClockAppearance', { Simple: 0, Old: 1, J_Walker: 2} );
 
     var submarine=this.gui.addFolder("Submarine");
     submarine.add(this.scene, 'speed', this.scene.v_min, this.scene.v_max);
