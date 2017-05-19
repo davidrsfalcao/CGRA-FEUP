@@ -39,7 +39,8 @@ LightingScene.prototype.init = function(application) {
 
 	//Run/Pause control
 	this.pause = false;
-	this.stoppedTime = 0;
+	this.time = 0;
+	this.lastUpdate = 0;
 	this.frames = 100;
 
 
@@ -302,11 +303,10 @@ LightingScene.prototype.update = function(currTime) {
 	this.updateFrames();
 
 	if(!this.pause){
-		this.clock.update(currTime-this.stoppedTime);
+		this.clock.update(this.time);
+		this.time += currTime-this.lastUpdate;
 	}
-	else {
-		this.stoppedTime += 1000/this.frames; // update period
-	}
+
 
 	this.submarine.update();
 };
