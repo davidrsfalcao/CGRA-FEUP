@@ -119,7 +119,9 @@ MySubmarine.prototype.updateLights = function(){
 
 MySubmarine.prototype.moveFront = function(){
 
-    if (this.scene.speed < this.scene.v_max){
+    if(this.scene.speed == -1){
+        this.smoothStop();
+    }else if (this.scene.speed < this.scene.v_max){
         this.scene.speed++;
     }
 
@@ -127,9 +129,30 @@ MySubmarine.prototype.moveFront = function(){
 
 MySubmarine.prototype.moveBack = function(){
 
-    if (this.scene.speed > this.scene.v_min){
+    if(this.scene.speed == 1){
+        this.smoothStop();
+    }else if (this.scene.speed > this.scene.v_min){
         this.scene.speed--;
     }
+}
+
+MySubmarine.prototype.smoothStop = function(){
+
+    if (this.scene.speed > 0)
+    {
+        this.scene.speed -= (1/this.scene.frames)/5;
+        if (this.scene.speed < 0){
+            this.scene.speed = 0;
+        }
+
+    } else  if (this.scene.speed < 0)
+    {
+        this.scene.speed += (1/this.scene.frames)/5;
+        if (this.scene.speed > 0){
+            this.scene.speed = 0;
+        }
+    }
+
 }
 
 MySubmarine.prototype.tiltUp = function() {
@@ -210,6 +233,10 @@ MySubmarine.prototype.downPeriscope = function(){
 }
 
 MySubmarine.prototype.update = function(delta){
+
+    if ((this.scene.speed > -1) && (this.scene.speed != 0) && (this.scene.speed < 1)){
+        this.smoothStop();
+    }
 
     this.move(delta);
     this.propeller_left.update();
