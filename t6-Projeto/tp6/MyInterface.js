@@ -123,6 +123,30 @@ MyInterface.prototype.processKeyboard = function(event) {
             }
             break;
         }
+        case (81):	/* Q */ {
+            if(this.scene.speed != 0){
+                this.scene.submarine.tiltUp();
+            }
+            break;
+        }
+        case (113):	/* q */ {
+            if(this.scene.speed != 0){
+                this.scene.submarine.tiltUp();
+            }
+            break;
+        }
+        case (69):	/* E */ {
+            if(this.scene.speed != 0 && (this.scene.submarine.y > 0)){
+                this.scene.submarine.tiltDown();
+            }
+            break;
+        }
+        case (101):  /* e */ {
+            if(this.scene.speed != 0 && (this.scene.submarine.y > 0)){
+                this.scene.submarine.tiltDown();
+            }
+            break;
+        }
 
     };
 };
@@ -137,25 +161,7 @@ MyInterface.prototype.processKeyUp = function(event) {
     // for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
 
     switch (event.keyCode) {
-        /*
-        SUBMARINE MOVEMENT
-        */
-        // case (87):	/* W */ {
-        //     this.scene.submarine.moveFront();
-        //     break;
-        // }
-        // case (119):	/* w */ {
-        //     this.scene.submarine.moveFront();
-        //     break;
-        // }
-        // case (83):	/* S */ {
-        //     this.scene.submarine.moveBack();
-        //     break;
-        // }
-        // case (115):	/* s */ {
-        //     this.scene.submarine.moveBack();
-        //     break;
-        // }
+
         case (68):	/* D */ {
             this.scene.submarine.stopTurning();
             break;
@@ -170,6 +176,22 @@ MyInterface.prototype.processKeyUp = function(event) {
         }
         case (97):  /* a */ {
             this.scene.submarine.stopTurning();
+            break;
+        }
+        case (81):	/* Q */ {
+            this.scene.submarine.stopTilt();
+            break;
+        }
+        case (113):	/* q */ {
+            this.scene.submarine.stopTilt();
+            break;
+        }
+        case (69):	/* E */ {
+            this.scene.submarine.stopTilt();
+            break;
+        }
+        case (101):  /* e */ {
+            this.scene.submarine.stopTilt();
             break;
         }
 

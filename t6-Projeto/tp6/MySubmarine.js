@@ -21,8 +21,11 @@ function MySubmarine(scene) {
     this.periscope_heigth = 0.30;
     this.periscope_min = 0.15;
 
-    //Propeller Vertical movement
-    this.propellerV_angle = 0;
+    //Fin Vertical movement
+    this.finV_angle = 0;
+
+    //Fin Horizontal movement
+    this.finH_angle = 0;
 
 
     this.body = new MySubmarineBody(this.scene);
@@ -37,7 +40,6 @@ MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor = MySubmarine;
 
 MySubmarine.prototype.display = function() {
-
 
     this.scene.translate(this.x,this.y,this.z);
     this.scene.rotate(this.angle_mult *this.turn_angle,0,1,0);
@@ -84,19 +86,21 @@ MySubmarine.prototype.display = function() {
     //Barbatana da torre
     this.scene.pushMatrix();
     this.scene.translate(0,0.8,2.5);
+    this.scene.rotate(-this.finH_angle,1,0,0);
     this.middle_fin.display();
     this.scene.popMatrix();
 
     //Barbatana traseira horizontal
     this.scene.pushMatrix();
     this.scene.translate(0,0.1,-0.15);
+    this.scene.rotate(-this.finH_angle,1,0,0);
     this.back_fin.display();
     this.scene.popMatrix();
 
     //Barbatana traseira vertical
     this.scene.pushMatrix();
     this.scene.translate(0,0,-0.15);
-    this.scene.rotate(this.propellerV_angle,0,1,0);
+    this.scene.rotate(this.finV_angle,0,1,0);
     this.scene.rotate(Math.PI/2,0,0,1);
     this.back_fin.display();
     this.scene.popMatrix();
@@ -128,32 +132,68 @@ MySubmarine.prototype.moveBack = function(){
     }
 }
 
+MySubmarine.prototype.tiltUp = function() {
+
+    if (this.scene.speed > 0)
+    {
+        this.vertical_angle = Math.PI/9;
+        this.finH_angle = Math.PI/8;
+    }
+    else {
+        this.vertical_angle = - Math.PI/9;
+        this.finH_angle = - Math.PI/8;
+    }
+
+}
+
+MySubmarine.prototype.tiltDown = function() {
+
+    if (this.scene.speed > 0)
+    {
+        this.vertical_angle = -Math.PI/9;
+        this.finH_angle = - Math.PI/8;
+    }
+    else {
+        this.vertical_angle = Math.PI/9;
+        this.finH_angle = Math.PI/8;
+    }
+
+
+}
+
+MySubmarine.prototype.stopTilt = function() {
+
+    this.vertical_angle = 0;
+    this.finH_angle = 0;
+}
+
 MySubmarine.prototype.turnRight = function(){
 
     this.angle_mult -= 1;
     if(this.scene.speed > 0){
-        this.propellerV_angle = Math.PI/8;
+        this.finV_angle = Math.PI/8;
     }
-    else this.propellerV_angle = -Math.PI/8;
+    else this.finV_angle = -Math.PI/8;
 }
 
 MySubmarine.prototype.turnLeft = function(){
 
     this.angle_mult += 1;
     if(this.scene.speed > 0){
-        this.propellerV_angle = -Math.PI/8;
+        this.finV_angle = -Math.PI/8;
     }
-    else this.propellerV_angle = Math.PI/8;
+    else this.finV_angle = Math.PI/8;
 }
 
 MySubmarine.prototype.stopTurning = function(){
-    this.propellerV_angle = 0;
+    this.finV_angle = 0;
 }
 
 MySubmarine.prototype.move = function(delta) {
 
     this.z += Math.cos(this.angle_mult*this.turn_angle)*(delta/1000)*(this.scene.speed);
     this.x += Math.sin(this.angle_mult*this.turn_angle)*(delta/1000)*(this.scene.speed);
+    this.y += Math.sin(this.vertical_angle)*(delta/1000)*(this.scene.speed);
 
 }
 
