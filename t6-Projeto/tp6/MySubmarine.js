@@ -13,7 +13,8 @@ function MySubmarine(scene) {
 
     //Orientation
     this.angle_mult = 0;
-    this.turn_angle = Math.PI/90; // angulo de viragem - 2 graus
+    this.turn_angle = Math.PI/45; // angulo de viragem - 4 graus
+    this.vertical_angle = 0;
 
     //Periscope movement
     this.periscope_max = 0.60;
@@ -149,10 +150,10 @@ MySubmarine.prototype.stopTurning = function(){
     this.propellerV_angle = 0;
 }
 
-MySubmarine.prototype.move = function() {
+MySubmarine.prototype.move = function(delta) {
 
-    this.z += Math.cos(this.angle_mult*this.turn_angle)*0.1*(this.scene.speed);
-    this.x += Math.sin(this.angle_mult*this.turn_angle)*0.1*(this.scene.speed);
+    this.z += Math.cos(this.angle_mult*this.turn_angle)*(delta/1000)*(this.scene.speed);
+    this.x += Math.sin(this.angle_mult*this.turn_angle)*(delta/1000)*(this.scene.speed);
 
 }
 
@@ -168,9 +169,9 @@ MySubmarine.prototype.downPeriscope = function(){
     }
 }
 
-MySubmarine.prototype.update = function(){
+MySubmarine.prototype.update = function(delta){
 
-    this.move();
+    this.move(delta);
     this.propeller_left.update();
     this.propeller_right.update();
     this.updateLights();

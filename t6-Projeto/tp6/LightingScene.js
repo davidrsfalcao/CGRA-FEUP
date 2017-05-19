@@ -35,7 +35,7 @@ LightingScene.prototype.init = function(application) {
 	//Submarine control
 	this.speed = 0;
 	this.v_max = 5;
-	this.v_min = -2;
+	this.v_min = -3;
 
 	//Run/Pause control
 	this.pause = false;
@@ -308,5 +308,5 @@ LightingScene.prototype.update = function(currTime) {
 	}
 
 
-	this.submarine.update();
+	this.submarine.update(currTime-this.lastUpdate);
 };
