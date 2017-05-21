@@ -157,17 +157,19 @@ MyInterface.prototype.processKeyboard = function(event) {
             this.scene.Light = (!this.scene.Light);
             break;
         }
-				case (110):  /* n */ {
+        case (110):  /* n */ {
             this.scene.Light = (!this.scene.Light);
             break;
-        }case (102): { // f
-					this.scene.launchTorpedo();
-					break;
-				}
-				case (70): { // F
-					this.scene.launchTorpedo();
-					break;
-				}
+        }
+        case (70):  /* F */ {
+            this.scene.launchTorpedo();
+            break;
+        }
+        case (102): /* f */{
+            this.scene.launchTorpedo();
+            break;
+        }
+
 
 
 
