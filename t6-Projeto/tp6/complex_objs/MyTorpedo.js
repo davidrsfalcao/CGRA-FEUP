@@ -32,7 +32,7 @@ MyTorpedo.prototype.constructor = MyTorpedo;
 
 MyTorpedo.prototype.display = function() {
 		this.scene.translate(this.x , this.y , this.z );
-		this.scene.rotate(this.x_angle,1,0,0);
+		this.scene.rotate(-this.x_angle,1,0,0);
 		this.scene.rotate(this.y_angle,0,1,0);
 		this.scene.translate( -this.x , -this.y , -this.z );
 
