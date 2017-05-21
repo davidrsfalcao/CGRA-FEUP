@@ -11,8 +11,6 @@ function MyTorpedo(scene, sub, target) {
     this.y = sub.y + 0.7;
     this.z = sub.z + 3*Math.cos(sub.angle_mult * sub.turn_angle);
 
-    this.x_angle = sub.angle_mult* sub.turn_angle;
-
     this.time = 0.0;
     this.t = 0.0;
     this.target = target;
@@ -124,7 +122,7 @@ MyTorpedo.prototype.move = function (currTime){
     this.z = next_z;
 
     this.y_angle = Math.atan(delta_x / delta_z);
-    this.x_angle = Math.atan(delta_y / Math.sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z));
+    this.x_angle = Math.atan(delta_y / Math.sqrt(delta_x*delta_x + delta_z*delta_z));
     if (delta_z < 0)
     this.y_angle+=Math.PI;
 

@@ -395,8 +395,7 @@ LightingScene.prototype.update = function(currTime) {
 
 LightingScene.prototype.launchTorpedo = function (){
 	if ( this.chests_n >= 0){
-		var torp = new MyTorpedo( this, this.submarine , this.chests[this.chests_n] );
+		var torp = new MyTorpedo( this, this.submarine , this.chests[this.chests_n--] );
 		this.torpedos.push( torp );
-		this.chests_n--;
 	}
 }
