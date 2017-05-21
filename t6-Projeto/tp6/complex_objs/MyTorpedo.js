@@ -21,8 +21,8 @@ function MyTorpedo(scene, sub, target) {
 		this.y_angle = 0;
 
     this.back_fin = new MyWing(this.scene, 2.34, 0.35);
-		this.cylinder = new MyCylinder(this.scene, 500, 1, false);
-    this.front = new MyLamp(this.scene, 500, 10);
+		this.cylinder = new MyCylinder(this.scene, 100, 1, false);
+    this.front = new MyLamp(this.scene, 100, 10);
 
 		this.generatePoints();
 };
@@ -39,6 +39,7 @@ MyTorpedo.prototype.display = function() {
 			this.scene.translate( 0+this.x , 0+this.y , 1+this.z );
 			this.scene.scale( 0.1 , 0.1 , 1); // 0.73 x 1.20 x 4.08
 			this.scene.rotate(Math.PI,0,1,0);
+			this.scene.metalAppearance.apply();
 			this.cylinder.display();
 		this.scene.popMatrix();
 
@@ -47,6 +48,7 @@ MyTorpedo.prototype.display = function() {
 	    this.scene.translate(0+this.x , 0+this.y , 1+this.z );
 	    this.scene.scale( 0.1 , 0.1 , 0.1); // 0.73 x 1.20 x 0.46
 	    this.scene.rotate(Math.PI/2,1,0,0);
+			this.scene.redMetalAppearance.apply();
 	    this.front.display();
     this.scene.popMatrix();
 
@@ -55,6 +57,7 @@ MyTorpedo.prototype.display = function() {
 			this.scene.translate( this.x , this.y , this.z );
 	    this.scene.scale( 0.1  , 0.1 , 0.1 ); // 0.73 x 1.20 x 0.46
 	    this.scene.rotate(-Math.PI/2,1,0,0);
+			this.scene.metalAppearance.apply();
 	    this.front.display();
     this.scene.popMatrix();
 
@@ -62,7 +65,7 @@ MyTorpedo.prototype.display = function() {
     this.scene.pushMatrix();
 			this.scene.translate( this.x , this.y , this.z );
 			this.scene.scale(0.2 , 0.2 , 0.2 );
-    	this.scene.rotate(-this.finH_angle,1,0,0);
+			this.scene.redMetalAppearance.apply();
     	this.back_fin.display();
     this.scene.popMatrix();
 
@@ -70,8 +73,8 @@ MyTorpedo.prototype.display = function() {
     this.scene.pushMatrix();
 			this.scene.translate( this.x , this.y , this.z );
 			this.scene.scale(0.2 , 0.2 , 0.2 );
-    	this.scene.rotate(this.finV_angle,0,1,0);
     	this.scene.rotate(Math.PI/2,0,0,1);
+			this.scene.redMetalAppearance.apply();
     	this.back_fin.display();
     this.scene.popMatrix();
 }

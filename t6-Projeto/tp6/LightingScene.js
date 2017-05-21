@@ -165,9 +165,11 @@ LightingScene.prototype.init = function(application) {
 		this.chests.push( chest );
 	}
 	this.chests_n--;
+
 	//Torpedos
 	this.torpedos = [];
-
+	this.redMetalAppearance = new CGFappearance(this);
+	this.redMetalAppearance.loadTexture("../resources/images/red_metal.jpg");
 
 	//this.audio=new Audio("../resources/lalala.mp3");
 	//this.audio.play();
