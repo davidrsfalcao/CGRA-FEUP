@@ -153,14 +153,15 @@ LightingScene.prototype.init = function(application) {
 	//Targets
 	this.chests = [];
 	for (i = 0 ; i < this.getRandomInt(2,5) ; i++){
-		var x = this.getRandomInt(0,19);
-		var z = this.getRandomInt(0,19);
+		var x = this.getRandomInt(0,15);
+		var z = this.getRandomInt(0,15);
 		var mult = this.getRandomInt(0,2);
 		var size = this.getRandomInt(1,3);
 		if (mult == 0) //smaller obj
 			size = 1/size;
 
-		this.chests.push( new MyChest(this,x,z,size) );
+		var chest = new MyChest(this,x,y,size);
+		this.chests.push( chest );
 	}
 	//Torpedos
 	this.torpedos = [];
@@ -361,13 +362,22 @@ LightingScene.prototype.updateCamera = function(){
 LightingScene.prototype.update = function(currTime) {
 
 	this.updateFrames();
+	var delta_t = currTime-this.lastUpdate;
 
 	if(!this.pause){
 		this.clock.update(this.time);
 		this.time += currTime-this.lastUpdate;
 	}
 
-	this.submarine.update(currTime-this.lastUpdate);
+	this.submarine.update(delta_t);
+
+	for (i = 0 ; i < this.torpedos.length ; i++ )
+		if (this.torpedos[i] != null){
+			if (this.torpedos[i].move(delta_t) == 1)
+				this.torpedos[i] = null;
+			this.torpedos[i].display();
+		}
+
 
 	if (this.cameraChosen == 1){
 		this.updateCamera(); //camera 3ª pessoa
@@ -376,8 +386,7 @@ LightingScene.prototype.update = function(currTime) {
 
 };
 
-
 LightingScene.prototype.launchTorpedo = function (){
-	this.torpedos.push( new MyTorpedo( this, this.submarine , null ) );
-	this.display();
+	var torp = new MyTorpedo( this, this.submarine , this.chests[0] );
+	this.torpedos.push( torp );
 }

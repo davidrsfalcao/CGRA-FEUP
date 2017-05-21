@@ -11,12 +11,12 @@ function MyTorpedo(scene, sub, target) {
     this.y = sub.y+0.75;
     this.z = sub.z+2.5;
 
-		this.target = target;
+		this.x_angle = sub.angle_mult*Math.PI/45;
 
-    //Orientation
-    this.angle_mult = sub.angle_mult;//
-    this.turn_angle = Math.PI/45; // angulo de viragem - 4 graus
-    this.vertical_angle = sub.vertical_angle;
+		this.time = 0.0;
+		this.t = 0.0;
+
+		this.target = target;
 
 		//Fin Vertical movement
     this.finV_angle = sub.finV_angle;
@@ -28,13 +28,17 @@ function MyTorpedo(scene, sub, target) {
 		this.cylinder = new MyCylinder(this.scene, 500, 1, false);
     this.front = new MyLamp(this.scene, 500, 10);
 
-		this.move(sub);
+		this.generatePoints();
 };
 
 MyTorpedo.prototype = Object.create(CGFobject.prototype);
 MyTorpedo.prototype.constructor = MyTorpedo;
 
 MyTorpedo.prototype.display = function() {
+
+		this.scene.translate(this.x , this.y , this.z );
+		this.scene.rotate(this.x_angle,0,1,0);
+
 		// Main Cylinder
 		this.scene.pushMatrix();
 			this.scene.translate( 0+this.x , 0+this.y , 1+this.z );
@@ -77,32 +81,46 @@ MyTorpedo.prototype.display = function() {
     this.scene.popMatrix();
 }
 
-MyTorpedo.prototype.move = function (sub){
-	this.x = sub.x+0.35;
-	this.y = sub.y+0.75;
-	this.z = sub.z+2.5;
-
-	var angle = Math.acos( this.z / ( Math.sqrt( Math.pow(this.z,2) + Math.pow(this.x,2) ) ) );
-
-	this.scene.pushMatrix();
-		this.scene.translate(this.x,this.y,this.z);
-		this.scene.rotate(this.angle_mult *this.turn_angle,0,1,0);
-		this.scene.translate(-this.x, -this.y , -this.z );
-		this.display();
-	this.scene.popMatrix();
-}
-
 MyTorpedo.prototype.generatePoints = function(){
-    this.distance = Math.sqrt(Math.pow(target.x - this.x,2) + Math.pow(target.y - this.y,2) + Math.pow(target.z - this.z,2));
+    this.distance = Math.sqrt(Math.pow(this.scene.chests[0].x - this.x ,2) +
+		 							  				  Math.pow(-this.y ,2) +
+															Math.pow(this.scene.chests[0].z - this.z ,2));
 
-		this.pt1 = [this.x,this.y,this.z];
-		this.pt2 = [this.x + 6 , this.y , this.z ];
-		this.pt3 = [this.target.x,this.target.y + 3,this.target.z ];
-		this.pt4 = [this.target.x,this.target.y,this.target.z ];
+		this.pt1 = [this.x, 0 ,this.z];
+		this.pt2 = [this.x + 6 ,  0  , this.z ];
+		this.pt3 = [this.scene.chests[0].x,3,this.scene.chests[0].z ];
+		this.pt4 = [this.scene.chests[0].x,0,this.scene.chests[0].z ];
 }
 
-//points is an array of 4 positions
-MyTorpedo.prototype.bezierCurve = function ( points , t){
-	var pt1 = points[0], pt2 = points[1], pt3 = points[2], pt4 = points[3];
+MyTorpedo.prototype.move = function (currTime){
+	var delta_t = 0;
+	if (this.time != 0.0)
+		delta_t = (currTime - this.time)/1000;
 
+	this.time = currTime;
+
+	this.t += delta_t;
+
+	if (this.t >= 1.0)
+		console.log("	ENDNDNSADSANDSDAN\n ");
+
+	var b1 = Math.pow(1-this.t , 3),
+			b2 = 3*this.t*Math.pow((1-this.t),2),
+			b3 = 3*Math.pow(this.t,2)*(1-this.t),
+			b4 = Math.pow(this.t,3);
+
+	var next_x = this.pt1[0]*b1 + this.pt2[0]*b2 + this.pt3[0]*b3 + this.pt4[0]*b4,
+			next_y = this.pt1[1]*b1 + this.pt2[1]*b2 + this.pt3[1]*b3 + this.pt4[1]*b4,
+			next_z = this.pt1[2]*b1 + this.pt2[2]*b2 + this.pt3[2]*b3 + this.pt4[2]*b4;
+
+	//var delta_x = next_x - this.x,
+	//		delta_y = next_y - this.y,
+	//		delta_z = next_z - this.z;
+
+	this.x = next_x;
+	this.y = next_y;
+	this.z = next_z;
+
+
+	return 0;
 }
