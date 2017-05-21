@@ -31,8 +31,10 @@ MyTorpedo.prototype = Object.create(CGFobject.prototype);
 MyTorpedo.prototype.constructor = MyTorpedo;
 
 MyTorpedo.prototype.display = function() {
+		this.scene.translate(this.x , this.y , this.z );
 		this.scene.rotate(this.x_angle,1,0,0);
-		this.scene.rotate(-this.y_angle,0,1,0);
+		this.scene.rotate(this.y_angle,0,1,0);
+		this.scene.translate( -this.x , -this.y , -this.z );
 
 		// Main Cylinder
 		this.scene.pushMatrix();
@@ -98,7 +100,7 @@ MyTorpedo.prototype.move = function (currTime){
 
 	this.time = currTime;
 
-	this.t += delta_t / this.distance;
+	this.t += delta_t; // this.distance;
 
 	if (this.t >= 1){
 		return 1;
@@ -121,10 +123,10 @@ MyTorpedo.prototype.move = function (currTime){
 	this.y = next_y;
 	this.z = next_z;
 
-	//this.y_angle = Math.atan(delta_x / delta_z);
-	//this.x_angle = Math.atan(delta_y / Math.sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z));
-	//if (delta_z < 0)
-	//	this.y_angle+=Math.PI;
+	this.y_angle = Math.atan(delta_x / delta_z);
+	this.x_angle = Math.atan(delta_y / Math.sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z));
+	if (delta_z < 0)
+		this.y_angle+=Math.PI;
 
 
 	return 0;
