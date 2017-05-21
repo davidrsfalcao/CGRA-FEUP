@@ -161,9 +161,10 @@ LightingScene.prototype.init = function(application) {
 		if (mult == 0) //smaller obj
 			size = 1/size;
 
-		var chest = new MyChest(this,x,y,size);
+		var chest = new MyChest(this,x,z,size);
 		this.chests.push( chest );
 	}
+	this.chests_n--;
 	//Torpedos
 	this.torpedos = [];
 
@@ -291,12 +292,14 @@ LightingScene.prototype.display = function() {
 
 
 	for (i = 0 ; i < this.chests.length ; i++){
-		this.chests[i].display();
-		this.chests[i].openLid();
+		if ( this.chests[i] != null)
+			this.chests[i].display();
 	}
 
-	for (i = 0 ; i < this.torpedos.length ; i++)
-		this.torpedos[i].display();
+	for (i = 0 ; i < this.torpedos.length ; i++){
+		if (this.torpedos[i] != null)
+			this.torpedos[i].display();
+	}
 };
 
 LightingScene.prototype.switchLigths = function() {
@@ -374,8 +377,10 @@ LightingScene.prototype.update = function(currTime) {
 
 	for (i = 0 ; i < this.torpedos.length ; i++ )
 		if (this.torpedos[i] != null){
-			if (this.torpedos[i].move(currTime) == 1)
+			if (this.torpedos[i].move(currTime) == 1){
+				this.torpedos[i].target.openLid();
 				this.torpedos[i] = null;
+			}
 			else
 				this.torpedos[i].display();
 		}
@@ -389,8 +394,9 @@ LightingScene.prototype.update = function(currTime) {
 };
 
 LightingScene.prototype.launchTorpedo = function (){
-	if ( this.chests_n > 0){
-		var torp = new MyTorpedo( this, this.submarine , this.chests[this.chests_n--] );
+	if ( this.chests_n >= 0){
+		var torp = new MyTorpedo( this, this.submarine , this.chests[this.chests_n] );
 		this.torpedos.push( torp );
+		this.chests_n--;
 	}
 }

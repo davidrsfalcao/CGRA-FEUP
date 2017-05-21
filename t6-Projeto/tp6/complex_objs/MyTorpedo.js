@@ -17,11 +17,8 @@ function MyTorpedo(scene, sub, target) {
 		this.t = 0.0;
 		this.target = target;
 
-		//Fin Vertical movement
-    this.finV_angle = sub.finV_angle;
-
-    //Fin Horizontal movement
-    this.finH_angle = sub.finH_angle;
+		this.x_angle = 0;
+		this.y_angle = 0;
 
     this.back_fin = new MyWing(this.scene, 2.34, 0.35);
 		this.cylinder = new MyCylinder(this.scene, 500, 1, false);
@@ -34,9 +31,8 @@ MyTorpedo.prototype = Object.create(CGFobject.prototype);
 MyTorpedo.prototype.constructor = MyTorpedo;
 
 MyTorpedo.prototype.display = function() {
-
-		this.scene.translate(this.x , this.y , this.z );
-		this.scene.rotate(this.x_angle,0,1,0);
+		this.scene.rotate(this.x_angle,1,0,0);
+		this.scene.rotate(-this.y_angle,0,1,0);
 
 		// Main Cylinder
 		this.scene.pushMatrix();
@@ -81,14 +77,15 @@ MyTorpedo.prototype.display = function() {
 }
 
 MyTorpedo.prototype.generatePoints = function(){
-    this.distance = Math.sqrt(Math.pow(this.scene.chests[0].x - this.x ,2) +
+	var t_x = this.target.x * this.target.size, t_z = this.target.z * this.target.size;
+    this.distance = Math.sqrt(Math.pow(t_x - this.x ,2) +
 		 							  				  Math.pow(-this.y ,2) +
-															Math.pow(this.scene.chests[0].z - this.z ,2));
+															Math.pow(t_z - this.z ,2));
 
 		this.pt1 = [this.x, 0 ,this.z];
 		this.pt2 = [this.x + 6 ,  0  , this.z ];
-		this.pt3 = [this.scene.chests[0].x,3,this.scene.chests[0].z ];
-		this.pt4 = [this.scene.chests[0].x,0,this.scene.chests[0].z ];
+		this.pt3 = [ t_x,3,t_z ];
+		this.pt4 = [ t_x,0,t_z ];
 }
 
 MyTorpedo.prototype.move = function (currTime){
@@ -113,9 +110,18 @@ MyTorpedo.prototype.move = function (currTime){
 			next_y = this.pt1[1]*b1 + this.pt2[1]*b2 + this.pt3[1]*b3 + this.pt4[1]*b4,
 			next_z = this.pt1[2]*b1 + this.pt2[2]*b2 + this.pt3[2]*b3 + this.pt4[2]*b4;
 
+	var delta_x = next_x - this.x,
+		 	delta_y = next_y - this.y,
+			delta_z = next_z - this.z;
+
 	this.x = next_x;
 	this.y = next_y;
 	this.z = next_z;
+
+	//this.y_angle = Math.atan(delta_x / delta_z);
+	//this.x_angle = Math.atan(delta_y / Math.sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z));
+	//if (delta_z < 0)
+	//	this.y_angle+=Math.PI;
 
 
 	return 0;
