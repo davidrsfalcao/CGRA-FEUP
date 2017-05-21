@@ -7,9 +7,9 @@ function MyTorpedo(scene, sub, target) {
     this.scene = scene;
 
     //Coordinates of the torpedo
-    this.x = sub.x+0.35;
-    this.y = sub.y+0.75;
-    this.z = sub.z+2.5;
+    this.x = sub.x + 3*Math.sin(sub.angle_mult * sub.turn_angle);
+    this.y = sub.y + 0.7;
+    this.z = sub.z + 3*Math.cos(sub.angle_mult * sub.turn_angle);
 
     this.time = 0.0;
     this.t = 0.0;
