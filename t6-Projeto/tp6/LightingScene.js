@@ -15,7 +15,6 @@ LightingScene.prototype.getRandomInt = function(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-
 LightingScene.prototype.init = function(application) {
 	CGFscene.prototype.init.call(this, application);
 
@@ -57,7 +56,6 @@ LightingScene.prototype.init = function(application) {
 	//submarine
 	this.Light = false;
 	this.submarine = new MySubmarine(this);
-	this.temp = new CGFappearance(this);
 
 
 	//Textures submarine
@@ -152,8 +150,8 @@ LightingScene.prototype.init = function(application) {
 	this.chestInsideAppearance = new CGFappearance(this);
 	this.chestInsideAppearance.loadTexture("../resources/images/gold.jpg");
 
+	//Targets
 	this.chests = [];
-
 	for (i = 0 ; i < this.getRandomInt(2,5) ; i++){
 		var x = this.getRandomInt(0,19);
 		var z = this.getRandomInt(0,19);
@@ -164,6 +162,9 @@ LightingScene.prototype.init = function(application) {
 
 		this.chests.push( new MyChest(this,x,z,size) );
 	}
+	//Torpedos
+	this.torpedos = [];
+
 
 	//this.audio=new Audio("../resources/lalala.mp3");
 	//this.audio.play();
@@ -292,8 +293,8 @@ LightingScene.prototype.display = function() {
 		this.chests[i].openLid();
 	}
 
-
-
+	for (i = 0 ; i < this.torpedos.length ; i++)
+		this.torpedos[i].display();
 };
 
 LightingScene.prototype.switchLigths = function() {
@@ -374,3 +375,9 @@ LightingScene.prototype.update = function(currTime) {
 	//else camera livre
 
 };
+
+
+LightingScene.prototype.launchTorpedo = function (){
+	this.torpedos.push( new MyTorpedo( this, this.submarine , null ) );
+	this.display();
+}

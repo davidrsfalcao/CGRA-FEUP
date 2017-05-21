@@ -21,10 +21,10 @@ MyChest.prototype.constructor = MyChest;
 
 MyChest.prototype.display = function() {
 
-        if (!this.open){
+        if (!this.open){ //lid closed
             this.lid.display();
         }
-        else {
+        else { //lid open
             this.scene.pushMatrix();
         		this.scene.translate( (this.x-0.5)*this.size , 0.6*this.size , this.z*this.size );
         		this.scene.rotate(Math.PI/4,0,0,1);
@@ -92,5 +92,4 @@ MyChest.prototype.display = function() {
 
 MyChest.prototype.openLid = function(){
     this.open = true;
-
 }

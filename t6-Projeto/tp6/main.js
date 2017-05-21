@@ -25,6 +25,8 @@ serialInclude([
 	'complex_objs/MyClockHand.js',
 	'complex_objs/MyLid.js',
 	'complex_objs/MyChest.js',
+	'complex_objs/MyTorpedo.js',
+
 
 	'MyInterface.js',
 	'LightingScene.js',

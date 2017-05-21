@@ -212,8 +212,8 @@ MySubmarine.prototype.stopTurning = function(){
     this.finV_angle = 0;
 }
 
-MySubmarine.prototype.move = function(delta) {
 
+MySubmarine.prototype.move = function(delta) {
     this.z += Math.cos(this.angle_mult*this.turn_angle)*(delta/1000)*(this.scene.speed);
     this.x += Math.sin(this.angle_mult*this.turn_angle)*(delta/1000)*(this.scene.speed);
     if (this.y + Math.sin(this.vertical_angle)*(delta/1000)*(this.scene.speed) < 0){
@@ -222,6 +222,7 @@ MySubmarine.prototype.move = function(delta) {
     this.y += Math.sin(this.vertical_angle)*(delta/1000)*(this.scene.speed);
 
 }
+
 
 MySubmarine.prototype.upPeriscope = function(){
     if(this.periscope_heigth < this.periscope_max){
@@ -234,6 +235,7 @@ MySubmarine.prototype.downPeriscope = function(){
         this.periscope_heigth -= 0.01;
     }
 }
+
 
 MySubmarine.prototype.update = function(delta){
 
