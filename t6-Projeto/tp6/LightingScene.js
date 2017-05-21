@@ -10,8 +10,6 @@ LightingScene.prototype = Object.create(CGFscene.prototype);
 LightingScene.prototype.constructor = LightingScene;
 
 LightingScene.prototype.getRandomInt = function(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
@@ -152,8 +150,8 @@ LightingScene.prototype.init = function(application) {
 
 	//Targets
 	this.chests = [];
-	this.chests_n = 0;
-	for (i = 0 ; i < ( this.chests_n = this.getRandomInt(2,5) ) ; i++){
+	var n = this.getRandomInt(2,5);
+	for (i = 0 ; i < n ; i++){
 		var x = this.getRandomInt(0,15);
 		var z = this.getRandomInt(0,15);
 		var mult = this.getRandomInt(0,2);
@@ -164,7 +162,7 @@ LightingScene.prototype.init = function(application) {
 		var chest = new MyChest(this,x,z,size);
 		this.chests.push( chest );
 	}
-	this.chests_n--;
+	this.chests_n = n-1;
 
 	//Torpedos
 	this.torpedos = [];
