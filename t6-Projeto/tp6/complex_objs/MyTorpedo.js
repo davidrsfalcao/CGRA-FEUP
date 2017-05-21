@@ -122,7 +122,7 @@ MyTorpedo.prototype.move = function (currTime){
     this.z = next_z;
 
     this.y_angle = Math.atan(delta_x / delta_z);
-    this.x_angle = Math.atan(delta_y / Math.sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z));
+    this.x_angle = Math.atan(delta_y / Math.sqrt(delta_x*delta_x + delta_z*delta_z));
     if (delta_z < 0)
     this.y_angle+=Math.PI;
 
