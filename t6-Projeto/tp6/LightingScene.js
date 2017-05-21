@@ -9,6 +9,13 @@ function LightingScene() {
 LightingScene.prototype = Object.create(CGFscene.prototype);
 LightingScene.prototype.constructor = LightingScene;
 
+LightingScene.prototype.getRandomInt = function(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
 LightingScene.prototype.init = function(application) {
 	CGFscene.prototype.init.call(this, application);
 
@@ -133,6 +140,28 @@ LightingScene.prototype.init = function(application) {
 	this.waterAppearance.loadTexture("../resources/images/water.png");
 
 
+	//Chests
+	this.chestTopSideAppearance = new CGFappearance(this);
+	this.chestTopSideAppearance.loadTexture("../resources/images/chest_top_side.png");
+	this.chestBackAppearance = new CGFappearance(this);
+	this.chestBackAppearance.loadTexture("../resources/images/Chest_back.png");
+	this.chestFrontAppearance = new CGFappearance(this);
+	this.chestFrontAppearance.loadTexture("../resources/images/Chest_front.png");
+	this.chestSideAppearance = new CGFappearance(this);
+	this.chestSideAppearance.loadTexture("../resources/images/Chest_sides.png")
+	this.chestInsideAppearance = new CGFappearance(this);
+	this.chestInsideAppearance.loadTexture("../resources/images/gold.jpg");
+
+	this.chests = [];
+
+	for (i = 0 ; i < this.getRandomInt(2,10) ; i++){
+		var x = this.getRandomInt(0,19), z = this.getRandomInt(0,19), mult = this.getRandomInt(0,2), size = this.getRandomInt(1,3);
+		if (mult == 0) //smaller obj
+			size = 1/size;
+
+		this.chests.push( new MyChest(this,x,z,size) );
+	}
+
 	//this.audio=new Audio("../resources/lalala.mp3");
 	//this.audio.play();
 	this.setUpdatePeriod(1000/this.frames);
@@ -254,7 +283,13 @@ LightingScene.prototype.display = function() {
 	this.water_wall.display();
 	this.popMatrix();
 
-	// ---- END Primitive drawing section
+
+	for (i = 0 ; i < this.chests.length ; i++){
+		this.chests[i].display();
+		this.chests[i].openLid();
+	}
+
+
 
 };
 

@@ -4,24 +4,32 @@ serialInclude=function(a){var b=console,c=serialInclude.l;if(a.length>0)c.splice
 
 serialInclude([
 	'../lib/CGF.js',
-	'LightingScene.js',
-	'MyQuad.js',
-	'MyUnitCubeQuad.js',
-	'MyPlane.js',
-	'MyLamp.js',
-	'MyPrism.js',
-	'MyCylinder.js',
-	'MyCylinderInverted.js',
+	'base_objs/MyQuad.js',
+	'base_objs/MyUnitCubeQuad.js',
+	'base_objs/MyPrism.js',
+	'base_objs/MyCylinder.js',
+	'base_objs/MyCylinderInverted.js',
+	'base_objs/MyPlane.js',
+	'base_objs/MyPolygon.js',
+	'base_objs/MySemiCircle.js',
+	'base_objs/MySemiCylinder.js',
+	'base_objs/MyTriangle.js',
+	'base_objs/MyLamp.js',
+	'base_objs/MyWing.js',
+
+	'complex_objs/MySubmarine.js',
+	'complex_objs/MySubmarineBody.js',
+	'complex_objs/MyPeriscope.js',
+	'complex_objs/MyPropeller.js',
+	'complex_objs/MyClock.js',
+	'complex_objs/MyClockHand.js',
+	'complex_objs/MyLid.js',
+	'complex_objs/MyChest.js',
+
 	'MyInterface.js',
-	'MySubmarine.js',
-	'MySubmarineBody.js',
-	'MyPeriscope.js',
-	'MyPropeller.js',
-	'MyPolygon.js',
-	'MyClock.js',
-	'MyClockHand.js',
-	'MyTriangle.js',
-	'MyWing.js',
+	'LightingScene.js',
+
+
 
 	main=function() {
 		var app = new CGFapplication(document.body);

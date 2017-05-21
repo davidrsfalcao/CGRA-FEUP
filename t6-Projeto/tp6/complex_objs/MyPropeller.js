@@ -10,7 +10,7 @@ function MyPropeller(scene, orientation) {
     this.position = 0;
 
 
-    this.cylinder = new MyCylinder(this.scene, 500, 1);
+    this.cylinder = new MyCylinder(this.scene, 500, 1, false);
     this.cylinder1 = new MyCylinderInverted(this.scene,500,1);
 
     this.center = new MyLamp(this.scene,50,10);
