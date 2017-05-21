@@ -85,8 +85,8 @@ MyTorpedo.prototype.generatePoints = function(){
 		 							  				  Math.pow(-this.y ,2) +
 															Math.pow(t_z - this.z ,2));
 
-		this.pt1 = [this.x, 0 ,this.z];
-		this.pt2 = [this.x + 6 ,  0  , this.z ];
+		this.pt1 = [this.x, this.y ,this.z];
+		this.pt2 = [this.x + 6 ,  this.y  , this.z ];
 		this.pt3 = [ t_x,3,t_z ];
 		this.pt4 = [ t_x,0,t_z ];
 }
