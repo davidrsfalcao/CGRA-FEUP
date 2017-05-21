@@ -15,7 +15,6 @@ function MyTorpedo(scene, sub, target) {
 
 		this.time = 0.0;
 		this.t = 0.0;
-
 		this.target = target;
 
 		//Fin Vertical movement
@@ -99,10 +98,11 @@ MyTorpedo.prototype.move = function (currTime){
 
 	this.time = currTime;
 
-	this.t += delta_t;
+	this.t += delta_t / this.distance;
 
-	if (this.t >= 1.0)
-		console.log("	ENDNDNSADSANDSDAN\n ");
+	if (this.t >= 1){
+		return 1;
+	}
 
 	var b1 = Math.pow(1-this.t , 3),
 			b2 = 3*this.t*Math.pow((1-this.t),2),
@@ -112,10 +112,6 @@ MyTorpedo.prototype.move = function (currTime){
 	var next_x = this.pt1[0]*b1 + this.pt2[0]*b2 + this.pt3[0]*b3 + this.pt4[0]*b4,
 			next_y = this.pt1[1]*b1 + this.pt2[1]*b2 + this.pt3[1]*b3 + this.pt4[1]*b4,
 			next_z = this.pt1[2]*b1 + this.pt2[2]*b2 + this.pt3[2]*b3 + this.pt4[2]*b4;
-
-	//var delta_x = next_x - this.x,
-	//		delta_y = next_y - this.y,
-	//		delta_z = next_z - this.z;
 
 	this.x = next_x;
 	this.y = next_y;

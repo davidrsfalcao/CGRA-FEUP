@@ -152,7 +152,8 @@ LightingScene.prototype.init = function(application) {
 
 	//Targets
 	this.chests = [];
-	for (i = 0 ; i < this.getRandomInt(2,5) ; i++){
+	this.chests_n = 0;
+	for (i = 0 ; i < ( this.chests_n = this.getRandomInt(2,5) ) ; i++){
 		var x = this.getRandomInt(0,15);
 		var z = this.getRandomInt(0,15);
 		var mult = this.getRandomInt(0,2);
@@ -373,9 +374,10 @@ LightingScene.prototype.update = function(currTime) {
 
 	for (i = 0 ; i < this.torpedos.length ; i++ )
 		if (this.torpedos[i] != null){
-			if (this.torpedos[i].move(delta_t) == 1)
+			if (this.torpedos[i].move(currTime) == 1)
 				this.torpedos[i] = null;
-			this.torpedos[i].display();
+			else
+				this.torpedos[i].display();
 		}
 
 
@@ -387,6 +389,8 @@ LightingScene.prototype.update = function(currTime) {
 };
 
 LightingScene.prototype.launchTorpedo = function (){
-	var torp = new MyTorpedo( this, this.submarine , this.chests[0] );
-	this.torpedos.push( torp );
+	if ( this.chests_n > 0){
+		var torp = new MyTorpedo( this, this.submarine , this.chests[this.chests_n--] );
+		this.torpedos.push( torp );
+	}
 }
