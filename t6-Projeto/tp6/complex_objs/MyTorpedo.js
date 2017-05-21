@@ -100,7 +100,7 @@ MyTorpedo.prototype.move = function (currTime){
 
 	this.time = currTime;
 
-	this.t += delta_t; // this.distance;
+	this.t += delta_t / this.distance;
 
 	if (this.t >= 1){
 		return 1;
