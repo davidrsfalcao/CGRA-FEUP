@@ -154,8 +154,11 @@ LightingScene.prototype.init = function(application) {
 
 	this.chests = [];
 
-	for (i = 0 ; i < this.getRandomInt(2,10) ; i++){
-		var x = this.getRandomInt(0,19), z = this.getRandomInt(0,19), mult = this.getRandomInt(0,2), size = this.getRandomInt(1,3);
+	for (i = 0 ; i < this.getRandomInt(2,5) ; i++){
+		var x = this.getRandomInt(0,19);
+		var z = this.getRandomInt(0,19);
+		var mult = this.getRandomInt(0,2);
+		var size = this.getRandomInt(1,3);
 		if (mult == 0) //smaller obj
 			size = 1/size;
 

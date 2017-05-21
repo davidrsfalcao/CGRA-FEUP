@@ -9,16 +9,29 @@ function MyChest(scene, x , z , size) {
 		this.x = x;
 		this.z = z;
 		this.size = size;
+        this.open= false;
 
 		this.side_chest = new MyQuad(this.scene,1,0,1,0);
 		this.lid = new MyLid(this.scene,x,z,size);
+        this.lid1 = new MyLid(this.scene, this.x, this.z , this.size);
 };
 
 MyChest.prototype = Object.create(CGFobject.prototype);
 MyChest.prototype.constructor = MyChest;
 
 MyChest.prototype.display = function() {
-		this.lid.display();
+
+        if (!this.open){
+            this.lid.display();
+        }
+        else {
+            this.scene.pushMatrix();
+        		this.scene.translate( (this.x-0.5)*this.size , 0.6*this.size , this.z*this.size );
+        		this.scene.rotate(Math.PI/4,0,0,1);
+        		this.scene.translate( (-this.x+0.5)*this.size ,-0.6*this.size , (-this.z*this.size) );
+        		this.lid1.display();
+        	this.scene.popMatrix();
+        }
 
 		//Back face
 		this.scene.pushMatrix();
@@ -78,11 +91,6 @@ MyChest.prototype.display = function() {
 
 
 MyChest.prototype.openLid = function(){
-	this.lid = new MyLid(this.scene, this.x, this.z , this.size);
-	this.scene.pushMatrix();
-		this.scene.translate( (this.x-0.5)*this.size , 0.6*this.size , this.z*this.size );
-		this.scene.rotate(Math.PI/4,0,0,1);
-		this.scene.translate( (-this.x+0.5)*this.size ,-0.6*this.size , (-this.z*this.size) );
-		this.lid.display();
-	this.scene.popMatrix();
+    this.open = true;
+
 }
