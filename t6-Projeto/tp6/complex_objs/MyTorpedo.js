@@ -11,8 +11,6 @@ function MyTorpedo(scene, sub, target) {
     this.y = sub.y+0.75;
     this.z = sub.z+2.5;
 
-		this.x_angle = sub.angle_mult*Math.PI/45;
-
 		this.time = 0.0;
 		this.t = 0.0;
 		this.target = target;
