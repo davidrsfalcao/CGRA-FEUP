@@ -171,6 +171,9 @@ LightingScene.prototype.init = function(application) {
 
 	//this.audio=new Audio("../resources/lalala.mp3");
 	//this.audio.play();
+
+	this.explosions = [];
+
 	this.setUpdatePeriod(1000/this.frames);
 
 };
@@ -300,6 +303,13 @@ LightingScene.prototype.display = function() {
 		if (this.torpedos[i] != null)
 			this.torpedos[i].display();
 	}
+
+	for (var i = 0; i < this.explosions.length; i++) {
+		if (this.explosions[i].state == "ON"){
+			console.log("Here");
+			this.explosions[i].display();
+		}
+	}
 };
 
 LightingScene.prototype.switchLigths = function() {
@@ -379,6 +389,9 @@ LightingScene.prototype.update = function(currTime) {
 		if (this.torpedos[i] != null){
 			if (this.torpedos[i].move(currTime) == 1){
 				this.torpedos[i].target.openLid();
+				var x1 = this.torpedos[i].target.x;
+				var z1 = this.torpedos[i].target.y;
+				this.explosions.push(new MyExplosion(this,x1,0,z1));
 				this.torpedos[i] = null;
 			}
 			else
@@ -390,6 +403,12 @@ LightingScene.prototype.update = function(currTime) {
 		this.updateCamera(); //camera 3ª pessoa
 	}
 	//else camera livre
+
+	for (var i = 0; i < this.explosions.length; i++) {
+		if (this.explosions[i].state == "ON"){
+			this.explosions[i].update(delta_t);
+		}
+	}
 
 };
 
